@@ -1,0 +1,21 @@
+<svg width="208" height="100" viewBox="0 0 208 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Montserrat:wght@700&amp;display=swap');
+    </style>
+  </defs>
+  <!-- Red square -->
+  <rect x="0" y="0" width="56" height="56" rx="8" ry="8" fill="#E23D38"/>
+  <text x="28" y="28" font-family="Poppins, sans-serif" font-weight="600" font-size="30" fill="white" text-anchor="middle" dominant-baseline="central">a</text>
+  
+  <!-- Blue square -->
+  <rect x="64" y="0" width="56" height="56" rx="8" ry="8" fill="#2F80ED"/>
+  <text x="92" y="28" font-family="Poppins, sans-serif" font-weight="600" font-size="30" fill="white" text-anchor="middle" dominant-baseline="central">c</text>
+  
+  <!-- Yellow square -->
+  <rect x="128" y="0" width="56" height="56" rx="8" ry="8" fill="#F2C94C"/>
+  <text x="156" y="28" font-family="Poppins, sans-serif" font-weight="600" font-size="30" fill="white" text-anchor="middle" dominant-baseline="central">p</text>
+  
+  <!-- DATA LAB text -->
+  <text x="92" y="82" font-family="Montserrat, sans-serif" font-weight="700" font-size="20" fill="#555555" text-anchor="middle" letter-spacing="0.15em">DATA LAB</text>
+</svg>

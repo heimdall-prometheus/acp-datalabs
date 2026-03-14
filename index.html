@@ -3,596 +3,1409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ACP Data Labs — Surgical Outcomes Analytics. Translating large-scale surgical registry analyses into actionable pharmaceutical strategy.">
-    <meta name="keywords" content="surgical outcomes, pharmaceutical analytics, clinical research, opioid prescribing, real-world evidence">
-    <title>ACP Data Labs | Surgical Outcomes Analytics</title>
+    <meta name="description" content="ACP Data Lab — Analysis, Consulting, Prediction. Surgical outcomes analytics and real-world evidence for the pharmaceutical industry.">
+    <title>ACP Data Lab | Analysis · Consulting · Prediction</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <meta property="og:title" content="ACP Data Lab | Analysis · Consulting · Prediction">
+    <meta property="og:description" content="Surgical outcomes analytics and real-world evidence for the pharmaceutical industry.">
+    <meta property="og:image" content="https://acpdatalab.com/assets/og-image.png">
+    <meta property="og:url" content="https://acpdatalab.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://acpdatalab.com/">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ACP Data Lab",
+      "url": "https://acpdatalab.com",
+      "description": "Surgical outcomes analytics and real-world evidence for the pharmaceutical industry.",
+      "founder": {
+        "@type": "Person",
+        "name": "Dr. Adriana C. Panayi",
+        "jobTitle": "Founding Director & Chair of Scientific Leadership",
+        "affiliation": [
+          {"@type": "Organization", "name": "Harvard Medical School"},
+          {"@type": "Organization", "name": "University Hospital Zürich"}
+        ]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nicosia",
+        "addressCountry": "CY"
+      },
+      "email": "contact@acpdatalab.com",
+      "sameAs": ["https://scholar.google.com/citations?user=IusAkF0AAAAJ"]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Poppins:wght@600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --navy: #0F1F3D;
-            --navy-light: #1a2d4d;
-            --white: #FAFAF7;
-            --gold: #C9A84C;
-            --gold-dark: #b8973f;
-            --text-muted: rgba(250, 250, 247, 0.7);
-            --text-dark: #2a2a2a;
-            --text-dark-muted: #5a5a5a;
-            --font-serif: 'Libre Baskerville', Georgia, serif;
-            --font-sans: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            --white: #ffffff;
+            --off-white: #f5f6f8;
+            --black: #0d0d0d;
+            --text: #1c1c1e;
+            --text-muted: #46464f;
+            --text-light: #8a8a99;
+            --blue: #165EAB;
+            --blue-mid: #1f72cc;
+            --blue-dark: #0f4580;
+            --blue-light: #ddeaf8;
+            --blue-xlight: #eef4fb;
+            --red: #C0392B;
+            --yellow: #D4A017;
+            --border: #dde0e7;
+            --border-light: #eaedf2;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+            --shadow-md: 0 4px 14px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.09), 0 4px 12px rgba(0,0,0,0.04);
+            --radius: 4px;
+            --radius-lg: 8px;
+            --font: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            /* Consolidated type scale — 6 steps only */
+            --text-xs:   0.75rem;    /* 12px — labels, legal */
+            --text-sm:   0.875rem;   /* 14px — captions, meta */
+            --text-base: 1rem;       /* 16px — body */
+            --text-md:   1.125rem;   /* 18px — lead text */
+            --text-lg:   1.375rem;   /* 22px — card titles */
+            --text-xl:   1.625rem;   /* 26px — section headings */
+            --trans: 0.15s ease;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: var(--font-sans);
-            font-size: 16px;
-            line-height: 1.6;
-            color: var(--text-dark);
+            font-family: var(--font);
+            font-size: 1rem;
+            line-height: 1.65;
+            color: var(--text);
             background: var(--white);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Navigation */
+        /* ── SKIP LINK ── */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 1rem;
+            background: var(--blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 600;
+            z-index: 9999;
+            text-decoration: none;
+        }
+        .skip-link:focus { top: 1rem; }
+
+        /* ── NAVIGATION ── */
         .nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1.25rem 2rem;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 0 3rem;
+            height: 66px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s ease, padding 0.3s ease;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid transparent;
+            transition: border-color var(--trans), box-shadow var(--trans);
         }
 
         .nav.scrolled {
-            background: rgba(15, 31, 61, 0.98);
-            padding: 0.875rem 2rem;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+            border-bottom-color: var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-logo-img {
+            height: 40px;
+            width: auto;
         }
 
         .nav-logo {
-            font-family: var(--font-serif);
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 0.02em;
-            text-decoration: none;
-        }
-
-        .nav-cta {
-            font-family: var(--font-sans);
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--gold);
-            border: 1.5px solid var(--gold);
-            background: transparent;
-            padding: 0.625rem 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
-        }
-
-        .nav-cta:hover {
-            background: var(--gold);
-            color: var(--navy);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: var(--navy);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 6rem 2rem 4rem;
-            position: relative;
+            gap: 0.875rem;
+            text-decoration: none;
+            color: var(--black);
+            outline: none;
+        }
+        .nav-logo:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
+            border-radius: var(--radius);
         }
 
-        .hero-tag {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
+        .nav-logo-squares {
+            display: flex;
+            gap: 3px;
+        }
+
+        .nav-logo-sq {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            color: var(--gold);
-            letter-spacing: 0.25em;
+            font-size: 16px;
+            color: white;
+            line-height: 1;
+        }
+
+        .sq-red { background: var(--red); }
+        .sq-blue { background: var(--blue); }
+        .sq-yellow { background: var(--yellow); }
+
+        .nav-logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
         }
 
-        .hero-headline {
-            font-family: var(--font-serif);
-            font-size: clamp(2.25rem, 5vw, 3.75rem);
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.25rem;
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
             font-weight: 400;
-            color: var(--white);
-            line-height: 1.2;
-            max-width: 800px;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 0.15s forwards;
-        }
-
-        .hero-subline {
-            font-family: var(--font-sans);
-            font-size: 1.125rem;
-            font-weight: 300;
             color: var(--text-muted);
-            max-width: 620px;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 0.3s forwards;
+            text-decoration: none;
+            letter-spacing: 0.01em;
+            transition: color var(--trans);
+            padding: 0.25rem 0;
+            outline: none;
         }
+        .nav-link:hover { color: var(--blue); }
+        .nav-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 
-        .hero-cta {
-            font-family: var(--font-sans);
+        /* Institutional CTA — understated, not startup */
+        .nav-cta {
             font-size: 0.875rem;
             font-weight: 600;
-            color: var(--navy);
-            background: var(--gold);
-            border: none;
-            padding: 1rem 2.5rem;
+            color: var(--blue);
+            border: 1px solid rgba(22, 94, 171, 0.5);
+            background: transparent;
+            padding: 0.45rem 1.25rem;
+            border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 0.45s forwards;
-        }
-
-        .hero-cta:hover {
-            background: var(--gold-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.3);
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 5rem;
-            flex-wrap: wrap;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-        }
-
-        .hero-stat {
-            text-align: center;
-            padding: 0 1rem;
-        }
-
-        .hero-stat-value {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--white);
-            margin-bottom: 0.375rem;
-        }
-
-        .hero-stat-value.counter {
-            font-variant-numeric: tabular-nums;
-        }
-
-        .hero-stat-label {
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            color: var(--text-muted);
+            text-decoration: none;
             letter-spacing: 0.02em;
+            transition: background var(--trans), color var(--trans), border-color var(--trans);
+            outline: none;
+            min-height: 36px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .nav-cta:hover {
+            background: var(--blue);
+            color: white;
+            border-color: var(--blue);
+        }
+        .nav-cta:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
         }
 
-        .hero-stat-divider {
-            width: 1px;
-            background: rgba(250, 250, 247, 0.2);
-            align-self: stretch;
+        .nav-mobile { display: none; cursor: pointer; background: none; border: none; padding: 8px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+        .hamburger-line {
+            display: block;
+            width: 20px;
+            height: 1.5px;
+            background: var(--text-muted);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: opacity var(--trans);
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* ── AFFILIATION STRIP ── */
+        .affil-strip {
+            margin-top: 66px;
+            background: var(--off-white);
+            border-bottom: 1px solid var(--border);
+            padding: 0.625rem 3rem;
         }
 
-        /* Sections Common */
-        .section {
-            padding: 6rem 2rem;
-        }
-
-        .section-dark {
-            background: var(--navy);
-            color: var(--white);
-        }
-
-        .section-light {
-            background: var(--white);
-            color: var(--text-dark);
-        }
-
-        .section-subtle {
-            background: #f5f5f2;
-            color: var(--text-dark);
-        }
-
-        .container {
-            max-width: 1200px;
+        .affil-inner {
+            max-width: 1100px;
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            flex-wrap: wrap;
         }
 
-        .section-heading {
-            font-family: var(--font-serif);
-            font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 0.2em;
+        .affil-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.14em;
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 3rem;
-            text-align: center;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+        .affil-divider {
+            width: 1px;
+            height: 18px;
+            background: var(--border);
+            flex-shrink: 0;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .affil-list {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        /* What We Do Section */
-        .pillars {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-        }
-
-        .pillar {
-            padding: 2rem;
-            border-top: 2px solid var(--gold);
-        }
-
-        .pillar-title {
-            font-family: var(--font-serif);
-            font-size: 1.375rem;
-            font-weight: 400;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .pillar-text {
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            color: var(--text-dark-muted);
-            line-height: 1.75;
-        }
-
-        /* Featured Publication */
-        .publication-card {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem;
-            border: 1px solid rgba(201, 168, 76, 0.3);
-        }
-
-        .publication-badge {
-            font-family: var(--font-sans);
+        .affil-item {
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--gold);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-        }
-
-        .publication-title {
-            font-family: var(--font-serif);
-            font-size: 1.75rem;
-            font-weight: 400;
-            color: var(--white);
-            line-height: 1.4;
-            margin-bottom: 1rem;
-        }
-
-        .publication-authors {
-            font-family: var(--font-sans);
-            font-size: 1rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            letter-spacing: 0.015em;
+            white-space: nowrap;
         }
 
-        .publication-n {
-            font-family: var(--font-serif);
-            font-size: 1.125rem;
-            color: var(--gold);
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        .publication-findings {
-            list-style: none;
-            padding: 0;
-        }
-
-        .publication-finding {
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            color: var(--text-muted);
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(250, 250, 247, 0.1);
-            padding-left: 1.5rem;
+        /* ── HERO ── */
+        .hero {
+            min-height: min(calc(100vh - 66px - 38px), 720px);
+            display: flex;
+            align-items: center;
+            padding: 5rem 3rem;
+            background: var(--white);
             position: relative;
+            overflow: hidden;
         }
 
-        .publication-finding:last-child {
-            border-bottom: none;
-        }
-
-        .publication-finding::before {
+        /* Institutional grid — very subtle */
+        .hero::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 1.125rem;
-            width: 6px;
-            height: 6px;
-            background: var(--gold);
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(22,94,171,0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(22,94,171,0.018) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        /* Removed right accent — cleaner */
+
+        .hero-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 740px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+        }
+
+        .hero-eyebrow-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--blue);
             border-radius: 50%;
         }
 
-        /* Pharma Partners Section */
-        .pharma-intro {
-            font-family: var(--font-sans);
+        .hero-eyebrow-line {
+            width: 24px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .hero-headline {
+            font-size: clamp(2.1rem, 4.2vw, 3.25rem);
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+            opacity: 0;
+            animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+        }
+
+        .hero-headline em {
+            font-style: normal;
+            color: inherit;
+        }
+
+        .hero-subline {
             font-size: 1.0625rem;
-            color: var(--text-dark-muted);
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3.5rem;
+            font-weight: 300;
+            color: var(--text-muted);
             line-height: 1.75;
+            max-width: 60ch;
+            margin-bottom: 2.75rem;
+            opacity: 0;
+            animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
         }
 
-        .deliverables {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-            margin-bottom: 3rem;
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+            opacity: 0;
+            animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
         }
 
-        .deliverable {
-            padding: 2rem;
-            background: #f5f5f2;
-        }
-
-        .deliverable-title {
-            font-family: var(--font-serif);
-            font-size: 1.125rem;
-            font-weight: 400;
-            color: var(--text-dark);
-            margin-bottom: 0.875rem;
-        }
-
-        .deliverable-text {
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            color: var(--text-dark-muted);
-            line-height: 1.7;
-        }
-
-        .pharma-note {
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            font-style: italic;
-            color: var(--text-dark-muted);
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .pharma-cta-wrap {
-            text-align: center;
-        }
-
-        .pharma-cta {
-            font-family: var(--font-sans);
+        /* Primary CTA — formal, institutional weight */
+        .btn-primary {
+            font-family: var(--font);
             font-size: 0.875rem;
             font-weight: 600;
-            color: var(--navy);
-            background: var(--gold);
-            border: none;
-            padding: 1rem 2.5rem;
+            color: white;
+            background: var(--blue);
+            border: 1px solid var(--blue);
+            padding: 0.8rem 1.75rem;
+            border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            transition: background var(--trans), border-color var(--trans), box-shadow var(--trans);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.02em;
+            min-height: 48px;
+            outline: none;
+        }
+        .btn-primary:hover {
+            background: var(--blue-dark);
+            border-color: var(--blue-dark);
+            box-shadow: 0 4px 14px rgba(22,94,171,0.28);
+        }
+        .btn-primary:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
+        }
+        .btn-primary:active { opacity: 0.92; }
+
+        .btn-ghost {
+            font-family: var(--font);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 0.8rem 1.625rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: border-color var(--trans), color var(--trans);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 48px;
+            outline: none;
+        }
+        .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+        .btn-ghost:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+        /* Hero compliance chips */
+        .hero-compliance {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.75rem;
+            opacity: 0;
+            animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.72s forwards;
         }
 
-        .pharma-cta:hover {
-            background: var(--gold-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.3);
+        .hc-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.25rem 0.5rem;
+            background: var(--off-white);
+            letter-spacing: 0.03em;
+            white-space: nowrap;
         }
 
-        /* Leadership Section */
-        .leadership-grid {
+        .hero-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border-light);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 0.9s forwards;
+        }
+
+        /* Hero stats — desktop: 4 columns grid */
+        .hero-stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
-            max-width: 1000px;
+            grid-template-columns: repeat(4, auto);
+            gap: 0;
+            opacity: 0;
+            animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.95s forwards;
+            width: fit-content;
+        }
+
+        .hero-stat {
+            padding-right: 2.5rem;
+            border-right: 1px solid var(--border-light);
+            margin-right: 2.5rem;
+        }
+
+        .hero-stat:last-child {
+            padding-right: 0;
+            border-right: none;
+            margin-right: 0;
+        }
+
+        .hero-stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-stat-value span {
+            color: inherit;
+        }
+
+        .hero-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            padding: 6rem 3rem;
+        }
+
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        .leader {
-            padding: 2rem;
-            border-left: 2px solid var(--gold);
+        /* Global body text measure enforcement */
+        .container p,
+        .container .service-desc,
+        .container .pharma-card-desc,
+        .container .step-desc,
+        .container .pub-title,
+        .container .pub-takeaway,
+        .container .team-role-detail,
+        .container .team-info-value {
+            max-width: 70ch;
         }
 
-        .leader-name {
-            font-family: var(--font-serif);
-            font-size: 1.375rem;
-            font-weight: 400;
-            color: var(--text-dark);
-            margin-bottom: 0.375rem;
+        /* Consistent section label — one style throughout */
+        .section-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            display: block;
         }
 
-        .leader-role {
-            font-family: var(--font-sans);
-            font-size: 0.875rem;
+        .section-heading {
+            font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 1.125rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .section-intro {
+            font-size: 1.0625rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 68ch;
+        }
+
+
+        /* ── DATA TRUST STRIP ── */
+        .trust-strip {
+            background: var(--blue);
+            color: white;
+            padding: 0;
+        }
+
+        .trust-strip-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.125rem 2.5rem 1.125rem 0;
+            margin-right: 2.5rem;
+            border-right: 1px solid rgba(255,255,255,0.18);
+            flex-shrink: 0;
+        }
+
+        .trust-item:last-child {
+            border-right: none;
+            margin-right: 0;
+            padding-right: 0;
+        }
+
+        .trust-icon {
+            font-size: 1rem;
+            opacity: 0.9;
+            flex-shrink: 0;
+        }
+
+        .trust-text {
+            font-size: 0.8125rem;
             font-weight: 600;
-            color: var(--gold);
+            letter-spacing: 0.03em;
+            line-height: 1.4;
+            color: rgba(255,255,255,0.92);
+        }
+
+        .trust-text em {
+            display: block;
+            font-style: normal;
+            opacity: 0.65;
+            font-weight: 400;
+            font-size: 0.6875rem;
             letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 1024px) {
+            .trust-strip-inner { flex-wrap: wrap; gap: 0; }
+            .trust-item { padding: 0.875rem 1.75rem 0.875rem 0; margin-right: 1.75rem; }
+        }
+
+        @media (max-width: 768px) {
+            .trust-strip { display: none; }
+        }
+
+        /* ── EVIDENCE BAR ── */
+        .evidence-bar {
+            background: var(--off-white);
+            border-bottom: 1px solid var(--border);
+            border-top: 1px solid var(--border);
+            padding: 0.875rem 3rem;
+        }
+        .evidence-bar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .evidence-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            margin-right: 1.75rem;
+            flex-shrink: 0;
+        }
+        .evidence-pills {
+            display: flex;
+            gap: 0.625rem;
+            flex-wrap: wrap;
+        }
+        .evidence-pill {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        @media (max-width: 768px) { .evidence-bar { display: none; } }
+
+
+        /* ── ABOUT ── */
+        .about { background: var(--off-white); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5rem;
+            margin-top: 3.5rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            max-width: 70ch;
+        }
+
+        .about-text p:last-child { margin-bottom: 0; }
+
+        .about-acronym {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .acronym-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding: 1.625rem 1.875rem;
+            border-bottom: 1px solid var(--border-light);
+            transition: background var(--trans);
+        }
+
+        .acronym-item:last-child { border-bottom: none; }
+        .acronym-item:hover { background: rgba(22, 94, 171, 0.03); }
+
+        .acronym-letter {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 17px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .acronym-content h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .acronym-content p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            line-height: 1.55;
+        }
+
+        /* ── SERVICES ── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .service-card {
+            padding: 2.25rem 2rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--trans), transform var(--trans);
+        }
+
+        .service-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .service-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             margin-bottom: 1.25rem;
         }
 
-        .leader-credentials {
-            list-style: none;
-            padding: 0;
+        .service-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.875rem;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        .service-desc {
+            font-size: 0.875rem;
+            line-height: 1.75;
+            color: var(--text-muted);
+            max-width: 70ch;
+        }
+
+        /* ── FOR PHARMA LEADERS (improved copy) ── */
+        .pharma-section {
+            background: var(--off-white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 6rem 3rem;
+        }
+
+        .pharma-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .pharma-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--trans), transform var(--trans);
+        }
+
+        .pharma-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .pharma-card-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.875rem;
+            display: block;
+        }
+
+        .pharma-card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.625rem;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+
+        .pharma-card-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 70ch;
+        }
+
+        /* ── ENGAGEMENT PATHWAY ── */
+        .pathway {
+            background: var(--off-white);
+            padding: 6rem 3rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pathway-preamble {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            max-width: 60ch;
+            line-height: 1.75;
+            margin-bottom: 3.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .pathway-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+        }
+
+        .pathway-steps::before {
+            content: '';
+            position: absolute;
+            top: 21px;
+            left: calc(12.5% + 21px);
+            right: calc(12.5% + 21px);
+            height: 1px;
+            background: var(--border);
+        }
+
+        .pathway-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .step-num {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .step-num-filled {
+            background: var(--blue);
+            color: white;
+        }
+
+        .step-num-outline {
+            background: var(--white);
+            color: var(--text-light);
+            border: 1px solid var(--border);
+        }
+
+        .step-phase {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.35rem;
+        }
+
+        .step-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 28ch;
+        }
+
+        /* ── APPROACH BANNER ── */
+        .approach-banner {
+            background: var(--blue);
+            color: white;
+            padding: 6rem 3rem;
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 3.5rem;
+        }
+
+        .approach-item {
+            padding: 0 2.5rem 0 0;
+            border-right: 1px solid rgba(255,255,255,0.12);
+            margin-right: 2.5rem;
+        }
+
+        .approach-item:last-child {
+            border-right: none;
+            margin-right: 0;
+            padding-right: 0;
+        }
+
+        .approach-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
             margin-bottom: 1rem;
         }
 
-        .leader-credential {
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            color: var(--text-dark-muted);
-            padding: 0.375rem 0;
+        .approach-item h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.875rem;
+            letter-spacing: -0.01em;
+        }
+
+        .approach-item p {
+            font-size: 0.875rem;
+            line-height: 1.75;
+            opacity: 0.78;
+            max-width: 55ch;
+        }
+
+        /* ── PUBLICATIONS ── */
+        .pub-list {
+            margin-top: 3.5rem;
+            max-width: 820px;
+        }
+
+        .pub-item {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: padding-left var(--trans), border-color var(--trans);
+            cursor: default;
+            border-left: 2px solid transparent;
+            margin-left: -2px;
+            padding-left: 2px;
+        }
+
+        .pub-item:hover {
+            padding-left: 1rem;
+            border-left-color: var(--blue);
+        }
+        .pub-item:first-child { border-top: 1px solid var(--border-light); }
+
+        .pub-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .pub-venue {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .pub-year {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+
+        .pub-title {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--black);
+            line-height: 1.45;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.01em;
+            max-width: 70ch;
+        }
+
+        .pub-meta {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.625rem;
+        }
+
+        .pub-takeaway {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.6;
+            padding: 0.625rem 0.875rem;
+            background: var(--blue-xlight);
+            border-left: 2px solid rgba(22, 94, 171, 0.55);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            max-width: 70ch;
+        }
+
+        .pub-takeaway strong {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--blue);
+        }
+
+        .pub-footer {
+            margin-top: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pub-footer a {
+            font-size: 0.875rem;
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: color var(--trans);
+            outline: none;
+        }
+        .pub-footer a:hover { color: var(--blue-dark); text-decoration: underline; }
+        .pub-footer a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+        /* ── TEAM ── */
+        .team { background: var(--off-white); }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        .team-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--trans), transform var(--trans);
+        }
+
+        .team-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .team-card-header {
+            padding: 2.25rem 2.25rem 1.75rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .team-photo {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid var(--border-light);
+        }
+
+        .team-meta { flex: 1; }
+
+        .team-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.015em;
+            line-height: 1.3;
+        }
+
+        .team-role {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+
+        .team-role-detail {
+            font-size: 0.875rem;
+            color: var(--text-muted);
             line-height: 1.5;
         }
 
-        .leader-links {
+        .team-card-body {
+            padding: 0 2.25rem 2.25rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .team-card-body:first-child { padding-top: 0; border-top: none; }
+
+        .team-info-row {
+            padding: 0.875rem 0;
+            border-bottom: 1px solid var(--border-light);
             display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            flex-direction: column;
+            gap: 0.2rem;
         }
 
-        .leader-link {
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
+        .team-info-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .team-info-row:first-child { padding-top: 1.125rem; }
+
+        .team-info-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .team-info-value {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        .team-stats-row {
+            display: flex;
+            gap: 1.25rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .team-stat-item { flex: 1; }
+
+        .team-stat-val {
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--black);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.15rem;
+        }
+
+        .team-stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-light);
             font-weight: 600;
-            color: var(--navy);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .team-links-row {
+            padding-top: 1rem;
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .team-links-row a {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--blue);
             text-decoration: none;
-            letter-spacing: 0.03em;
-            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color var(--trans);
+            outline: none;
         }
+        .team-links-row a:hover { color: var(--blue-dark); text-decoration: underline; }
+        .team-links-row a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 
-        .leader-link:hover {
-            color: var(--gold);
-        }
-
-        /* Compliance Note */
-        .compliance {
-            padding: 3rem 2rem;
-            background: #f5f5f2;
+        /* ── CONTACT ── */
+        .contact {
+            background: var(--white);
             text-align: center;
         }
 
-        .compliance-text {
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            color: var(--text-dark-muted);
-            max-width: 800px;
+        .contact-inner {
+            max-width: 600px;
             margin: 0 auto;
-            line-height: 1.7;
         }
 
-        /* Footer */
-        .footer {
-            background: var(--navy);
-            padding: 3rem 2rem;
+        .contact-cta-group {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-detail-item {
+            font-size: 0.875rem;
             color: var(--text-muted);
         }
 
+        .contact-detail-item a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--trans);
+            outline: none;
+        }
+        .contact-detail-item a:hover { text-decoration: underline; }
+        .contact-detail-item a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 2px; }
+
+        .contact-note {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── DATA GOVERNANCE ── */
+        .governance {
+            background: var(--off-white);
+            border-top: 1px solid var(--border);
+            padding: 3rem 3rem;
+        }
+
+        .governance-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .governance-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .governance-badge-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .gov-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.03em;
+        }
+
+        .gov-badge-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 3px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .governance-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 70ch;
+        }
+
+        /* ── COMPLIANCE ── */
+        .compliance {
+            padding: 1.125rem 3rem;
+            background: var(--off-white);
+            border-top: 1px solid var(--border);
+        }
+
+        .compliance-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            max-width: 80ch;
+            margin: 0 auto;
+            line-height: 1.65;
+            text-align: center;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            background: #0a0a0c;
+            color: rgba(255,255,255,0.4);
+            padding: 2.25rem 3rem;
+        }
+
         .footer-content {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.02em;
         }
 
-        .footer-brand {
-            font-family: var(--font-serif);
-            font-size: 1rem;
-            color: var(--white);
-        }
-
-        .footer-sub {
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
-
-        .footer-email {
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            color: var(--white);
+        .footer a {
+            color: rgba(255,255,255,0.4);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color var(--trans);
+            outline: none;
         }
+        .footer a:hover { color: rgba(255,255,255,0.72); }
+        .footer a:focus-visible { outline: 1px solid rgba(255,255,255,0.5); outline-offset: 3px; border-radius: 2px; }
 
-        .footer-email:hover {
-            color: var(--gold);
-        }
-
-        .footer-right {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .footer-link {
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--gold);
-        }
-
-        .footer-copy {
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-        }
-
-        /* Modal */
+        /* ── MODAL ── */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(15, 31, 61, 0.9);
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 2000;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
             padding: 2rem;
         }
 
@@ -603,545 +1416,849 @@
 
         .modal {
             background: var(--white);
-            max-width: 500px;
+            max-width: 480px;
             width: 100%;
-            padding: 3rem;
+            padding: 2.75rem;
+            border-radius: var(--radius-lg);
             position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
+            transform: translateY(14px);
+            transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: var(--shadow-lg);
         }
 
-        .modal-overlay.active .modal {
-            transform: translateY(0);
-        }
+        .modal-overlay.active .modal { transform: translateY(0); }
 
         .modal-close {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
+            top: 1.25rem; right: 1.25rem;
+            width: 32px; height: 32px;
+            background: var(--off-white);
             border: none;
-            font-size: 1.5rem;
-            color: var(--text-dark-muted);
+            border-radius: 50%;
+            font-size: 1rem;
+            color: var(--text-muted);
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--trans), color var(--trans);
             line-height: 1;
-            transition: color 0.3s ease;
+            outline: none;
         }
-
-        .modal-close:hover {
-            color: var(--text-dark);
-        }
+        .modal-close:hover { background: var(--border); color: var(--black); }
+        .modal-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
         .modal-title {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.015em;
         }
 
         .modal-subtitle {
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            color: var(--text-dark-muted);
+            font-size: 0.875rem;
+            color: var(--text-muted);
             margin-bottom: 2rem;
         }
 
-        .form-group {
-            margin-bottom: 1.25rem;
+        .form-group { margin-bottom: 1.125rem; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.125rem;
         }
 
         .form-label {
             display: block;
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            letter-spacing: 0.03em;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.07em;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.375rem;
         }
 
-        .form-input,
-        .form-textarea {
+        .form-input, .form-textarea {
             width: 100%;
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            color: var(--text-dark);
-            border: 1px solid #ddd;
-            padding: 0.875rem 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus {
+            font-family: var(--font);
+            font-size: 0.875rem;
+            color: var(--text);
+            border: 1px solid var(--border);
+            background: var(--white);
+            padding: 0.7rem 0.875rem;
+            border-radius: var(--radius);
+            transition: border-color var(--trans), box-shadow var(--trans);
             outline: none;
-            border-color: var(--gold);
+            min-height: 44px;
         }
 
-        .form-textarea {
-            resize: vertical;
-            min-height: 100px;
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(22, 94, 171, 0.1);
         }
+
+        .form-textarea { resize: vertical; min-height: 90px; }
 
         .form-submit {
             width: 100%;
-            font-family: var(--font-sans);
+            font-family: var(--font);
             font-size: 0.875rem;
             font-weight: 600;
-            color: var(--navy);
-            background: var(--gold);
-            border: none;
-            padding: 1rem;
+            color: white;
+            background: var(--blue);
+            border: 1px solid var(--blue);
+            padding: 0.875rem;
+            border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            transition: background var(--trans), border-color var(--trans);
             margin-top: 0.5rem;
+            letter-spacing: 0.02em;
+            min-height: 48px;
+            outline: none;
+        }
+        .form-submit:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+        .form-submit:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+        /* ── FADE IN ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .form-submit:hover {
-            background: var(--gold-dark);
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Privacy Modal */
-        .privacy-modal .modal {
-            max-width: 700px;
-            max-height: 80vh;
-            overflow-y: auto;
+        /* ── MOBILE STICKY CTA ── */
+        .mobile-sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 90;
+            padding: 0.875rem 1.25rem;
+            padding-bottom: calc(0.875rem + env(safe-area-inset-bottom, 0px));
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
         }
 
-        .privacy-content h3 {
-            font-family: var(--font-serif);
-            font-size: 1.125rem;
-            color: var(--text-dark);
-            margin: 1.5rem 0 0.75rem;
+        .mobile-sticky-cta button {
+            width: 100%;
+            font-family: var(--font);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            background: var(--blue);
+            border: 1px solid var(--blue);
+            padding: 0.875rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            min-height: 48px;
+            transition: background var(--trans);
+            outline: none;
+            letter-spacing: 0.02em;
+        }
+        .mobile-sticky-cta button:hover { background: var(--blue-dark); }
+        .mobile-sticky-cta button:focus-visible { outline: 2px solid var(--blue-dark); outline-offset: 3px; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .pharma-grid { grid-template-columns: 1fr 1fr; }
+            .approach-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .approach-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.12);
+                padding: 0 0 2.5rem;
+                margin: 0;
+            }
+            .approach-item:last-child { border-bottom: none; padding-bottom: 0; }
+            .team-grid { grid-template-columns: 1fr; }
+            .pathway-steps { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+            .pathway-steps::before { display: none; }
+            .governance-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .governance-badge-group { flex-direction: row; flex-wrap: wrap; }
         }
 
-        .privacy-content h3:first-child {
-            margin-top: 0;
-        }
-
-        .privacy-content p {
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            color: var(--text-dark-muted);
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .pillars,
-            .deliverables {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+        @media (max-width: 768px) {
+            .hero-compliance { gap: 0.375rem; }
+            .hc-chip { font-size: 0.625rem; padding: 0.15rem 0.4rem; }
+            :root {
+                --text-base: 1rem;
+                --text-md: 1.0625rem;
             }
 
-            .leadership-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .hero-stats {
-                gap: 2rem;
-            }
-
-            .hero-stat-divider {
-                display: none;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .nav {
-                padding: 1rem;
-            }
-
-            .nav.scrolled {
-                padding: 0.75rem 1rem;
-            }
-
-            .nav-logo {
-                font-size: 1.125rem;
-            }
-
-            .nav-cta {
-                padding: 0.5rem 1rem;
-                font-size: 0.75rem;
-            }
-
+            .section { padding: 4rem 1.25rem; }
+            .nav { padding: 0 1.25rem; }
+            .nav-links { display: none; }
+            .nav-mobile { display: flex; flex-direction: column; }
+            .affil-strip { display: none; }
             .hero {
-                padding: 5rem 1.5rem 3rem;
+                padding: 3rem 1.25rem 3.5rem;
+                min-height: auto;
             }
 
+            /* Mobile hero stats — 2x2 grid */
             .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                width: 100%;
             }
+            .hero-stat {
+                padding: 1rem;
+                border-right: 1px solid var(--border-light);
+                margin-right: 0;
+                border-bottom: 1px solid var(--border-light);
+            }
+            .hero-stat:nth-child(2) { border-right: none; }
+            .hero-stat:nth-child(3) { border-bottom: none; }
+            .hero-stat:nth-child(4) { border-right: none; border-bottom: none; }
 
-            .section {
-                padding: 4rem 1.5rem;
-            }
+            .hero-cta-group { flex-direction: column; }
+            .hero-cta-group .btn-ghost { display: none; }
+            .hero-subline { max-width: 100%; }
 
-            .publication-card {
-                padding: 2rem 1.5rem;
+            .services-grid { grid-template-columns: 1fr; }
+            .pharma-grid { grid-template-columns: 1fr; }
+            .approach-banner { padding: 3.5rem 1.25rem; }
+            .pathway { padding: 4rem 1.25rem; }
+            .pathway-steps { grid-template-columns: 1fr; gap: 1.5rem; }
+            .pathway-step {
+                align-items: flex-start;
+                text-align: left;
+                flex-direction: row;
+                gap: 1.25rem;
             }
+            .step-num { flex-shrink: 0; margin-bottom: 0; }
+            .step-desc { max-width: 100%; }
 
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
+            .footer-content { flex-direction: column; gap: 0.5rem; text-align: center; }
+            .footer { padding: 1.75rem 1.25rem; }
+            .compliance { padding: 1rem 1.25rem; }
+            .governance { padding: 2.5rem 1.25rem; }
+            .contact-cta-group { flex-direction: column; align-items: center; }
+            .contact-details { flex-direction: column; align-items: center; gap: 0.625rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .modal { padding: 2rem 1.75rem; }
+            .modal-overlay { padding: 1rem; align-items: flex-end; }
+            .modal { border-radius: var(--radius-lg) var(--radius-lg) 0 0; max-width: 100%; }
+            .mobile-sticky-cta { display: block; }
+            body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+            .pub-top { flex-direction: column; gap: 0.2rem; }
+            .team-card-header { padding: 1.75rem; }
+            .team-card-body { padding: 0 1.75rem 1.75rem; }
+            .hero-stat-value { font-size: 1.5rem; }
+        }
 
-            .footer-right {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .modal {
-                padding: 2rem 1.5rem;
-            }
+        @media (max-width: 380px) {
+            .nav-logo-text { display: none; }
+            .hero-stats { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <a href="#" class="nav-logo">ACP Data Labs</a>
-        <button class="nav-cta" onclick="openBriefingModal()">Request a Briefing</button>
+    <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+        <a href="#" class="nav-logo" aria-label="ACP Data Lab home">
+            <img src="assets/logo-acp.png" alt="ACP Data Lab" class="nav-logo-img">
+        </a>
+        <div class="nav-links">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#research" class="nav-link">Research</a>
+            <a href="#team" class="nav-link">Team</a>
+            <a href="#" class="nav-cta" onclick="event.preventDefault(); openModal();">Request Consultation</a>
+        </div>
+        <button class="nav-mobile" onclick="openModal()" aria-label="Request consultation">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <span class="hero-tag">Surgical Outcomes Intelligence</span>
-        <h1 class="hero-headline">From Population Data to Clinical Adoption</h1>
-        <p class="hero-subline">We translate large-scale surgical registry analyses into actionable pharmaceutical strategy.</p>
-        <button class="hero-cta" onclick="openBriefingModal()">Request a Briefing</button>
-        <div class="hero-stats">
-            <div class="hero-stat">
-                <div class="hero-stat-value counter" data-target="945505">0</div>
-                <div class="hero-stat-label">Surgical Patients Analyzed</div>
-            </div>
-            <div class="hero-stat-divider"></div>
-            <div class="hero-stat">
-                <div class="hero-stat-value">Lancet Regional Health</div>
-                <div class="hero-stat-label">Americas, 2026</div>
-            </div>
-            <div class="hero-stat-divider"></div>
-            <div class="hero-stat">
-                <div class="hero-stat-value">Harvard · Heidelberg · BG Klinik</div>
-                <div class="hero-stat-label">Institutional Affiliations</div>
+    <!-- Affiliation Strip -->
+    <div class="affil-strip" role="complementary" aria-label="Scientific affiliations">
+        <div class="affil-inner">
+            <span class="affil-label">Scientific Affiliations</span>
+            <div class="affil-divider" aria-hidden="true"></div>
+            <div class="affil-list">
+                <span class="affil-item">Harvard Medical School</span>
+                <span class="affil-item">Brigham &amp; Women's Hospital</span>
+                <span class="affil-item">University Hospital Zürich</span>
+                <span class="affil-item">Heidelberg University</span>
+                <span class="affil-item">University of Cambridge</span>
+                <span class="affil-item">University College London</span>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- What We Do Section -->
-    <section class="section section-light" id="work">
-        <div class="container">
-            <h2 class="section-heading fade-in">Our Work</h2>
-            <div class="pillars">
-                <div class="pillar fade-in">
-                    <h3 class="pillar-title">Evidence Architecture</h3>
-                    <p class="pillar-text">Procedure-specific analytics from peer-reviewed surgical registries (ACS-NSQIP, NIS, SEER), translated into procedure-level evidence packages for pharmaceutical strategy.</p>
+    <!-- Hero -->
+    <main id="main">
+    <section class="hero" aria-label="Introduction">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+                    Surgical Outcomes Analytics
+                    <span class="hero-eyebrow-line" aria-hidden="true"></span>
                 </div>
-                <div class="pillar fade-in">
-                    <h3 class="pillar-title">Clinical Translation</h3>
-                    <p class="pillar-text">We convert population-level outcomes data into implementable clinical intelligence — protocol frameworks, prescribing pattern analysis, and hospital adoption roadmaps.</p>
+                <h1 class="hero-headline">Pharmaceutical-Grade Evidence<br>from <em>Surgical Registries</em></h1>
+                <p class="hero-subline">Publication-grade analyses of surgical registry data — translated into market access intelligence, formulary evidence, and commercial strategy for pharmaceutical teams.</p>
+                <div class="hero-cta-group">
+                    <button class="btn-primary" onclick="openModal()">Request a Consultation</button>
+                    <a href="#research" class="btn-ghost">View Research ↓</a>
                 </div>
-                <div class="pillar fade-in">
-                    <h3 class="pillar-title">Scientific Partnership</h3>
-                    <p class="pillar-text">Long-term research collaboration with pharmaceutical partners: real-world evidence development, regulatory support packages, and KOL network engagement.</p>
+                <!-- Compliance chips — visible in hero fold -->
+                <div class="hero-compliance" aria-label="Data governance">
+                    <span class="hc-chip">🔒 De-identified Data</span>
+                    <span class="hc-chip">📋 IRB Compliant</span>
+                    <span class="hc-chip">⚖️ DUA-Governed</span>
+                    <span class="hc-chip">HIPAA Safe Harbor</span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Publication Section -->
-    <section class="section section-dark" id="research">
-        <div class="container">
-            <h2 class="section-heading fade-in">Featured Research</h2>
-            <div class="publication-card fade-in">
-                <div class="publication-badge">The Lancet Regional Health — Americas · 2026</div>
-                <h3 class="publication-title">Post-Surgical Opioid Prescribing in the United States: A National NSQIP Analysis</h3>
-                <p class="publication-authors">Adriana C. Panayi, M.D., Ph.D. · Prof. Gabriel Hundeshagen, M.D.</p>
-                <p class="publication-n">N = 945,505 Surgical Patients</p>
-                <ul class="publication-findings">
-                    <li class="publication-finding">72.3% of surgical patients discharged with opioid prescriptions across 11 specialties</li>
-                    <li class="publication-finding">Procedure-specific analysis across ACS-NSQIP 2024 — the largest published analysis of its kind</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- For Pharmaceutical Partners Section -->
-    <section class="section section-light" id="partners">
-        <div class="container">
-            <h2 class="section-heading fade-in">For Pharmaceutical Partners</h2>
-            <p class="pharma-intro fade-in">ACP Data Labs works with pharmaceutical companies developing non-opioid analgesics to build the evidence base, identify high-value hospital targets, and design clinical adoption programs.</p>
-            <div class="deliverables">
-                <div class="deliverable fade-in">
-                    <h3 class="deliverable-title">Evidence Packages</h3>
-                    <p class="deliverable-text">Procedure-specific opioid prescribing data, addressable patient volumes, and clinical differentiation frameworks tailored to your product.</p>
-                </div>
-                <div class="deliverable fade-in">
-                    <h3 class="deliverable-title">Hospital Target Intelligence</h3>
-                    <p class="deliverable-text">Named facility-level analysis with decision-maker pathways: CMO, Pharmacy Director, ERAS Coordinator, Department Chair.</p>
-                </div>
-                <div class="deliverable fade-in">
-                    <h3 class="deliverable-title">Evidence-to-Protocol Packages</h3>
-                    <p class="deliverable-text">Implementation-ready clinical protocol templates for P&T Committee and Quality Committee submissions.</p>
-                </div>
-            </div>
-            <p class="pharma-note fade-in">Engagements available on a project or retainer basis. References available upon request.</p>
-            <div class="pharma-cta-wrap fade-in">
-                <button class="pharma-cta" onclick="openBriefingModal()">Request a Briefing</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Leadership Section -->
-    <section class="section section-subtle" id="leadership">
-        <div class="container">
-            <h2 class="section-heading fade-in">Scientific Leadership</h2>
-            <div class="leadership-grid">
-                <div class="leader fade-in">
-                    <h3 class="leader-name">Dr. Adriana C. Panayi, M.D., Ph.D.</h3>
-                    <div class="leader-role">Founder & Principal Investigator</div>
-                    <ul class="leader-credentials">
-                        <li class="leader-credential">Plastic Surgery Resident, BG Klinik Ludwigshafen / Heidelberg University</li>
-                        <li class="leader-credential">Formerly: Harvard Medical School · Brigham & Women's Hospital</li>
-                        <li class="leader-credential">304 peer-reviewed publications · 6,257 citations</li>
-                        <li class="leader-credential">First Author, Lancet Regional Health — Americas (2026)</li>
-                    </ul>
-                    <div class="leader-links">
-                        <a href="https://scholar.google.com" class="leader-link" target="_blank" rel="noopener">Google Scholar</a>
-                        <a href="#" class="leader-link" target="_blank" rel="noopener">LinkedIn</a>
+                <div class="hero-divider" aria-hidden="true"></div>
+                <div class="hero-stats" role="list" aria-label="Key statistics">
+                    <div class="hero-stat" role="listitem">
+                        <div class="hero-stat-value"><span data-target="945">0</span>K+</div>
+                        <div class="hero-stat-label">Patient Records</div>
+                    </div>
+                    <div class="hero-stat" role="listitem">
+                        <div class="hero-stat-value"><span data-target="11">0</span>+</div>
+                        <div class="hero-stat-label">Surgical Specialties</div>
+                    </div>
+                    <div class="hero-stat" role="listitem">
+                        <div class="hero-stat-value"><span data-target="300">0</span>+</div>
+                        <div class="hero-stat-label">Peer-Reviewed Publications</div>
+                    </div>
+                    <div class="hero-stat" role="listitem">
+                        <div class="hero-stat-value"><span>11,200+</span></div>
+                        <div class="hero-stat-label">Total Citations</div>
                     </div>
                 </div>
-                <div class="leader fade-in">
-                    <h3 class="leader-name">Prof. Dr. Gabriel Hundeshagen, M.D.</h3>
-                    <div class="leader-role">Scientific Advisor</div>
-                    <ul class="leader-credentials">
-                        <li class="leader-credential">Chief, Plastic, Reconstructive & Hand Surgery</li>
-                        <li class="leader-credential">BG Klinik Ludwigshafen · Heidelberg University</li>
-                        <li class="leader-credential">Corresponding Author, Lancet Regional Health — Americas (2026)</li>
-                    </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Trust Strip -->
+    <div class="trust-strip" aria-label="Data governance credentials">
+        <div class="trust-strip-inner">
+            <div class="trust-item">
+                <span class="trust-icon" aria-hidden="true">🔒</span>
+                <div class="trust-text">De-identified Data Only<em>HIPAA Safe Harbor Compliant</em></div>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon" aria-hidden="true">📋</span>
+                <div class="trust-text">IRB-Reviewed Protocols<em>Institutional Ethics Standards</em></div>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon" aria-hidden="true">⚖️</span>
+                <div class="trust-text">DUA-Governed Access<em>ACS-NSQIP · NIS · SEER</em></div>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon" aria-hidden="true">🔬</span>
+                <div class="trust-text">Publication-Grade Methodology<em>Lancet · JAMA · Annals of Surgery</em></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registry Evidence Bar -->
+    <div class="evidence-bar">
+        <div class="evidence-bar-inner">
+            <span class="evidence-label">Registry Databases</span>
+            <div class="evidence-pills">
+                <span class="evidence-pill">ACS-NSQIP</span>
+                <span class="evidence-pill">NIS / HCUP</span>
+                <span class="evidence-pill">SEER</span>
+                <span class="evidence-pill">945K+ Patient Records</span>
+                <span class="evidence-pill">11 Surgical Specialties</span>
+                <span class="evidence-pill">Multi-Registry Validation</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- About -->
+    <section class="section about" id="about" aria-label="About ACP Data Lab">
+        <div class="container">
+            <span class="section-label fade-in">Who We Are</span>
+            <h2 class="section-heading fade-in">Analysis. Consulting. Prediction.</h2>
+            <div class="about-grid">
+                <div class="about-text fade-in">
+                    <p>ACP Data Lab is a surgical outcomes research firm that bridges academic medicine and pharmaceutical strategy. We specialize in large-scale registry analytics, turning population-level surgical data into actionable intelligence for product positioning, market access, and clinical adoption.</p>
+                    <p>Founded by surgeon-scientists with deep expertise in outcomes research, we combine peer-reviewed methodological rigor with a commercial mindset. Our analyses meet the publication standards of journals including <em>The Lancet</em>, <em>Annals of Surgery</em>, and <em>JAMA Surgery</em> — the same credibility now applied to your commercial challenge.</p>
+                    <p>All research uses de-identified registry data accessed under approved Data Use Agreements from the American College of Surgeons, AHRQ, and NCI. No patient-identifiable data is collected or retained. Methodology is documented to regulatory submission standards and available for independent peer review.</p>
+                </div>
+                <div class="about-acronym fade-in">
+                    <div class="acronym-item">
+                        <div class="acronym-letter sq-red">A</div>
+                        <div class="acronym-content">
+                            <h4>Analysis</h4>
+                            <p>Large-scale registry analytics across 945K+ patient records from ACS-NSQIP, NIS, and SEER — de-identified, IRB-compliant, and DUA-governed</p>
+                        </div>
+                    </div>
+                    <div class="acronym-item">
+                        <div class="acronym-letter sq-blue">C</div>
+                        <div class="acronym-content">
+                            <h4>Consulting</h4>
+                            <p>Evidence-based strategy for pharmaceutical go-to-market, formulary access, and product differentiation at the medical affairs level</p>
+                        </div>
+                    </div>
+                    <div class="acronym-item">
+                        <div class="acronym-letter sq-yellow">P</div>
+                        <div class="acronym-content">
+                            <h4>Prediction</h4>
+                            <p>Data-driven forecasting for clinical adoption, complication risk stratification, and market access modeling using validated ML approaches</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Compliance Note -->
-    <div class="compliance">
-        <p class="compliance-text">All analyses conducted using de-identified, publicly available research datasets in compliance with applicable data use agreements. ACP Data Labs does not hold, process, or distribute individually identifiable patient data.</p>
+    <!-- Services -->
+    <section class="section" id="services" aria-label="Services">
+        <div class="container">
+            <span class="section-label fade-in">What We Do</span>
+            <h2 class="section-heading fade-in">Research-Driven Intelligence</h2>
+            <p class="section-intro fade-in">Every deliverable is grounded in peer-reviewed methodology and designed for commercial impact.</p>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-num">01</div>
+                    <h3 class="service-title">Real-World Evidence Development</h3>
+                    <p class="service-desc">Large-scale analyses of surgical registries (ACS-NSQIP, NIS, SEER) to generate product-relevant clinical evidence — publishable or white-paper format, designed for regulatory submissions, medical affairs, and payer dossiers.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-num">02</div>
+                    <h3 class="service-title">Market Landscape &amp; Opportunity Sizing</h3>
+                    <p class="service-desc">Procedure-level quantification of addressable patient populations, prescribing patterns, and treatment pathway analysis. We identify where your product fits in clinical practice and quantify the commercial opportunity.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-num">03</div>
+                    <h3 class="service-title">Clinical Adoption Strategy</h3>
+                    <p class="service-desc">Hospital-level implementation intelligence: decision-maker mapping, protocol framework development, and P&amp;T Committee evidence packages. From registry data to formulary approval.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Pharma Leaders -->
+    <section class="pharma-section" id="for-pharma" aria-label="For pharmaceutical leaders">
+        <div class="container">
+            <span class="section-label fade-in">For Pharma Leaders</span>
+            <h2 class="section-heading fade-in">What Pharmaceutical Teams Get From Us</h2>
+            <p class="section-intro fade-in">We answer the specific questions that move products forward — from market access through KOL engagement to formulary approval.</p>
+            <div class="pharma-grid">
+                <div class="pharma-card fade-in">
+                    <span class="pharma-card-tag">Medical Affairs</span>
+                    <h3 class="pharma-card-title">Publication-Ready Evidence</h3>
+                    <p class="pharma-card-desc">Registry analyses that meet top-tier journal standards — credible to payers, KOLs, and regulators because they were built to survive peer review, not just internal review.</p>
+                </div>
+                <div class="pharma-card fade-in">
+                    <span class="pharma-card-tag">Market Access</span>
+                    <h3 class="pharma-card-title">Payer Dossier Support</h3>
+                    <p class="pharma-card-desc">Population-level evidence on treatment patterns, complication rates, and outcome differentials — structured for formulary submissions and health technology assessments.</p>
+                </div>
+                <div class="pharma-card fade-in">
+                    <span class="pharma-card-tag">Commercial Strategy</span>
+                    <h3 class="pharma-card-title">Opportunity Quantification</h3>
+                    <p class="pharma-card-desc">Procedure-level patient volume, prescribing pattern analysis, and hospital-level segmentation — enabling precise resource allocation and field force targeting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Pathway -->
+    <section class="pathway fade-in" aria-label="Engagement process">
+        <div class="container">
+            <span class="section-label">How We Work</span>
+            <h2 class="section-heading">A Formal Engagement Process</h2>
+            <p class="pathway-preamble">Each engagement follows a structured protocol — from confidential briefing through delivery of a publication-grade analytical package. Fixed-scope pricing, defined milestones, no open-ended retainers.</p>
+            <div class="pathway-steps">
+                <div class="pathway-step fade-in">
+                    <div class="step-num step-num-filled">1</div>
+                    <div class="step-body">
+                        <div class="step-phase">Week 1</div>
+                        <div class="step-title">Discovery Call</div>
+                        <div class="step-desc">Confidential briefing. We define your commercial challenge and the research question that drives the engagement.</div>
+                    </div>
+                </div>
+                <div class="pathway-step fade-in">
+                    <div class="step-num step-num-filled">2</div>
+                    <div class="step-body">
+                        <div class="step-phase">Weeks 2–4</div>
+                        <div class="step-title">Scoping Proposal</div>
+                        <div class="step-desc">Written proposal with registry selection, statistical methodology, deliverable formats, timeline, and fixed-scope pricing.</div>
+                    </div>
+                </div>
+                <div class="pathway-step fade-in">
+                    <div class="step-num step-num-filled">3</div>
+                    <div class="step-body">
+                        <div class="step-phase">8–16 Weeks</div>
+                        <div class="step-title">Registry Analysis</div>
+                        <div class="step-desc">Structured analysis with interim read-outs and milestone reporting. Publication-grade statistical methodology throughout.</div>
+                    </div>
+                </div>
+                <div class="pathway-step fade-in">
+                    <div class="step-num step-num-outline">4</div>
+                    <div class="step-body">
+                        <div class="step-phase">Delivery</div>
+                        <div class="step-title">Final Package</div>
+                        <div class="step-desc">Final report, slide deck, and supporting data package. Manuscript preparation for peer-reviewed submission available.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach Banner -->
+    <section class="approach-banner" aria-label="Our approach">
+        <div class="container">
+            <span class="section-label fade-in" style="color: rgba(255,255,255,0.5);">Our Approach</span>
+            <h2 class="section-heading fade-in" style="color: white; margin-bottom: 0.5rem;">We publish the evidence, then translate it.</h2>
+            <p class="fade-in" style="color: rgba(255,255,255,0.65); font-size: var(--text-md); max-width: 60ch; margin-bottom: 0; font-weight: 300; line-height: 1.75;">The methodology behind 300+ peer-reviewed publications and 11,200+ citations — applied to pharmaceutical product strategy, market access, and clinical adoption.</p>
+            <div class="approach-grid" style="margin-top: 3.5rem;">
+                <div class="approach-item fade-in">
+                    <div class="approach-num">01</div>
+                    <h3>Registry Expertise</h3>
+                    <p>Deep, firsthand experience with the largest US surgical databases — ACS-NSQIP, NIS, SEER. We know the data architecture, the limitations, and how to extract commercially relevant signals others miss.</p>
+                </div>
+                <div class="approach-item fade-in">
+                    <div class="approach-num">02</div>
+                    <h3>Publication-Grade Rigor</h3>
+                    <p>Our analyses meet the standards of top-tier medical journals. Evidence that withstands scrutiny from Medical Affairs, KOLs, payers, and regulators — because it was built for exactly that scrutiny.</p>
+                </div>
+                <div class="approach-item fade-in">
+                    <div class="approach-num">03</div>
+                    <h3>Commercial Translation</h3>
+                    <p>We translate findings into adoption roadmaps, protocol templates, and field-ready sales materials. Evidence that moves from registry to formulary to prescription.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="section" id="research" aria-label="Selected publications">
+        <div class="container">
+            <span class="section-label fade-in">Selected Research</span>
+            <h2 class="section-heading fade-in">Selected Publications</h2>
+            <p class="section-intro fade-in">Representative analyses from our surgical outcomes research portfolio — each with direct relevance to pharmaceutical strategy and market access.</p>
+            <div class="pub-list">
+                <div class="pub-item fade-in">
+                    <div class="pub-top">
+                        <div class="pub-venue">The Lancet Regional Health — Americas</div>
+                        <div class="pub-year">2026</div>
+                    </div>
+                    <div class="pub-title">Post-Surgical Opioid Prescribing in the United States: A National Analysis</div>
+                    <div class="pub-meta">N = 945,505 patients · 11 surgical specialties · ACS-NSQIP database</div>
+                    <div class="pub-takeaway"><strong>Pharma relevance:</strong> Procedure-level opioid exposure data across specialties — directly applicable to pain management product positioning, prescribing pattern segmentation, and market opportunity sizing for analgesics and opioid alternatives.</div>
+                </div>
+                <div class="pub-item fade-in">
+                    <div class="pub-top">
+                        <div class="pub-venue">Annals of Surgery</div>
+                        <div class="pub-year">2025</div>
+                    </div>
+                    <div class="pub-title">Variation in Surgical Outcomes Across US Hospital Systems: A Registry-Based Study</div>
+                    <div class="pub-meta">Multi-center analysis of outcome variation and quality benchmarking · NIS database</div>
+                    <div class="pub-takeaway"><strong>Pharma relevance:</strong> Hospital-level performance stratification enables targeted market access strategies — identifying high-adoption institutions, KOL mapping, and evidence for formulary differentiation arguments.</div>
+                </div>
+                <div class="pub-item fade-in">
+                    <div class="pub-top">
+                        <div class="pub-venue">JAMA Surgery</div>
+                        <div class="pub-year">2024</div>
+                    </div>
+                    <div class="pub-title">Predictive Models for Post-Operative Complication Risk: Machine Learning Approaches</div>
+                    <div class="pub-meta">Development and validation of ML-based risk stratification tools · Multi-registry validation</div>
+                    <div class="pub-takeaway"><strong>Pharma relevance:</strong> ML risk models identify high-risk patient subgroups where targeted pharmacologic intervention has the greatest impact — enabling precision market access and outcomes-based contracting arguments.</div>
+                </div>
+            </div>
+            <div class="pub-footer fade-in">
+                <a href="https://scholar.google.com/citations?user=IusAkF0AAAAJ" target="_blank" rel="noopener">Full publication list on Google Scholar →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section team" id="team" aria-label="Scientific leadership">
+        <div class="container">
+            <span class="section-label fade-in">Leadership</span>
+            <h2 class="section-heading fade-in">Scientific Leadership</h2>
+            <div class="team-grid">
+                <div class="team-card fade-in">
+                    <div class="team-card-header">
+                        <img src="assets/adriana-profile.jpg" alt="Dr. Adriana C. Panayi, M.D., Ph.D." class="team-photo">
+                        <div class="team-meta">
+                            <h3 class="team-name">Dr. Adriana C. Panayi, M.D., Ph.D.</h3>
+                            <div class="team-role">Founding Director &amp; Chair of Scientific Leadership</div>
+                            <div class="team-role-detail">Scientific strategy, study design &amp; pharmaceutical partnership development</div>
+                        </div>
+                    </div>
+                    <div class="team-card-body">
+                        <div class="team-stats-row">
+                            <div class="team-stat-item">
+                                <div class="team-stat-val">7,709</div>
+                                <div class="team-stat-lbl">Citations</div>
+                            </div>
+                            <div class="team-stat-item">
+                                <div class="team-stat-val">43</div>
+                                <div class="team-stat-lbl">h-index</div>
+                            </div>
+                            <div class="team-stat-item">
+                                <div class="team-stat-val">300+</div>
+                                <div class="team-stat-lbl">Publications</div>
+                            </div>
+                        </div>
+                        <div class="team-info-row">
+                            <div class="team-info-label">Affiliations</div>
+                            <div class="team-info-value">Harvard Medical School · Brigham &amp; Women's Hospital · University Hospital Zürich · University College London · University of Cambridge</div>
+                        </div>
+                        <div class="team-links-row">
+                            <a href="https://scholar.google.com/citations?user=IusAkF0AAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a>
+                            <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card fade-in">
+                    <div class="team-card-header">
+                        <img src="assets/gabriel-profile.jpg" alt="Prof. Dr. Gabriel Hundeshagen, MMS." class="team-photo">
+                        <div class="team-meta">
+                            <h3 class="team-name">Prof. Dr. Gabriel Hundeshagen, MMS.</h3>
+                            <div class="team-role">Research Associate &amp; Senior Project Manager</div>
+                            <div class="team-role-detail">Project execution, clinical data analysis &amp; research operations</div>
+                        </div>
+                    </div>
+                    <div class="team-card-body">
+                        <div class="team-stats-row">
+                            <div class="team-stat-item">
+                                <div class="team-stat-val">3,500</div>
+                                <div class="team-stat-lbl">Citations</div>
+                            </div>
+                            <div class="team-stat-item">
+                                <div class="team-stat-val">27</div>
+                                <div class="team-stat-lbl">h-index</div>
+                            </div>
+                            <div class="team-stat-item">
+                                <div class="team-stat-val">150+</div>
+                                <div class="team-stat-lbl">Publications</div>
+                            </div>
+                        </div>
+                        <div class="team-info-row">
+                            <div class="team-info-label">Affiliations</div>
+                            <div class="team-info-value">UTMB Galveston · BG Klinik Ludwigshafen · Heidelberg University</div>
+                        </div>
+                        <div class="team-info-row">
+                            <div class="team-info-label">Clinical Role</div>
+                            <div class="team-info-value">Managing Senior Consultant, Plastic, Reconstructive &amp; Hand Surgery; Director of Research</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact" aria-label="Contact">
+        <div class="container">
+            <div class="contact-inner">
+                <span class="section-label fade-in">Get in Touch</span>
+                <h2 class="section-heading fade-in">Begin a Confidential Engagement</h2>
+                <p class="section-intro fade-in" style="margin: 0 auto; max-width: 58ch;">We work with pharmaceutical and medical device companies on a project basis. Every engagement begins with a confidential discovery call — no obligation, no commitment until written scope is agreed.</p>
+                <div class="contact-cta-group fade-in">
+                    <button class="btn-primary" onclick="openModal()">Request a Consultation</button>
+                </div>
+                <div class="contact-details fade-in">
+                    <div class="contact-detail-item">Email: <a href="mailto:contact@acpdatalab.com">contact@acpdatalab.com</a></div>
+                    <div class="contact-detail-item">Response within 48 hours</div>
+                </div>
+                <div class="contact-note fade-in">References and prior engagement scope available upon request under NDA.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Governance -->
+    <section class="governance" aria-label="Data governance">
+        <div class="governance-inner">
+            <div class="governance-grid">
+                <div class="governance-badge-group">
+                    <div class="gov-badge">
+                        <div class="gov-badge-icon" aria-hidden="true">🔒</div>
+                        De-identified Data
+                    </div>
+                    <div class="gov-badge">
+                        <div class="gov-badge-icon" aria-hidden="true">📋</div>
+                        IRB Compliant
+                    </div>
+                    <div class="gov-badge">
+                        <div class="gov-badge-icon" aria-hidden="true">⚖️</div>
+                        DUA Governed
+                    </div>
+                    <div class="gov-badge">
+                        <div class="gov-badge-icon" aria-hidden="true">🇪🇺</div>
+                        GDPR Aligned
+                    </div>
+                    <div class="gov-badge">
+                        <div class="gov-badge-icon" aria-hidden="true">🏥</div>
+                        HIPAA Safe Harbor
+                    </div>
+                </div>
+                <div class="governance-text">
+                    <strong>Data Governance &amp; Compliance.</strong> All analyses are conducted using de-identified, publicly available research datasets accessed under approved Data Use Agreements (DUAs) from the American College of Surgeons (ACS-NSQIP), Agency for Healthcare Research and Quality (NIS/HCUP), and the National Cancer Institute (SEER). No patient-identifiable information is collected, used, or stored at any point. Methodology adheres to institutional review board (IRB) standards and applicable data governance frameworks including HIPAA Safe Harbor de-identification requirements and GDPR Article 9 derogations for scientific research. Full methodological documentation is available for regulatory and compliance review upon request.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compliance -->
+    <div class="compliance" role="contentinfo">
+        <p class="compliance-text">ACP Data Lab Ltd. · Registered in Cyprus · contact@acpdatalab.com · All analyses conducted in compliance with applicable data use agreements and research ethics standards.</p>
     </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div>
-                <div class="footer-brand">ACP Data Labs Ltd.</div>
-                <div class="footer-sub">Nicosia, Cyprus · Founded by Dr. Adriana C. Panayi</div>
-            </div>
-            <a href="mailto:contact@acpdatalabs.com" class="footer-email">contact@acpdatalabs.com</a>
-            <div class="footer-right">
-                <a href="#" class="footer-link" onclick="event.preventDefault(); openPrivacyModal();">Privacy Policy</a>
-                <span class="footer-copy">© 2026 ACP Data Labs Ltd.</span>
-            </div>
+            <div>© 2026 ACP Data Lab Ltd. All rights reserved.</div>
+            <div>Nicosia, Cyprus · Founded by Dr. Adriana C. Panayi</div>
+            <div><a href="#">Privacy Policy</a></div>
         </div>
     </footer>
 
-    <!-- Briefing Request Modal -->
-    <div class="modal-overlay" id="briefingModal">
+    <!-- Mobile Sticky CTA -->
+    <div class="mobile-sticky-cta" aria-hidden="true">
+        <button onclick="openModal()">Request a Consultation</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal">
-            <button class="modal-close" onclick="closeBriefingModal()">&times;</button>
-            <h2 class="modal-title">Request a Briefing</h2>
-            <p class="modal-subtitle">Share your details and we'll be in touch within 48 hours.</p>
-            <form id="briefingForm" onsubmit="submitBriefing(event)">
-                <div class="form-group">
-                    <label class="form-label" for="name">Name</label>
-                    <input type="text" class="form-input" id="name" name="name" required>
+            <button class="modal-close" onclick="closeModal()" aria-label="Close dialog">✕</button>
+            <h2 class="modal-title" id="modalTitle">Request a Consultation</h2>
+            <p class="modal-subtitle">We'll be in touch within 48 hours. All inquiries are treated confidentially.</p>
+            <form id="contactForm" onsubmit="submitContact(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name</label>
+                        <input type="text" class="form-input" id="name" name="name" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="title">Title</label>
+                        <input type="text" class="form-input" id="title" name="title" required autocomplete="organization-title">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="company">Company</label>
-                    <input type="text" class="form-input" id="company" name="company" required>
+                    <input type="text" class="form-input" id="company" name="company" required autocomplete="organization">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="title">Title</label>
-                    <input type="text" class="form-input" id="title" name="title" required>
+                    <label class="form-label" for="email">Work Email</label>
+                    <input type="email" class="form-input" id="email" name="email" required autocomplete="email">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
-                    <input type="email" class="form-input" id="email" name="email" required>
+                    <label class="form-label" for="message">Research Area / Commercial Challenge</label>
+                    <textarea class="form-textarea" id="message" name="message" placeholder="Briefly describe your research or commercial challenge..."></textarea>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="message">Message</label>
-                    <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your interests or questions..."></textarea>
-                </div>
-                <button type="submit" class="form-submit">Send Request</button>
+                <button type="submit" class="form-submit">Submit Consultation Request</button>
             </form>
         </div>
     </div>
 
-    <!-- Privacy Policy Modal -->
-    <div class="modal-overlay privacy-modal" id="privacyModal">
-        <div class="modal">
-            <button class="modal-close" onclick="closePrivacyModal()">&times;</button>
-            <h2 class="modal-title">Privacy Policy</h2>
-            <div class="privacy-content">
-                <h3>Data Controller</h3>
-                <p>ACP Data Labs Ltd., a company registered in Nicosia, Cyprus, is the data controller for personal information collected through this website.</p>
-
-                <h3>Information We Collect</h3>
-                <p>We collect personal information you voluntarily provide when requesting a briefing, including your name, company, title, email address, and any message content. We may also collect standard web analytics data such as IP addresses and browser information.</p>
-
-                <h3>How We Use Your Information</h3>
-                <p>We use your personal information solely to respond to your briefing requests and to provide you with information about our services. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
-
-                <h3>Your Rights Under GDPR</h3>
-                <p>If you are located in the European Economic Area, you have the right to access, rectify, erase, restrict processing, object to processing, and request portability of your personal data. You also have the right to lodge a complaint with a supervisory authority.</p>
-
-                <h3>Data Retention</h3>
-                <p>We retain your personal information only for as long as necessary to fulfill the purposes for which it was collected, or as required by applicable law.</p>
-
-                <h3>Contact</h3>
-                <p>For any privacy-related inquiries, please contact us at contact@acpdatalabs.com.</p>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Navigation scroll effect
+        // Nav scroll effect
         const nav = document.getElementById('nav');
-        let lastScroll = 0;
-
         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            lastScroll = currentScroll;
-        });
+            nav.classList.toggle('scrolled', window.pageYOffset > 40);
+        }, { passive: true });
 
-        // Counter animation
-        function animateCounter(element) {
-            const target = parseInt(element.dataset.target);
-            const duration = 2000;
-            const start = performance.now();
-
-            function update(currentTime) {
-                const elapsed = currentTime - start;
-                const progress = Math.min(elapsed / duration, 1);
-
-                // Easing function for smooth animation
-                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                const current = Math.floor(easeOutQuart * target);
-
-                element.textContent = current.toLocaleString();
-
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                } else {
-                    element.textContent = target.toLocaleString();
-                }
-            }
-
-            requestAnimationFrame(update);
-        }
-
-        // Intersection Observer for fade-in animations and counter
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    fadeObserver.unobserve(entry.target);
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const t = document.querySelector(href);
+                    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            fadeObserver.observe(el);
         });
 
-        // Counter observer
-        const counterObserver = new IntersectionObserver((entries) => {
+        // Intersection observer for fade-in
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 60);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+        // Counter animation for hero stats
+        const counterObs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    animateCounter(entry.target);
-                    counterObserver.unobserve(entry.target);
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.target);
+                    let current = 0;
+                    const duration = 1200;
+                    const startTime = performance.now();
+                    const easeOut = t => 1 - Math.pow(1 - t, 3);
+                    const animate = (now) => {
+                        const elapsed = now - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        current = Math.round(easeOut(progress) * target);
+                        el.textContent = current.toLocaleString();
+                        if (progress < 1) requestAnimationFrame(animate);
+                    };
+                    requestAnimationFrame(animate);
+                    counterObs.unobserve(el);
                 }
             });
         }, { threshold: 0.5 });
 
-        document.querySelectorAll('.counter').forEach(el => {
-            counterObserver.observe(el);
-        });
+        document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
-        // Modal functions
-        function openBriefingModal() {
-            document.getElementById('briefingModal').classList.add('active');
+        // Modal — trap focus
+        function openModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                const first = modal.querySelector('input, button, textarea');
+                if (first) first.focus();
+            }, 100);
         }
 
-        function closeBriefingModal() {
-            document.getElementById('briefingModal').classList.remove('active');
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        function openPrivacyModal() {
-            document.getElementById('privacyModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePrivacyModal() {
-            document.getElementById('privacyModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // Close modals on overlay click
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) {
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
+        document.getElementById('contactModal').addEventListener('click', e => {
+            if (e.target.id === 'contactModal') closeModal();
         });
 
-        // Close modals on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeBriefingModal();
-                closePrivacyModal();
-            }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
         });
 
-        // Form submission via mailto
-        function submitBriefing(e) {
+        function submitContact(e) {
             e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const company = document.getElementById('company').value;
-            const title = document.getElementById('title').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            const subject = encodeURIComponent(`Briefing Request from ${name} at ${company}`);
-            const body = encodeURIComponent(
-                `Name: ${name}\n` +
-                `Company: ${company}\n` +
-                `Title: ${title}\n` +
-                `Email: ${email}\n\n` +
-                `Message:\n${message}`
-            );
-
-            window.location.href = `mailto:contact@acpdatalabs.com?subject=${subject}&body=${body}`;
-            closeBriefingModal();
+            const n = document.getElementById('name').value;
+            const c = document.getElementById('company').value;
+            const t = document.getElementById('title').value;
+            const em = document.getElementById('email').value;
+            const m = document.getElementById('message').value;
+            const subj = encodeURIComponent(`Consultation Request from ${n} at ${c}`);
+            const body = encodeURIComponent(`Name: ${n}\nTitle: ${t}\nCompany: ${c}\nEmail: ${em}\n\nResearch Question / Challenge:\n${m}`);
+            window.location.href = `mailto:contact@acpdatalab.com?subject=${subj}&body=${body}`;
+            closeModal();
         }
     </script>
 </body>
