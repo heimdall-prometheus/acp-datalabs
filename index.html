@@ -81,9 +81,9 @@
     /* NAV */
     .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color var(--trans), box-shadow var(--trans); }
     .nav.scrolled { border-bottom-color: var(--border-2); box-shadow: var(--sh-sm); }
-    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .nav-inner { height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
     .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .brand img { height: 44px; width: auto; }
+    .brand img { height: 64px; width: auto; }
     .brand-text { display: flex; flex-direction: column; line-height: 1; }
     .brand-name { font-size: .82rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t1); }
     .brand-sub  { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin-top: 4px; }
@@ -137,7 +137,7 @@
     .hero-stat-label { font-size: .72rem; color: var(--t3); letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
 
     /* Hero dashboard */
-    .hero-visual { position: relative; }
+    .hero-visual { position: relative; padding: 24px 28px 24px 28px; }
     .hero-card-main { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: 28px; box-shadow: var(--sh-lg); position: relative; overflow: hidden; }
     .hero-card-main::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--blue) 50%, var(--yellow) 100%); }
     .hc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
@@ -159,9 +159,9 @@
     .hc-metric strong { display: block; font-family: "DM Serif Display", serif; font-size: 1.3rem; color: var(--t1); margin-bottom: 2px; }
     .hc-metric span   { font-size: .7rem; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: .08em; }
 
-    .float-card { position: absolute; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 13px 16px; box-shadow: var(--sh-md); animation: float 4s ease-in-out infinite; }
-    .float-card-1 { top: -22px; right: -18px; animation-delay: 0s; }
-    .float-card-2 { bottom: -16px; left: -18px; animation-delay: 2s; }
+    .float-card { position: absolute; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 13px 16px; box-shadow: var(--sh-md); animation: float 4s ease-in-out infinite; z-index: 2; }
+    .float-card-1 { top: 0; right: 0; animation-delay: 0s; }
+    .float-card-2 { bottom: 70px; left: 0; animation-delay: 2s; }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
     .fc-label { font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); margin-bottom: 3px; }
     .fc-value { font-family: "DM Serif Display", serif; font-size: 1.15rem; color: var(--t1); }
@@ -208,7 +208,7 @@
     .acr-item { display: flex; align-items: flex-start; gap: 16px; padding: 22px 24px; border-bottom: 1px solid var(--border-2); transition: background var(--trans); }
     .acr-item:last-child { border-bottom: none; }
     .acr-item:hover { background: rgba(62,59,56,.025); }
-    .acr-letter { width: 48px; height: 48px; flex-shrink: 0; object-fit: contain; }
+    .acr-letter { width: 48px; height: 48px; flex-shrink: 0; object-fit: contain; filter: grayscale(100%); }
     .acr-body h4 { font-size: .96rem; font-weight: 700; color: var(--t1); margin-bottom: 3px; }
     .acr-body p  { font-size: .84rem; color: var(--t3); line-height: 1.55; }
 
@@ -559,11 +559,6 @@
                 <div class="hc-bar-row"><span class="hc-label">Evidence base</span><div class="hc-track"><div class="hc-fill hc-f3"></div></div><span class="hc-val">91%</span></div>
                 <div class="hc-bar-row"><span class="hc-label">Differentiation</span><div class="hc-track"><div class="hc-fill hc-f4"></div></div><span class="hc-val">74%</span></div>
               </div>
-              <div class="hc-metrics">
-                <div class="hc-metric"><strong>945K+</strong><span>Patient records</span></div>
-                <div class="hc-metric"><strong>11+</strong><span>Specialties</span></div>
-                <div class="hc-metric"><strong>300+</strong><span>Publications</span></div>
-              </div>
             </div>
             <div class="float-card float-card-2">
               <div class="fc-label">h-index</div>
@@ -598,18 +593,6 @@
         </div>
       </div>
     </div>
-
-    <!-- STATS BAR -->
-    <section class="stats-bar" aria-label="Key metrics">
-      <div class="container">
-        <div class="stats-bar-inner">
-          <div class="stat-item"><div class="stat-num">945<em>K+</em></div><div class="stat-label">Patient records analysed</div></div>
-          <div class="stat-item"><div class="stat-num">300<em>+</em></div><div class="stat-label">Peer-reviewed publications</div></div>
-          <div class="stat-item"><div class="stat-num">11<em>,</em>200<em>+</em></div><div class="stat-label">Total citations</div></div>
-          <div class="stat-item"><div class="stat-num">11<em>+</em></div><div class="stat-label">Surgical specialties</div></div>
-        </div>
-      </div>
-    </section>
 
     <!-- ABOUT -->
     <section class="section section-soft" id="about" aria-label="About ACP Data Lab">
@@ -966,7 +949,7 @@
             <a href="#services" class="btn btn-outline-white btn-lg">View Services</a>
           </div>
           <div class="cta-contact-details">
-            <span>Email: <a href="mailto:contact@acpdatalab.com">contact@acpdatalab.com</a></span>
+            <span>Email: <a href="/cdn-cgi/l/email-protection#50333f3e2431332410313320343124313c31327e333f3d"><span class="__cf_email__" data-cfemail="1d7e7273697c7e695d7c7e6d797c697c717c7f337e7270">[email&#160;protected]</span></a></span>
             <span>Response within 48 hours</span>
           </div>
           <p class="cta-note">References and prior engagement scope available upon request under NDA.</p>
@@ -995,7 +978,7 @@
     <!-- COMPLIANCE -->
     <div class="compliance">
       <div class="container">
-        <p class="compliance-text">ACP Data Lab Ltd. · contact@acpdatalab.com · All analyses conducted in compliance with applicable data use agreements and research ethics standards.</p>
+        <p class="compliance-text">ACP Data Lab Ltd. · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f6c60617b6e6c7b4f6e6c7f6b6e7b6e636e6d216c6062">[email&#160;protected]</a> · All analyses conducted in compliance with applicable data use agreements and research ethics standards.</p>
       </div>
     </div>
 
@@ -1004,10 +987,6 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="assets/Logo.png" alt="ACP Data Lab" />
-        <span>ACP Data Lab</span>
-      </div>
       <div class="footer-links">
         <a href="#about">About</a>
         <a href="#services">Services</a>
@@ -1016,7 +995,7 @@
         <a href="#contact">Contact</a>
         <a href="#">Privacy Policy</a>
       </div>
-      <div class="footer-meta">© 2026 ACP Data Lab Ltd. · Founded by Dr. Adriana C. Panayi</div>
+      <div class="footer-meta">© 2026 ACP Data Lab Ltd.</div>
     </div>
   </footer>
 
@@ -1061,7 +1040,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Nav scroll effect
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
@@ -1159,16 +1138,4 @@
       const company = document.getElementById('fcompany').value;
       const title   = document.getElementById('ftitle').value;
       const email   = document.getElementById('femail').value;
-      const message = document.getElementById('fmessage').value;
-
-      // Replace the form with a success message
-      document.getElementById('formWrap').innerHTML = `
-        <div class="form-success">
-          <h3>Thank you, ${name}.</h3>
-          <p>Your consultation request has been received. We'll be in touch at <strong>${email}</strong> within 48 hours.</p>
-        </div>
-      `;
-    }
-  </script>
-</body>
-</html>
+      const message = document.getElementById('fmessage
