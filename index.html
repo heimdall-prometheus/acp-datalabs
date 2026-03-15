@@ -1,667 +1,1399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ACP Data Lab</title>
-
-<style>
-
-/* ================================
-COLOR SYSTEM
-================================ */
-
-:root{
-
---ash-white:#F2EDE4;
---warm-parchment:#E8E0CC;
---pale-linen:#D6CCBA;
---faded-stone:#B8B0A0;
-
---dove-grey:#9E9890;
---pencil-line:#787368;
---slate-grey:#6E6A64;
---warm-shadow:#504C47;
---graphite:#3E3B38;
-
---text-primary:var(--graphite);
---text-secondary:var(--warm-shadow);
---text-muted:var(--pencil-line);
-
---border:rgba(62,59,56,0.15);
-
---radius:6px;
-
---shadow-sm:0 1px 3px rgba(0,0,0,0.05);
---shadow-md:0 10px 30px rgba(0,0,0,0.08);
-
-}
-
-/* ================================
-GLOBAL
-================================ */
-
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
-body{
-
-font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-
-background:var(--ash-white);
-
-color:var(--text-primary);
-
-line-height:1.6;
-
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:0 24px;
-}
-
-section{
-padding:80px 0;
-}
-
-/* ================================
-NAV
-================================ */
-
-nav{
-
-position:fixed;
-
-top:0;
-width:100%;
-
-background:rgba(242,237,228,0.9);
-
-backdrop-filter:blur(10px);
-
-border-bottom:1px solid var(--border);
-
-z-index:1000;
-
-}
-
-.nav-inner{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-height:70px;
-
-}
-
-.logo{
-
-font-weight:700;
-
-letter-spacing:.1em;
-
-font-size:.9rem;
-
-}
-
-.nav-links{
-
-display:flex;
-
-gap:28px;
-
-font-size:.9rem;
-
-}
-
-.nav-links a{
-
-text-decoration:none;
-
-color:var(--text-secondary);
-
-}
-
-.nav-links a:hover{
-
-color:var(--graphite);
-
-}
-
-/* ================================
-BUTTONS
-================================ */
-
-.btn{
-
-display:inline-block;
-
-padding:12px 22px;
-
-border-radius:var(--radius);
-
-font-size:.9rem;
-
-text-decoration:none;
-
-font-weight:600;
-
-}
-
-.btn-primary{
-
-background:var(--graphite);
-
-color:white;
-
-}
-
-.btn-primary:hover{
-
-background:var(--warm-shadow);
-
-}
-
-.btn-secondary{
-
-border:1px solid var(--dove-grey);
-
-color:var(--graphite);
-
-}
-
-.btn-secondary:hover{
-
-background:var(--warm-parchment);
-
-}
-
-/* ================================
-HERO
-================================ */
-
-.hero{
-
-padding-top:140px;
-
-}
-
-.hero h1{
-
-font-size:48px;
-
-line-height:1.1;
-
-margin-bottom:20px;
-
-max-width:600px;
-
-}
-
-.hero p{
-
-font-size:18px;
-
-color:var(--text-secondary);
-
-max-width:600px;
-
-margin-bottom:30px;
-
-}
-
-.hero-buttons{
-
-display:flex;
-
-gap:16px;
-
-margin-bottom:40px;
-
-}
-
-/* ================================
-STATS
-================================ */
-
-.stats{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:20px;
-
-}
-
-.stat{
-
-background:var(--warm-parchment);
-
-border-radius:var(--radius);
-
-padding:24px;
-
-box-shadow:var(--shadow-sm);
-
-}
-
-.stat strong{
-
-font-size:28px;
-
-display:block;
-
-margin-bottom:4px;
-
-}
-
-.stat span{
-
-font-size:13px;
-
-color:var(--text-muted);
-
-}
-
-/* ================================
-SECTION TITLES
-================================ */
-
-.section-title{
-
-font-size:32px;
-
-margin-bottom:16px;
-
-}
-
-.section-text{
-
-color:var(--text-secondary);
-
-max-width:650px;
-
-margin-bottom:40px;
-
-}
-
-/* ================================
-CARDS
-================================ */
-
-.grid{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:24px;
-
-}
-
-.card{
-
-background:var(--warm-parchment);
-
-padding:28px;
-
-border-radius:var(--radius);
-
-box-shadow:var(--shadow-sm);
-
-}
-
-.card h3{
-
-margin-bottom:10px;
-
-}
-
-.card p{
-
-font-size:15px;
-
-color:var(--text-secondary);
-
-}
-
-/* ================================
-TEAM
-================================ */
-
-.team-grid{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:24px;
-
-}
-
-.team-card{
-
-background:var(--warm-parchment);
-
-padding:30px;
-
-border-radius:var(--radius);
-
-box-shadow:var(--shadow-sm);
-
-}
-
-.team-card h3{
-
-margin-bottom:8px;
-
-}
-
-.team-card span{
-
-color:var(--text-muted);
-
-font-size:14px;
-
-}
-
-/* ================================
-CONTACT
-================================ */
-
-.contact{
-
-text-align:center;
-
-}
-
-.contact p{
-
-max-width:600px;
-
-margin:auto;
-
-color:var(--text-secondary);
-
-margin-bottom:30px;
-
-}
-
-/* ================================
-FOOTER
-================================ */
-
-footer{
-
-background:var(--graphite);
-
-color:var(--ash-white);
-
-padding:40px 0;
-
-font-size:14px;
-
-text-align:center;
-
-}
-
-/* ================================
-RESPONSIVE
-================================ */
-
-@media(max-width:900px){
-
-.stats{
-grid-template-columns:1fr 1fr;
-}
-
-.grid{
-grid-template-columns:1fr;
-}
-
-.team-grid{
-grid-template-columns:1fr;
-}
-
-.hero h1{
-font-size:38px;
-}
-
-}
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACP Data Lab | Surgical Outcomes Intelligence</title>
+  <meta
+    name="description"
+    content="ACP Data Lab transforms surgical and registry data into publication-grade evidence for pharmaceutical, medtech, and healthcare strategy teams."
+  />
+  <style>
+    :root{
+      /* Neutral palette from your reference */
+      --warm-parchment:#E8E0CC;
+      --pale-linen:#D6CCBA;
+      --dove-grey:#9E9890;
+      --slate-grey:#6E6A64;
+      --graphite:#3E3B38;
+      --faded-stone:#B8B0A0;
+      --ash-white:#F2EDE4;
+      --warm-shadow:#504C47;
+      --pencil-line:#787368;
+
+      /* Main site colors */
+      --bg:#ffffff;
+      --bg-soft:#faf9f7;
+      --bg-section:#f6f4f0;
+      --card:#ffffff;
+      --card-tint:#fbfaf8;
+
+      --text:var(--graphite);
+      --text-2:var(--warm-shadow);
+      --text-3:var(--pencil-line);
+
+      --line:rgba(62,59,56,.12);
+      --line-2:rgba(62,59,56,.08);
+
+      /* Logo colors for small accents only */
+      --logo-red:#F52B2E;
+      --logo-blue:#157ABD;
+      --logo-yellow:#F2B90F;
+
+      --radius:18px;
+      --radius-sm:10px;
+      --shadow-sm:0 1px 2px rgba(20,20,20,.03), 0 8px 24px rgba(20,20,20,.04);
+      --shadow-md:0 8px 20px rgba(20,20,20,.05), 0 20px 48px rgba(20,20,20,.07);
+      --max:1200px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;
+    }
+
+    img{
+      display:block;
+      max-width:100%;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 48px));
+      margin:0 auto;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:.76rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-3);
+      margin-bottom:16px;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:24px;
+      height:1px;
+      background:var(--dove-grey);
+      display:inline-block;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:50px;
+      padding:0 20px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-size:.95rem;
+      font-weight:600;
+      transition:.2s ease;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+
+    .btn-primary{
+      background:var(--graphite);
+      border-color:var(--graphite);
+      color:#fff;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .btn-primary:hover{
+      background:var(--warm-shadow);
+      border-color:var(--warm-shadow);
+      transform:translateY(-1px);
+    }
+
+    .btn-secondary{
+      background:#fff;
+      border-color:var(--line);
+      color:var(--text);
+    }
+
+    .btn-secondary:hover{
+      background:var(--bg-soft);
+      transform:translateY(-1px);
+    }
+
+    .btn-light{
+      background:#fff;
+      border-color:rgba(255,255,255,.22);
+      color:var(--graphite);
+    }
+
+    .btn-light:hover{
+      background:var(--ash-white);
+    }
+
+    .section{
+      padding:96px 0;
+    }
+
+    .section-soft{
+      background:var(--bg-section);
+      border-top:1px solid var(--line-2);
+      border-bottom:1px solid var(--line-2);
+    }
+
+    .section-head{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:42px;
+      align-items:end;
+      margin-bottom:34px;
+    }
+
+    .section-head h2{
+      font-size:clamp(2rem, 3.2vw, 3.5rem);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      max-width:12ch;
+    }
+
+    .section-head p{
+      color:var(--text-2);
+      font-size:1.03rem;
+      max-width:60ch;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:22px;
+    }
+
+    .grid-4{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line-2);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow-sm);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow-md);
+      border-color:var(--line);
+    }
+
+    .card .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:.75rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--text-3);
+      margin-bottom:14px;
+    }
+
+    .card .tag-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--dove-grey);
+      flex:0 0 auto;
+    }
+
+    .card h3{
+      font-size:1.24rem;
+      line-height:1.18;
+      margin-bottom:12px;
+      letter-spacing:-.02em;
+    }
+
+    .card p{
+      color:var(--text-2);
+      font-size:.97rem;
+    }
+
+    .card-link{
+      margin-top:20px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+      color:var(--text);
+    }
+
+    /* NAV */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line-2);
+    }
+
+    .nav-inner{
+      min-height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+      flex-shrink:0;
+    }
+
+    .brand img{
+      height:56px;
+      width:auto;
+      object-fit:contain;
+    }
+
+    .brand-meta{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
+
+    .brand-name{
+      font-size:.88rem;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--text);
+    }
+
+    .brand-sub{
+      font-size:.71rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--text-3);
+      margin-top:5px;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      color:var(--text-2);
+      font-size:.95rem;
+    }
+
+    .nav-links a:hover{
+      color:var(--text);
+    }
+
+    /* HERO */
+    .hero{
+      padding:72px 0 54px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(232,224,204,.42), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #fcfbf9 100%);
+      border-bottom:1px solid var(--line-2);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:48px;
+      align-items:center;
+    }
+
+    .hero h1{
+      font-size:clamp(2.8rem, 5.8vw, 5.8rem);
+      line-height:.95;
+      letter-spacing:-.06em;
+      max-width:10ch;
+      margin-bottom:18px;
+    }
+
+    .hero p{
+      max-width:60ch;
+      font-size:1.08rem;
+      color:var(--text-2);
+      margin-bottom:28px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:28px;
+    }
+
+    .hero-mini{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .hero-mini span{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line-2);
+      color:var(--text-3);
+      font-size:.84rem;
+      font-weight:600;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .hero-panel{
+      background:linear-gradient(180deg, #ffffff 0%, #fbfaf8 100%);
+      border:1px solid var(--line-2);
+      border-radius:28px;
+      padding:30px;
+      box-shadow:var(--shadow-md);
+      position:relative;
+      overflow:hidden;
+      min-height:450px;
+    }
+
+    .hero-panel::before{
+      content:"";
+      position:absolute;
+      inset:auto -40px -60px auto;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(214,204,186,.32), transparent 62%);
+      pointer-events:none;
+    }
+
+    .hero-stack{
+      display:grid;
+      gap:16px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero-widget{
+      background:var(--card-tint);
+      border:1px solid var(--line-2);
+      border-radius:22px;
+      padding:20px;
+    }
+
+    .hero-widget-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .hero-widget-title{
+      font-size:.86rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:var(--text-3);
+    }
+
+    .hero-widget-status{
+      font-size:.78rem;
+      font-weight:700;
+      color:var(--text-3);
+      padding:6px 10px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line-2);
+    }
+
+    .hero-bars{
+      display:grid;
+      gap:10px;
+    }
+
+    .hero-bar{
+      display:grid;
+      grid-template-columns:100px 1fr 40px;
+      gap:12px;
+      align-items:center;
+      font-size:.9rem;
+      color:var(--text-2);
+    }
+
+    .hero-track{
+      height:9px;
+      border-radius:999px;
+      background:var(--ash-white);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-fill{
+      height:100%;
+      border-radius:999px;
+      background:var(--graphite);
+    }
+
+    .fill-1{ width:82%; }
+    .fill-2{ width:68%; background:var(--slate-grey); }
+    .fill-3{ width:91%; background:var(--pencil-line); }
+
+    .hero-metrics{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .metric{
+      background:#fff;
+      border:1px solid var(--line-2);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .metric strong{
+      display:block;
+      font-size:1.4rem;
+      letter-spacing:-.03em;
+      margin-bottom:4px;
+    }
+
+    .metric span{
+      font-size:.82rem;
+      color:var(--text-3);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:700;
+    }
+
+    .hero-note-card{
+      background:linear-gradient(135deg, var(--graphite), var(--warm-shadow));
+      color:#fff;
+      border-radius:22px;
+      padding:22px;
+    }
+
+    .hero-note-card h3{
+      font-size:1.15rem;
+      line-height:1.2;
+      margin-bottom:8px;
+      letter-spacing:-.02em;
+    }
+
+    .hero-note-card p{
+      color:rgba(255,255,255,.8);
+      font-size:.94rem;
+      margin:0;
+    }
+
+    /* CLIENT STRIP */
+    .logo-strip{
+      padding:28px 0;
+      border-bottom:1px solid var(--line-2);
+      background:#fff;
+    }
+
+    .logo-strip-inner{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .logo-strip-label{
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:700;
+      color:var(--text-3);
+    }
+
+    .trust-logos{
+      display:grid;
+      grid-template-columns:repeat(6, 1fr);
+      gap:12px;
+    }
+
+    .trust-logo{
+      height:60px;
+      border:1px solid var(--line-2);
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--text-3);
+      background:var(--card-tint);
+      font-size:.9rem;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+
+    /* FEATURE SPLIT */
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:32px;
+      align-items:center;
+      padding:24px 0;
+    }
+
+    .split + .split{
+      border-top:1px solid var(--line-2);
+      margin-top:24px;
+      padding-top:48px;
+    }
+
+    .split-copy h3{
+      font-size:clamp(1.8rem, 3vw, 3rem);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      margin-bottom:14px;
+      max-width:12ch;
+    }
+
+    .split-copy p{
+      color:var(--text-2);
+      max-width:56ch;
+      margin-bottom:20px;
+      font-size:1rem;
+    }
+
+    .split-visual{
+      background:#fff;
+      border:1px solid var(--line-2);
+      border-radius:26px;
+      min-height:360px;
+      padding:28px;
+      box-shadow:var(--shadow-sm);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .split-visual.soft{
+      background:linear-gradient(180deg, #fff 0%, #fbfaf8 100%);
+    }
+
+    .visual-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      height:100%;
+    }
+
+    .visual-card{
+      background:var(--card-tint);
+      border:1px solid var(--line-2);
+      border-radius:20px;
+      padding:18px;
+    }
+
+    .visual-card h4{
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:var(--text-3);
+      margin-bottom:12px;
+    }
+
+    .chart-bars{
+      display:grid;
+      gap:10px;
+    }
+
+    .chart-row{
+      display:grid;
+      grid-template-columns:90px 1fr;
+      gap:10px;
+      align-items:center;
+      font-size:.88rem;
+      color:var(--text-2);
+    }
+
+    .bar-track{
+      height:10px;
+      background:var(--ash-white);
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .bar{
+      height:100%;
+      border-radius:999px;
+      background:var(--graphite);
+    }
+
+    .b1{ width:78%; }
+    .b2{ width:54%; background:var(--slate-grey); }
+    .b3{ width:88%; background:var(--pencil-line); }
+    .b4{ width:66%; background:var(--faded-stone); }
+
+    .kpi-grid{
+      display:grid;
+      gap:12px;
+    }
+
+    .kpi{
+      background:#fff;
+      border:1px solid var(--line-2);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .kpi strong{
+      display:block;
+      font-size:1.2rem;
+      margin-bottom:2px;
+      letter-spacing:-.03em;
+    }
+
+    .kpi span{
+      color:var(--text-3);
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:700;
+    }
+
+    .code-window{
+      background:var(--graphite);
+      color:#fff;
+      border-radius:22px;
+      padding:20px;
+      height:100%;
+      display:grid;
+      gap:12px;
+    }
+
+    .dots{
+      display:flex;
+      gap:8px;
+    }
+
+    .dots span{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,.26);
+    }
+
+    .code-lines{
+      display:grid;
+      gap:9px;
+      margin-top:4px;
+    }
+
+    .code-lines span{
+      display:block;
+      height:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.15);
+    }
+
+    .code-lines span:nth-child(1){ width:85%; }
+    .code-lines span:nth-child(2){ width:70%; }
+    .code-lines span:nth-child(3){ width:92%; }
+    .code-lines span:nth-child(4){ width:58%; }
+    .code-lines span:nth-child(5){ width:80%; }
+
+    /* RESOURCE CARDS */
+    .resource-card{
+      background:linear-gradient(180deg, #fff 0%, #fbfaf8 100%);
+    }
+
+    .resource-type{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:700;
+      color:var(--text-3);
+      margin-bottom:10px;
+    }
+
+    /* TESTIMONIAL BAND */
+    .testimonial-wrap{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:22px;
+    }
+
+    .testimonial{
+      background:#fff;
+      border:1px solid var(--line-2);
+      border-radius:24px;
+      padding:28px;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .testimonial p{
+      font-size:1rem;
+      color:var(--text-2);
+      margin-bottom:18px;
+    }
+
+    .testimonial strong{
+      display:block;
+      font-size:.98rem;
+      margin-bottom:2px;
+    }
+
+    .testimonial span{
+      color:var(--text-3);
+      font-size:.88rem;
+    }
+
+    /* FINAL CTA */
+    .cta-shell{
+      background:linear-gradient(135deg, var(--graphite), var(--warm-shadow));
+      color:#fff;
+      border-radius:34px;
+      padding:48px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow-md);
+    }
+
+    .cta-shell::after{
+      content:"";
+      position:absolute;
+      right:-80px;
+      bottom:-80px;
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.1), transparent 65%);
+    }
+
+    .cta-shell .eyebrow{
+      color:rgba(255,255,255,.7);
+    }
+
+    .cta-shell .eyebrow::before{
+      background:rgba(255,255,255,.35);
+    }
+
+    .cta-shell h2{
+      font-size:clamp(2rem, 3.8vw, 4rem);
+      line-height:.98;
+      letter-spacing:-.05em;
+      max-width:12ch;
+      margin-bottom:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .cta-shell p{
+      max-width:62ch;
+      color:rgba(255,255,255,.82);
+      margin-bottom:24px;
+      position:relative;
+      z-index:1;
+    }
+
+    .cta-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+    }
+
+    /* FOOTER */
+    .footer{
+      padding:34px 0 50px;
+      border-top:1px solid var(--line-2);
+      background:#fff;
+    }
+
+    .footer-inner{
+      display:grid;
+      grid-template-columns:1fr auto auto auto;
+      gap:20px;
+      align-items:center;
+      color:var(--text-3);
+      font-size:.92rem;
+    }
+
+    .footer-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .footer-brand img{
+      height:38px;
+      width:auto;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px){
+      .hero-grid,
+      .section-head,
+      .split,
+      .logo-strip-inner{
+        grid-template-columns:1fr;
+      }
+
+      .section-head h2,
+      .split-copy h3,
+      .cta-shell h2{
+        max-width:none;
+      }
+
+      .trust-logos{
+        grid-template-columns:repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 900px){
+      .grid-3,
+      .grid-4,
+      .testimonial-wrap,
+      .footer-inner,
+      .hero-metrics{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .visual-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .container{
+        width:min(var(--max), calc(100% - 32px));
+      }
+
+      .nav-inner{
+        min-height:auto;
+        padding:14px 0;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .nav-links{
+        flex-wrap:wrap;
+        gap:14px 18px;
+      }
+
+      .brand img{
+        height:50px;
+      }
+
+      .hero{
+        padding-top:42px;
+      }
+
+      .grid-3,
+      .grid-4,
+      .testimonial-wrap,
+      .footer-inner,
+      .hero-metrics,
+      .trust-logos{
+        grid-template-columns:1fr;
+      }
+
+      .cta-shell{
+        padding:34px 24px;
+      }
+
+      .section{
+        padding:78px 0;
+      }
+
+      .hero-panel{
+        min-height:auto;
+      }
+
+      .hero-bar{
+        grid-template-columns:84px 1fr 34px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<nav>
-
-<div class="container nav-inner">
-
-<div class="logo">
-ACP DATA LAB
-</div>
-
-<div class="nav-links">
-
-<a href="#about">About</a>
-<a href="#services">Services</a>
-<a href="#research">Research</a>
-<a href="#team">Team</a>
-<a href="#contact">Contact</a>
-
-</div>
-
-</div>
-
-</nav>
-
-
-<section class="hero">
-
-<div class="container">
-
-<h1>
-Pharmaceutical-Grade Evidence from Surgical Data
-</h1>
-
-<p>
-ACP Data Lab transforms large-scale surgical registry data into actionable intelligence for pharmaceutical companies, medical device firms, and healthcare strategists.
-</p>
-
-<div class="hero-buttons">
-
-<a class="btn btn-primary" href="#contact">Request Consultation</a>
-<a class="btn btn-secondary" href="#services">Explore Services</a>
-
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<strong>945K+</strong>
-<span>Patient Records</span>
-</div>
-
-<div class="stat">
-<strong>11+</strong>
-<span>Surgical Specialties</span>
-</div>
-
-<div class="stat">
-<strong>300+</strong>
-<span>Publications</span>
-</div>
-
-<div class="stat">
-<strong>11,200+</strong>
-<span>Total Citations</span>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="services">
-
-<div class="container">
-
-<h2 class="section-title">Services</h2>
-
-<p class="section-text">
-We translate surgical outcomes data into strategic insight for pharmaceutical companies and healthcare innovators.
-</p>
-
-<div class="grid">
-
-<div class="card">
-<h3>Real-World Evidence</h3>
-<p>
-Large-scale registry analytics producing publication-grade clinical evidence for regulatory submissions and medical affairs.
-</p>
-</div>
-
-<div class="card">
-<h3>Market Landscape Analysis</h3>
-<p>
-Procedure-level quantification of patient populations and treatment pathways to identify commercial opportunities.
-</p>
-</div>
-
-<div class="card">
-<h3>Clinical Adoption Strategy</h3>
-<p>
-Data-driven frameworks supporting hospital adoption, formulary access and market entry.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="research">
-
-<div class="container">
-
-<h2 class="section-title">Research</h2>
-
-<p class="section-text">
-Our team has published extensively in top-tier surgical and medical journals.
-</p>
-
-<div class="grid">
-
-<div class="card">
-<h3>The Lancet Regional Health</h3>
-<p>
-National analysis of post-surgical opioid prescribing patterns across multiple specialties.
-</p>
-</div>
-
-<div class="card">
-<h3>Annals of Surgery</h3>
-<p>
-Multi-center registry study examining variation in surgical outcomes across hospitals.
-</p>
-</div>
-
-<div class="card">
-<h3>JAMA Surgery</h3>
-<p>
-Machine learning models predicting postoperative complications across national databases.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="team">
-
-<div class="container">
-
-<h2 class="section-title">Leadership</h2>
-
-<div class="team-grid">
-
-<div class="team-card">
-
-<h3>Dr Adriana C Panayi</h3>
-
-<span>Founding Director</span>
-
-<p>
-Surgeon-scientist specialising in outcomes research and real-world evidence generation.
-</p>
-
-</div>
-
-<div class="team-card">
-
-<h3>Prof Gabriel Hundeshagen</h3>
-
-<span>Research Director</span>
-
-<p>
-Plastic surgeon and academic researcher with extensive experience in surgical registry analytics.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="contact" class="contact">
-
-<div class="container">
-
-<h2 class="section-title">Begin a Confidential Engagement</h2>
-
-<p>
-We work with pharmaceutical and medical device companies on a project basis. Contact us to discuss your research or strategic question.
-</p>
-
-<a class="btn btn-primary" href="mailto:contact@acpdatalab.com">
-Contact Us
-</a>
-
-</div>
-
-</section>
-
-
-<footer>
-
-<div class="container">
-
-© 2026 ACP Data Lab · Nicosia, Cyprus
-
-</div>
-
-</footer>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand" aria-label="ACP Data Lab home">
+        <img src="Logo.png" alt="ACP Data Lab logo" />
+        <div class="brand-meta">
+          <div class="brand-name">ACP Data Lab</div>
+          <div class="brand-sub">Analysis · Consulting · Prediction</div>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#platform">Platform</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#resources">Resources</a>
+        <a href="#team">Team</a>
+        <a href="#contact" class="btn btn-primary">Book a consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Surgical outcomes intelligence</span>
+            <h1>Analytics that move healthcare decisions forward.</h1>
+            <p>
+              ACP Data Lab helps pharmaceutical, medtech, and healthcare teams turn surgical and registry data into publication-grade evidence, sharper strategy, and decision-ready insight.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">Request a consultation</a>
+              <a href="#platform" class="btn btn-secondary">Explore the platform</a>
+            </div>
+
+            <div class="hero-mini">
+              <span>Registry analytics</span>
+              <span>Real-world evidence</span>
+              <span>Commercial insight</span>
+              <span>Clinical strategy</span>
+            </div>
+          </div>
+
+          <div class="hero-panel">
+            <div class="hero-stack">
+              <div class="hero-widget">
+                <div class="hero-widget-top">
+                  <div class="hero-widget-title">Portfolio performance</div>
+                  <div class="hero-widget-status">Live</div>
+                </div>
+                <div class="hero-bars">
+                  <div class="hero-bar">
+                    <span>Adoption</span>
+                    <div class="hero-track"><div class="hero-fill fill-1"></div></div>
+                    <strong>82</strong>
+                  </div>
+                  <div class="hero-bar">
+                    <span>Access</span>
+                    <div class="hero-track"><div class="hero-fill fill-2"></div></div>
+                    <strong>68</strong>
+                  </div>
+                  <div class="hero-bar">
+                    <span>Evidence</span>
+                    <div class="hero-track"><div class="hero-fill fill-3"></div></div>
+                    <strong>91</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-metrics">
+                <div class="metric">
+                  <strong>945K+</strong>
+                  <span>Patient records</span>
+                </div>
+                <div class="metric">
+                  <strong>11+</strong>
+                  <span>Specialties</span>
+                </div>
+                <div class="metric">
+                  <strong>300+</strong>
+                  <span>Publications</span>
+                </div>
+              </div>
+
+              <div class="hero-note-card">
+                <h3>Built for evidence, not dashboard theatre.</h3>
+                <p>
+                  We combine academic-grade methodology with a commercially useful output style—clear, structured, and ready for strategic use.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="logo-strip" aria-label="Representative client categories">
+      <div class="container logo-strip-inner">
+        <div class="logo-strip-label">Built for teams across healthcare</div>
+        <div class="trust-logos">
+          <div class="trust-logo">Pharma</div>
+          <div class="trust-logo">MedTech</div>
+          <div class="trust-logo">Hospitals</div>
+          <div class="trust-logo">Academic centers</div>
+          <div class="trust-logo">Biotech</div>
+          <div class="trust-logo">Clinical strategy</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="platform">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Platform</span>
+            <h2>Bridge the gap between data and action.</h2>
+          </div>
+          <p>
+            ACP Data Lab is designed around the same basic challenge many healthcare teams face: valuable data exists, but it is rarely shaped into evidence that can be used quickly, credibly, and strategically.
+          </p>
+        </div>
+
+        <div class="split">
+          <div class="split-copy">
+            <span class="eyebrow">01</span>
+            <h3>Build sharper evidence in less time.</h3>
+            <p>
+              Whether the goal is publication support, market access positioning, or portfolio analysis, we structure large datasets into clean analytical workflows that reduce noise and surface what matters.
+            </p>
+            <a href="#contact" class="card-link">Discuss an engagement →</a>
+          </div>
+
+          <div class="split-visual soft">
+            <div class="visual-grid">
+              <div class="visual-card">
+                <h4>Program overview</h4>
+                <div class="chart-bars">
+                  <div class="chart-row">
+                    <span>Complications</span>
+                    <div class="bar-track"><div class="bar b1"></div></div>
+                  </div>
+                  <div class="chart-row">
+                    <span>Readmission</span>
+                    <div class="bar-track"><div class="bar b2"></div></div>
+                  </div>
+                  <div class="chart-row">
+                    <span>Length of stay</span>
+                    <div class="bar-track"><div class="bar b3"></div></div>
+                  </div>
+                  <div class="chart-row">
+                    <span>Variation</span>
+                    <div class="bar-track"><div class="bar b4"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kpi-grid">
+                <div class="kpi">
+                  <strong>7,709</strong>
+                  <span>Citations</span>
+                </div>
+                <div class="kpi">
+                  <strong>43</strong>
+                  <span>h-index</span>
+                </div>
+                <div class="kpi">
+                  <strong>Top-tier</strong>
+                  <span>Journal output</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="split-visual">
+            <div class="code-window">
+              <div class="dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="code-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-copy">
+            <span class="eyebrow">02</span>
+            <h3>Make complex surgical data usable for non-technical teams.</h3>
+            <p>
+              We translate complicated registry outputs into clear summaries, comparative analyses, and structured narratives that can be used by leadership, medical affairs, access teams, and external stakeholders.
+            </p>
+            <a href="#solutions" class="card-link">See solution areas →</a>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="split-copy">
+            <span class="eyebrow">03</span>
+            <h3>Embed insight into strategic decisions.</h3>
+            <p>
+              The point is not simply to analyze data. The point is to create evidence that can shape how teams think about adoption, segmentation, positioning, and where an intervention has the strongest value proposition.
+            </p>
+            <a href="#resources" class="card-link">View examples →</a>
+          </div>
+
+          <div class="split-visual soft">
+            <div class="visual-grid">
+              <div class="visual-card">
+                <h4>Decision themes</h4>
+                <div class="chart-bars">
+                  <div class="chart-row">
+                    <span>Positioning</span>
+                    <div class="bar-track"><div class="bar b3"></div></div>
+                  </div>
+                  <div class="chart-row">
+                    <span>Adoption</span>
+                    <div class="bar-track"><div class="bar b1"></div></div>
+                  </div>
+                  <div class="chart-row">
+                    <span>Targeting</span>
+                    <div class="bar-track"><div class="bar b2"></div></div>
+                  </div>
+                  <div class="chart-row">
+                    <span>Forecasting</span>
+                    <div class="bar-track"><div class="bar b4"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="visual-card">
+                <h4>Outputs</h4>
+                <div class="kpi-grid">
+                  <div class="kpi">
+                    <strong>Reports</strong>
+                    <span>Executive-ready</span>
+                  </div>
+                  <div class="kpi">
+                    <strong>Slides</strong>
+                    <span>Board and stakeholder</span>
+                  </div>
+                  <div class="kpi">
+                    <strong>Manuscripts</strong>
+                    <span>Publication support</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="solutions">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Solutions</span>
+            <h2>Choose the questions you need answered.</h2>
+          </div>
+          <p>
+            ACP Data Lab can support focused engagements or broader analytical programs, depending on whether you need one answer quickly or a deeper body of evidence over time.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="tag"><span class="tag-dot"></span>Evidence development</div>
+            <h3>Real-world evidence programs</h3>
+            <p>
+              Registry-based analyses structured for manuscripts, medical affairs, and external credibility.
+            </p>
+            <a href="#contact" class="card-link">Learn more →</a>
+          </article>
+
+          <article class="card">
+            <div class="tag"><span class="tag-dot"></span>Analytics</div>
+            <h3>Market landscape and opportunity sizing</h3>
+            <p>
+              Patient populations, procedural pathways, and variation across institutions or specialties.
+            </p>
+            <a href="#contact" class="card-link">Explore use case →</a>
+          </article>
+
+          <article class="card">
+            <div class="tag"><span class="tag-dot"></span>Strategy</div>
+            <h3>Clinical adoption and access support</h3>
+            <p>
+              Data-backed frameworks that support hospital adoption, payer conversations, and differentiation.
+            </p>
+            <a href="#contact" class="card-link">See approach →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Resources</span>
+            <h2>Research, reports, and working examples.</h2>
+          </div>
+          <p>
+            Use these sections to highlight what ACP Data Lab can produce: white papers, case studies, evidence summaries, and publication-driven analytical work.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card resource-card">
+            <div class="resource-type">Report</div>
+            <h3>Where surgical registry data can create competitive advantage</h3>
+            <p>
+              A practical framing of how real-world surgical data can support strategy, adoption, and evidence planning.
+            </p>
+            <a href="#" class="card-link">Read summary →</a>
+          </article>
+
+          <article class="card resource-card">
+            <div class="resource-type">Case study</div>
+            <h3>National prescribing variation after surgery</h3>
+            <p>
+              An example of how broad outcomes analysis can inform positioning and identify high-value segments.
+            </p>
+            <a href="#" class="card-link">View case study →</a>
+          </article>
+
+          <article class="card resource-card">
+            <div class="resource-type">Guide</div>
+            <h3>From publication-grade methods to stakeholder-ready outputs</h3>
+            <p>
+              How ACP Data Lab turns rigorous analysis into materials that leadership teams can actually use.
+            </p>
+            <a href="#" class="card-link">Open guide →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Selected perspectives</span>
+            <h2>Built for teams that need clarity, not clutter.</h2>
+          </div>
+          <p>
+            This section can later be replaced with real partner testimonials, quotes, or anonymized client outcomes once you have them ready.
+          </p>
+        </div>
+
+        <div class="testimonial-wrap">
+          <article class="testimonial">
+            <p>
+              “ACP Data Lab helped transform a broad research question into a decision-grade analytical package we could actually use internally.”
+            </p>
+            <strong>Medical Affairs Lead</strong>
+            <span>Pharmaceutical partner</span>
+          </article>
+
+          <article class="testimonial">
+            <p>
+              “The work felt rigorous in the academic sense, but also clear enough for strategy and leadership discussions.”
+            </p>
+            <strong>Commercial Strategy Director</strong>
+            <span>Healthcare organization</span>
+          </article>
+
+          <article class="testimonial">
+            <p>
+              “What stood out was not just the analysis, but the way the findings were translated into something useful.”
+            </p>
+            <strong>Clinical Innovation Advisor</strong>
+            <span>Industry collaborator</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Team</span>
+            <h2>Scientific leadership with clinical depth.</h2>
+          </div>
+          <p>
+            ACP Data Lab is built around surgeon-scientists and research leaders who understand the methodological standards required for serious healthcare evidence.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="tag"><span class="tag-dot" style="background: var(--logo-red);"></span>Founder</div>
+            <h3>Dr Adriana C Panayi</h3>
+            <p>
+              Surgeon-scientist focused on outcomes research, evidence generation, and high-value analytical collaboration across academic and clinical settings.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="tag"><span class="tag-dot" style="background: var(--logo-blue);"></span>Research leadership</div>
+            <h3>Prof Gabriel Hundeshagen</h3>
+            <p>
+              Senior clinical academic with extensive experience in surgical outcomes research, registry analytics, and multidisciplinary project execution.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="tag"><span class="tag-dot" style="background: var(--logo-yellow);"></span>Capability</div>
+            <h3>Built for collaboration</h3>
+            <p>
+              ACP Data Lab is designed to work alongside industry, hospital, and academic teams that need a rigorous but highly usable analytical partner.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="cta-shell">
+          <span class="eyebrow">Get started</span>
+          <h2>Start with a focused question.</h2>
+          <p>
+            Whether you need a single study, a strategic evidence package, or a broader analytical collaboration, ACP Data Lab can help define the right scope and output.
+          </p>
+          <div class="cta-actions">
+            <a href="mailto:contact@acpdatalab.com" class="btn btn-light">Book a consultation</a>
+            <a href="#solutions" class="btn btn-secondary" style="background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.22);">View solutions</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="Logo.png" alt="ACP Data Lab logo" />
+        <span>ACP Data Lab</span>
+      </div>
+      <div>Analysis · Consulting · Prediction</div>
+      <div>Nicosia, Cyprus</div>
+      <div>© 2026 ACP Data Lab</div>
+    </div>
+  </footer>
 
 </body>
 </html>
