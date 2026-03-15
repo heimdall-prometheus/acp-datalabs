@@ -85,9 +85,6 @@
     .nav-inner { height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
     .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
     .brand img { height: 64px; width: auto; }
-    .brand-text { display: flex; flex-direction: column; line-height: 1; }
-    .brand-name { font-size: .82rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t1); }
-    .brand-sub  { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin-top: 4px; }
     .nav-links  { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
     .nav-links a { padding: 8px 14px; font-size: .9rem; font-weight: 500; color: var(--t2); border-radius: 8px; transition: var(--trans); }
     .nav-links a:hover { color: var(--t1); background: var(--bg-soft); }
@@ -138,14 +135,16 @@
     .hero-stat-label { font-size: .72rem; color: var(--t3); letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
 
     /* Hero dashboard */
-    .hero-visual { position: relative; padding: 24px 28px 24px 28px; }
+    /* The visual wrapper has top/bottom margin for float cards, left/right padding for float cards */
+    .hero-visual { position: relative; margin-top: 56px; margin-bottom: 56px; }
+
     .hero-card-main { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: 28px; box-shadow: var(--sh-lg); position: relative; overflow: hidden; }
     .hero-card-main::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--blue) 50%, var(--yellow) 100%); }
     .hc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
     .hc-title { font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); }
     .hc-live { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 700; color: #2a7a4b; background: #edf7f2; border: 1px solid #c3e6d2; border-radius: 999px; padding: 4px 10px; }
     .hc-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #2a7a4b; }
-    .hc-bars { display: grid; gap: 12px; margin-bottom: 22px; }
+    .hc-bars { display: grid; gap: 12px; }
     .hc-bar-row { display: grid; grid-template-columns: 108px 1fr 40px; gap: 12px; align-items: center; }
     .hc-label { font-size: .86rem; font-weight: 500; color: var(--t2); }
     .hc-val   { font-size: .86rem; font-weight: 700; color: var(--t1); }
@@ -155,14 +154,13 @@
     .hc-f2 { width: 68%; background: var(--slate-grey); }
     .hc-f3 { width: 91%; background: var(--pencil-line); }
     .hc-f4 { width: 74%; background: var(--faded-stone); }
-    .hc-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .hc-metric { background: var(--bg-soft); border: 1px solid var(--border-2); border-radius: 12px; padding: 14px; text-align: center; }
-    .hc-metric strong { display: block; font-family: "DM Serif Display", serif; font-size: 1.3rem; color: var(--t1); margin-bottom: 2px; }
-    .hc-metric span   { font-size: .7rem; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: .08em; }
 
+    /* Float cards: positioned OUTSIDE the card, above and below */
     .float-card { position: absolute; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 13px 16px; box-shadow: var(--sh-md); animation: float 4s ease-in-out infinite; z-index: 2; }
-    .float-card-1 { top: 0; right: 0; animation-delay: 0s; }
-    .float-card-2 { bottom: 70px; left: 0; animation-delay: 2s; }
+    /* Evidence score: top-right, above the card */
+    .float-card-1 { top: -52px; right: 24px; animation-delay: 0s; }
+    /* h-index: bottom-left, below the card */
+    .float-card-2 { bottom: -52px; left: 24px; animation-delay: 2s; }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
     .fc-label { font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); margin-bottom: 3px; }
     .fc-value { font-family: "DM Serif Display", serif; font-size: 1.15rem; color: var(--t1); }
@@ -191,14 +189,6 @@
     .section-head { max-width: 680px; margin-bottom: 56px; }
     .section-head h2 { font-family: "DM Serif Display", serif; font-size: clamp(2rem, 3.5vw, 3.2rem); line-height: 1.04; letter-spacing: -.02em; margin-bottom: 14px; }
     .section-head p  { font-size: 1.02rem; color: var(--t2); line-height: 1.75; }
-
-    /* STATS BAR */
-    .stats-bar { background: var(--graphite); }
-    .stats-bar-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.08); }
-    .stat-item  { background: var(--graphite); padding: 32px; text-align: center; }
-    .stat-num   { font-family: "DM Serif Display", serif; font-size: 2.6rem; color: #fff; line-height: 1; margin-bottom: 6px; }
-    .stat-num em { font-style: normal; color: var(--warm-parchment); }
-    .stat-label { font-size: .74rem; font-weight: 600; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .1em; }
 
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: start; }
@@ -242,12 +232,9 @@
     .feat-tab-body h4 { font-size: .94rem; font-weight: 600; color: var(--t1); margin-bottom: 3px; }
     .feat-tab-body p  { font-size: .82rem; color: var(--t3); line-height: 1.5; }
 
-    /* --- FIX: Panel show/hide --- */
     .feat-panel { display: none; }
     .feat-panel.active { display: block; }
-    .feat-panel-visual { display: block; }
-
-    .feat-panel-visual { background: linear-gradient(160deg, #fff 0%, var(--bg-soft) 100%); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 36px; box-shadow: var(--sh-md); min-height: 400px; }
+    .feat-panel-visual { display: block; background: linear-gradient(160deg, #fff 0%, var(--bg-soft) 100%); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 36px; box-shadow: var(--sh-md); min-height: 400px; }
     .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
     .panel-title  { font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--t3); }
     .bar-chart { display: grid; gap: 14px; }
@@ -359,9 +346,6 @@
     .compliance-text { font-size: .74rem; color: var(--t3); text-align: center; }
     .footer { background: var(--graphite); border-top: 1px solid rgba(255,255,255,.06); padding: 28px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-    .footer-brand { display: flex; align-items: center; gap: 10px; }
-    .footer-brand img  { height: 32px; width: auto; }
-    .footer-brand span { font-size: .76rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: .8rem; color: rgba(255,255,255,.4); transition: var(--trans); }
     .footer-links a:hover { color: rgba(255,255,255,.75); }
@@ -417,7 +401,7 @@
       .approach-item:last-child { border-bottom: none; padding-bottom: 0; }
     }
     @media (max-width: 900px) {
-      .services-grid, .pharma-grid, .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+      .services-grid, .pharma-grid { grid-template-columns: 1fr 1fr; }
       .pathway-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
       .pathway-steps::before { display: none; }
       .team-grid { grid-template-columns: 1fr; }
@@ -434,7 +418,7 @@
       .hero-stat:nth-child(3) { border-bottom: none; }
       .hero-stat:nth-child(4) { border-right: none; border-bottom: none; }
       .section { padding: 64px 0; }
-      .services-grid, .pharma-grid, .stats-bar-inner, .hc-metrics { grid-template-columns: 1fr; }
+      .services-grid, .pharma-grid { grid-template-columns: 1fr; }
       .pathway-steps { grid-template-columns: 1fr; }
       .pathway-step { flex-direction: row; align-items: flex-start; gap: 16px; text-align: left; }
       .step-num { flex-shrink: 0; margin-bottom: 0; }
@@ -453,6 +437,7 @@
       .mobile-sticky-cta { display: block; }
       body { padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px)); }
       .pub-top { flex-direction: column; gap: 2px; }
+      .float-card-1, .float-card-2 { display: none; }
     }
   </style>
 </head>
@@ -460,15 +445,11 @@
 
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- NAV -->
+  <!-- NAV: logo only, no text next to it -->
   <header class="nav" id="nav">
     <div class="container nav-inner">
       <a href="#" class="brand" aria-label="ACP Data Lab home">
         <img src="assets/Logo.png" alt="ACP Data Lab" />
-        <div class="brand-text">
-          <div class="brand-name"></div>
-          <div class="brand-sub">Analysis · Consulting · Prediction</div>
-        </div>
       </a>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#about">About</a>
@@ -546,6 +527,7 @@
           </div>
 
           <div class="hero-visual">
+            <!-- Evidence score: floats above-right, outside the card -->
             <div class="float-card float-card-1">
               <div class="fc-label">Evidence score</div>
               <div class="fc-value">91 / 100</div>
@@ -562,6 +544,7 @@
                 <div class="hc-bar-row"><span class="hc-label">Differentiation</span><div class="hc-track"><div class="hc-fill hc-f4"></div></div><span class="hc-val">74%</span></div>
               </div>
             </div>
+            <!-- h-index: floats below-right, outside the card -->
             <div class="float-card float-card-2">
               <div class="fc-label">h-index</div>
               <div class="fc-value">43</div>
@@ -907,7 +890,6 @@
               </div>
             </div>
           </div>
-
           <div class="team-card fade-in">
             <div class="team-card-header">
               <img src="assets/gabriel-profile.jpg" alt="Prof. Dr. Gabriel Hundeshagen" class="team-photo"
@@ -951,7 +933,7 @@
             <a href="#services" class="btn btn-outline-white btn-lg">View Services</a>
           </div>
           <div class="cta-contact-details">
-            <span>Email: <a href="/cdn-cgi/l/email-protection#50333f3e2431332410313320343124313c31327e333f3d"><span class="__cf_email__" data-cfemail="1d7e7273697c7e695d7c7e6d797c697c717c7f337e7270">[email&#160;protected]</span></a></span>
+            <span>Email: <a href="mailto:contact@acpdatalab.com">contact@acpdatalab.com</a></span>
             <span>Response within 48 hours</span>
           </div>
           <p class="cta-note">References and prior engagement scope available upon request under NDA.</p>
@@ -980,7 +962,7 @@
     <!-- COMPLIANCE -->
     <div class="compliance">
       <div class="container">
-        <p class="compliance-text">ACP Data Lab Ltd. · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f6c60617b6e6c7b4f6e6c7f6b6e7b6e636e6d216c6062">[email&#160;protected]</a> · All analyses conducted in compliance with applicable data use agreements and research ethics standards.</p>
+        <p class="compliance-text">ACP Data Lab Ltd. · contact@acpdatalab.com · All analyses conducted in compliance with applicable data use agreements and research ethics standards.</p>
       </div>
     </div>
 
@@ -1049,7 +1031,7 @@
       nav.classList.toggle('scrolled', window.pageYOffset > 40);
     }, { passive: true });
 
-    // Smooth scroll for anchor links
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -1093,24 +1075,19 @@
     }, { threshold: 0.5 });
     document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
-    // ── FEATURE TABS (fixed) ──────────────────────────────────────────
+    // Feature tabs
     document.querySelectorAll('.feat-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         const targetId = tab.dataset.panel;
-
-        // Deactivate all tabs
         document.querySelectorAll('.feat-tab').forEach(t => t.classList.remove('active'));
-        // Hide all panels
         document.querySelectorAll('#featPanels > .feat-panel').forEach(p => p.classList.remove('active'));
-
-        // Activate clicked tab and its panel
         tab.classList.add('active');
         const panel = document.getElementById(targetId);
         if (panel) panel.classList.add('active');
       });
     });
 
-    // ── MODAL ─────────────────────────────────────────────────────────
+    // Modal
     function openModal() {
       const m = document.getElementById('contactModal');
       m.classList.add('active');
@@ -1136,12 +1113,8 @@
 
     function submitContact(e) {
       e.preventDefault();
-      const name    = document.getElementById('fname').value;
-      const company = document.getElementById('fcompany').value;
-      const title   = document.getElementById('ftitle').value;
-      const email   = document.getElementById('femail').value;
-      const message = document.getElementById('fmessage').value;
-
+      const name  = document.getElementById('fname').value;
+      const email = document.getElementById('femail').value;
       document.getElementById('formWrap').innerHTML = `
         <div class="form-success">
           <h3>Thank you, ${name}.</h3>
