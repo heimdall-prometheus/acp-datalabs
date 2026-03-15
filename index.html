@@ -1040,7 +1040,7 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // Nav scroll effect
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
@@ -1138,4 +1138,15 @@
       const company = document.getElementById('fcompany').value;
       const title   = document.getElementById('ftitle').value;
       const email   = document.getElementById('femail').value;
-      const message = document.getElementById('fmessage
+      const message = document.getElementById('fmessage').value;
+
+      document.getElementById('formWrap').innerHTML = `
+        <div class="form-success">
+          <h3>Thank you, ${name}.</h3>
+          <p>Your consultation request has been received. We'll be in touch at <strong>${email}</strong> within 48 hours.</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
