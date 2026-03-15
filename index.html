@@ -11,6 +11,7 @@
   <meta property="og:type" content="website" />
   <link rel="canonical" href="https://acpdatalab.com/" />
   <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/png" href="assets/Logo.png" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -244,6 +245,7 @@
     /* --- FIX: Panel show/hide --- */
     .feat-panel { display: none; }
     .feat-panel.active { display: block; }
+    .feat-panel-visual { display: block; }
 
     .feat-panel-visual { background: linear-gradient(160deg, #fff 0%, var(--bg-soft) 100%); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 36px; box-shadow: var(--sh-md); min-height: 400px; }
     .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
@@ -1099,7 +1101,7 @@
         // Deactivate all tabs
         document.querySelectorAll('.feat-tab').forEach(t => t.classList.remove('active'));
         // Hide all panels
-        document.querySelectorAll('.feat-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('#featPanels > .feat-panel').forEach(p => p.classList.remove('active'));
 
         // Activate clicked tab and its panel
         tab.classList.add('active');
