@@ -3,16 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACP Data Lab | Medical Outcomes Intelligence</title>
-  <meta name="description" content="ACP Data Lab transforms surgical and registry data into publication-grade evidence for pharmaceutical, medtech, and healthcare strategy teams." />
+  <title>ACP Data Lab | Analysis · Consulting · Prediction</title>
+  <meta name="description" content="ACP Data Lab — surgical outcomes analytics and real-world evidence for the pharmaceutical industry. Publication-grade registry analyses for market access, medical affairs, and commercial strategy." />
+  <meta property="og:title" content="ACP Data Lab | Analysis · Consulting · Prediction" />
+  <meta property="og:description" content="Surgical outcomes analytics and real-world evidence for the pharmaceutical industry." />
+  <meta property="og:url" content="https://acpdatalab.com" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://acpdatalab.com/" />
+  <meta name="robots" content="index, follow" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ACP Data Lab",
+    "url": "https://acpdatalab.com",
+    "description": "Surgical outcomes analytics and real-world evidence for the pharmaceutical industry.",
+    "founder": {
+      "@type": "Person",
+      "name": "Dr. Adriana C. Panayi",
+      "jobTitle": "Founding Director & Chair of Scientific Leadership",
+      "affiliation": [
+        {"@type": "Organization", "name": "Harvard Medical School"},
+        {"@type": "Organization", "name": "University Hospital Zürich"}
+      ]
+    },
+    "address": {"@type": "PostalAddress", "addressLocality": "Nicosia", "addressCountry": "CY"},
+    "email": "contact@acpdatalab.com",
+    "sameAs": ["https://scholar.google.com/citations?user=IusAkF0AAAAJ"]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── Tokens ──────────────────────────────────────────────────── */
     :root {
-      /* Brand palette */
       --warm-parchment: #E8E0CC;
       --pale-linen:     #D6CCBA;
       --dove-grey:      #9E9890;
@@ -22,1455 +48,493 @@
       --ash-white:      #F2EDE4;
       --warm-shadow:    #504C47;
       --pencil-line:    #787368;
-
-      /* Logo accents */
       --red:    #F52B2E;
       --blue:   #157ABD;
       --yellow: #F2B90F;
-
-      /* Page */
-      --bg:       #ffffff;
-      --bg-soft:  #faf9f7;
+      --bg:         #ffffff;
+      --bg-soft:    #faf9f7;
       --bg-section: #f6f4f0;
-      --surface:  #ffffff;
-
-      /* Text */
       --t1: #1a1917;
       --t2: #504C47;
       --t3: #787368;
-
-      /* Borders */
       --border:   rgba(62,59,56,.1);
       --border-2: rgba(62,59,56,.06);
-
-      /* Geometry */
-      --r: 14px;
+      --r:    14px;
       --r-lg: 24px;
       --r-xl: 34px;
-
-      /* Shadows */
       --sh-sm: 0 1px 3px rgba(0,0,0,.04), 0 6px 20px rgba(0,0,0,.05);
       --sh-md: 0 4px 12px rgba(0,0,0,.04), 0 16px 40px rgba(0,0,0,.07);
       --sh-lg: 0 8px 24px rgba(0,0,0,.05), 0 32px 64px rgba(0,0,0,.09);
-
       --max: 1180px;
+      --trans: .18s ease;
     }
 
-    /* ─── Reset ───────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: "DM Sans", ui-sans-serif, sans-serif;
-      background: var(--bg);
-      color: var(--t1);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
+    body { font-family: "DM Sans", ui-sans-serif, sans-serif; background: var(--bg); color: var(--t1); line-height: 1.6; -webkit-font-smoothing: antialiased; }
     img  { display: block; max-width: 100%; }
     a    { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(var(--max), calc(100% - 48px));
-      margin: 0 auto;
-    }
-
-    /* ─── Nav ─────────────────────────────────────────────────────── */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-2);
-    }
-
-    .nav-inner {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    .brand img {
-      height: 44px;
-      width: auto;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-
-    .brand-name {
-      font-size: .82rem;
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--t1);
-    }
-
-    .brand-sub {
-      font-size: .66rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--t3);
-      margin-top: 4px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .nav-links a {
-      padding: 8px 14px;
-      font-size: .92rem;
-      font-weight: 500;
-      color: var(--t2);
-      border-radius: 8px;
-      transition: .15s;
-    }
-
-    .nav-links a:hover {
-      color: var(--t1);
-      background: var(--bg-soft);
-    }
-
-    .nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    /* ─── Buttons ─────────────────────────────────────────────────── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      height: 46px;
-      padding: 0 22px;
-      border-radius: 999px;
-      border: 1.5px solid transparent;
-      font-size: .92rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: .18s ease;
-      white-space: nowrap;
-    }
-
-    .btn-ghost {
-      background: transparent;
-      border-color: var(--border);
-      color: var(--t1);
-    }
-    .btn-ghost:hover {
-      background: var(--bg-soft);
-      transform: translateY(-1px);
-    }
-
-    .btn-dark {
-      background: var(--graphite);
-      border-color: var(--graphite);
-      color: #fff;
-      box-shadow: var(--sh-sm);
-    }
-    .btn-dark:hover {
-      background: var(--warm-shadow);
-      border-color: var(--warm-shadow);
-      transform: translateY(-1px);
-      box-shadow: var(--sh-md);
-    }
-
-    .btn-outline-white {
-      background: transparent;
-      border-color: rgba(255,255,255,.4);
-      color: #fff;
-    }
-    .btn-outline-white:hover {
-      background: rgba(255,255,255,.1);
-      transform: translateY(-1px);
-    }
-
-    .btn-white {
-      background: #fff;
-      border-color: #fff;
-      color: var(--graphite);
-    }
-    .btn-white:hover {
-      background: var(--ash-white);
-      transform: translateY(-1px);
-    }
-
-    .btn-lg {
-      height: 54px;
-      padding: 0 28px;
-      font-size: 1rem;
-    }
-
-    /* ─── Hero ────────────────────────────────────────────────────── */
-    .hero {
-      padding: 88px 0 80px;
-      background: #fff;
-      border-bottom: 1px solid var(--border-2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* subtle decorative background rings */
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -160px;
-      right: -160px;
-      width: 560px;
-      height: 560px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(232,224,204,.38) 0%, transparent 68%);
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -80px;
-      left: -80px;
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(214,204,186,.22) 0%, transparent 68%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--t3);
-      margin-bottom: 20px;
-    }
-
-    .hero-eyebrow span {
-      width: 20px;
-      height: 2px;
-      background: var(--dove-grey);
-      display: inline-block;
-    }
-
-    .hero h1 {
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: clamp(2.8rem, 5vw, 5rem);
-      line-height: 1.02;
-      letter-spacing: -.02em;
-      color: var(--t1);
-      margin-bottom: 22px;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--slate-grey);
-    }
-
-    .hero-lead {
-      font-size: 1.08rem;
-      color: var(--t2);
-      max-width: 54ch;
-      margin-bottom: 36px;
-      font-weight: 400;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 14px;
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: .82rem;
-      font-weight: 500;
-      color: var(--t3);
-    }
-
-    /* Hero dashboard visual */
-    .hero-visual {
-      position: relative;
-    }
-
-    .hero-card-main {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 28px;
-      box-shadow: var(--sh-lg);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card-main::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--red) 0%, var(--blue) 50%, var(--yellow) 100%);
-    }
-
-    .hc-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-    }
-
-    .hc-title {
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--t3);
-    }
-
-    .hc-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: .74rem;
-      font-weight: 700;
-      color: #2a7a4b;
-      background: #edf7f2;
-      border: 1px solid #c3e6d2;
-      border-radius: 999px;
-      padding: 4px 10px;
-    }
-
-    .hc-badge::before {
-      content: "";
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: #2a7a4b;
-    }
-
-    .hc-bars {
-      display: grid;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .hc-bar-row {
-      display: grid;
-      grid-template-columns: 90px 1fr 36px;
-      gap: 12px;
-      align-items: center;
-      font-size: .88rem;
-      color: var(--t3);
-    }
-
-    .hc-track {
-      height: 8px;
-      background: var(--ash-white);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .hc-fill {
-      height: 100%;
-      border-radius: 999px;
-    }
-
-    .hc-fill-1 { width: 82%; background: var(--graphite); }
-    .hc-fill-2 { width: 68%; background: var(--slate-grey); }
-    .hc-fill-3 { width: 91%; background: var(--pencil-line); }
-    .hc-fill-4 { width: 74%; background: var(--faded-stone); }
-
-    .hc-row-label { font-weight: 500; color: var(--t2); font-size: .86rem; }
-    .hc-row-val   { font-weight: 700; color: var(--t1); font-size: .86rem; }
-
-    .hc-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .hc-metric {
-      background: var(--bg-soft);
-      border: 1px solid var(--border-2);
-      border-radius: 12px;
-      padding: 14px;
-      text-align: center;
-    }
-
-    .hc-metric strong {
-      display: block;
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -.03em;
-      color: var(--t1);
-      margin-bottom: 2px;
-    }
-
-    .hc-metric span {
-      font-size: .74rem;
-      font-weight: 600;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-
-    /* Floating accent cards */
-    .float-card {
-      position: absolute;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 16px;
-      box-shadow: var(--sh-md);
-      font-size: .82rem;
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .float-card-1 {
-      top: -24px;
-      right: -20px;
-      animation-delay: 0s;
-    }
-
-    .float-card-2 {
-      bottom: -18px;
-      left: -20px;
-      animation-delay: 2s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-6px); }
-    }
-
-    .fc-label {
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--t3);
-      margin-bottom: 4px;
-    }
-
-    .fc-value {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--t1);
-    }
-
-    /* ─── Stats bar ───────────────────────────────────────────────── */
-    .stats-bar {
-      background: var(--graphite);
-      padding: 40px 0;
-    }
-
-    .stats-bar-inner {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: rgba(255,255,255,.1);
-    }
-
-    .stat-item {
-      background: var(--graphite);
-      padding: 28px 32px;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-family: "DM Serif Display", serif;
-      font-size: 2.8rem;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .stat-num em {
-      font-style: normal;
-      color: var(--warm-parchment);
-    }
-
-    .stat-label {
-      font-size: .8rem;
-      font-weight: 500;
-      color: rgba(255,255,255,.55);
-      text-transform: uppercase;
-      letter-spacing: .1em;
-    }
-
-    /* ─── Feature tabs section ────────────────────────────────────── */
-    .features {
-      padding: 100px 0;
-      background: #fff;
-    }
-
-    .section-eyebrow {
-      font-size: .76rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--t3);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-eyebrow::before {
-      content: "";
-      width: 20px;
-      height: 2px;
-      background: var(--dove-grey);
-    }
-
-    .features-head {
-      max-width: 640px;
-      margin-bottom: 60px;
-    }
-
-    .features-head h2 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(2rem, 3.5vw, 3.4rem);
-      line-height: 1.05;
-      letter-spacing: -.02em;
-      margin-bottom: 16px;
-    }
-
-    .features-head p {
-      font-size: 1.04rem;
-      color: var(--t2);
-      max-width: 58ch;
-      line-height: 1.7;
-    }
-
-    .features-layout {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 52px;
-      align-items: start;
-    }
-
-    .feat-tabs {
-      display: grid;
-      gap: 4px;
-      position: sticky;
-      top: 90px;
-    }
-
-    .feat-tab {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 18px 20px;
-      border-radius: var(--r);
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-
-    .feat-tab:hover {
-      background: var(--bg-soft);
-    }
-
-    .feat-tab.active {
-      background: var(--bg-soft);
-      border-color: var(--border);
-      box-shadow: var(--sh-sm);
-    }
-
-    .feat-tab-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-    }
-
-    .feat-tab-icon-1 { background: rgba(245,43,46,.1); }
-    .feat-tab-icon-2 { background: rgba(21,122,189,.1); }
-    .feat-tab-icon-3 { background: rgba(242,185,15,.12); }
-
-    .feat-tab-body h4 {
-      font-size: .96rem;
-      font-weight: 600;
-      color: var(--t1);
-      margin-bottom: 4px;
-    }
-
-    .feat-tab-body p {
-      font-size: .84rem;
-      color: var(--t3);
-      line-height: 1.5;
-    }
-
-    .feat-panel {
-      display: none;
-    }
-
-    .feat-panel.active {
-      display: block;
-    }
-
-    .feat-panel-visual {
-      background: linear-gradient(160deg, #fff 0%, var(--bg-soft) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 36px;
-      box-shadow: var(--sh-md);
-      min-height: 420px;
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-    }
-
-    .panel-title {
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--t3);
-    }
-
-    /* Chart inside feature panels */
-    .bar-chart {
-      display: grid;
-      gap: 14px;
-    }
-
-    .bc-row {
-      display: grid;
-      grid-template-columns: 130px 1fr 50px;
-      align-items: center;
-      gap: 14px;
-      font-size: .9rem;
-      color: var(--t2);
-      font-weight: 500;
-    }
-
-    .bc-track {
-      height: 10px;
-      background: var(--ash-white);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .bc-fill {
-      height: 100%;
-      border-radius: 999px;
-      transition: width .6s ease;
-    }
-
-    .bc-fill-a { background: var(--graphite); }
-    .bc-fill-b { background: var(--slate-grey); }
-    .bc-fill-c { background: var(--pencil-line); }
-    .bc-fill-d { background: var(--faded-stone); }
-    .bc-fill-e { background: var(--warm-parchment); filter: brightness(.88); }
-
-    .bc-val { font-weight: 700; color: var(--t1); text-align: right; }
-
-    .panel-kpis {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .pk {
-      background: #fff;
-      border: 1px solid var(--border-2);
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .pk strong {
-      display: block;
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: -.03em;
-      margin-bottom: 3px;
-    }
-
-    .pk span {
-      font-size: .74rem;
-      font-weight: 600;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-
-    /* ─── Logos / clients strip ───────────────────────────────────── */
-    .clients {
-      padding: 48px 0;
-      border-top: 1px solid var(--border-2);
-      border-bottom: 1px solid var(--border-2);
-      background: var(--bg-soft);
-    }
-
-    .clients-label {
-      font-size: .76rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--t3);
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .clients-logos {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .client-pill {
-      height: 48px;
-      padding: 0 22px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .88rem;
-      font-weight: 600;
-      color: var(--t3);
-      box-shadow: var(--sh-sm);
-      transition: .18s;
-    }
-
-    .client-pill:hover {
-      color: var(--t1);
-      border-color: var(--border);
-      transform: translateY(-2px);
-      box-shadow: var(--sh-md);
-    }
-
-    /* ─── Solutions cards ─────────────────────────────────────────── */
-    .solutions {
-      padding: 100px 0;
-      background: var(--bg-soft);
-    }
-
-    .solutions-head {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: end;
-      margin-bottom: 48px;
-    }
-
-    .solutions-head h2 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(2rem, 3.4vw, 3.2rem);
-      line-height: 1.04;
-      letter-spacing: -.02em;
-    }
-
-    .solutions-head p {
-      font-size: 1rem;
-      color: var(--t2);
-      line-height: 1.7;
-    }
-
-    .solutions-head a {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 16px;
-      font-weight: 600;
-      font-size: .92rem;
-      color: var(--t1);
-      transition: gap .15s;
-    }
-
-    .solutions-head a:hover { gap: 10px; }
-
-    .sol-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .sol-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 30px;
-      box-shadow: var(--sh-sm);
-      transition: .2s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .sol-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--sh-md);
-      border-color: var(--border);
-    }
-
-    .sol-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-    }
-
-    .sol-icon-1 { background: rgba(245,43,46,.08); }
-    .sol-icon-2 { background: rgba(21,122,189,.08); }
-    .sol-icon-3 { background: rgba(242,185,15,.1); }
-    .sol-icon-4 { background: rgba(62,59,56,.07); }
-    .sol-icon-5 { background: rgba(110,106,100,.08); }
-    .sol-icon-6 { background: rgba(184,176,160,.14); }
-
-    .sol-label {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--t3);
-    }
-
-    .sol-card h3 {
-      font-size: 1.08rem;
-      font-weight: 600;
-      line-height: 1.3;
-      color: var(--t1);
-    }
-
-    .sol-card p {
-      font-size: .92rem;
-      color: var(--t2);
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .sol-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: .86rem;
-      font-weight: 600;
-      color: var(--t1);
-      margin-top: 4px;
-      transition: gap .15s;
-    }
-
-    .sol-link:hover { gap: 10px; }
-
-    /* ─── How it works (split sections) ──────────────────────────── */
-    .how {
-      padding: 100px 0;
-      background: #fff;
-    }
-
-    .how-head {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto 72px;
-    }
-
-    .how-head h2 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(2rem, 3.4vw, 3.2rem);
-      letter-spacing: -.02em;
-      margin-bottom: 14px;
-    }
-
-    .how-head p {
-      font-size: 1rem;
-      color: var(--t2);
-      line-height: 1.7;
-    }
-
-    .how-steps {
-      display: grid;
-      gap: 80px;
-    }
-
-    .how-step {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .how-step.reverse .how-step-copy { order: 2; }
-    .how-step.reverse .how-step-vis  { order: 1; }
-
-    .how-step-num {
-      font-family: "DM Serif Display", serif;
-      font-size: 4rem;
-      color: var(--warm-parchment);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-
-    .how-step-copy h3 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-      letter-spacing: -.02em;
-      line-height: 1.1;
-      margin-bottom: 14px;
-    }
-
-    .how-step-copy p {
-      font-size: .98rem;
-      color: var(--t2);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .how-step-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--t1);
-      transition: gap .15s;
-    }
-
-    .how-step-link:hover { gap: 10px; }
-
-    .how-step-vis {
-      background: linear-gradient(160deg, #fff 0%, var(--bg-soft) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 30px;
-      box-shadow: var(--sh-md);
-      min-height: 300px;
-    }
-
-    /* ─── Team section ────────────────────────────────────────────── */
-    .team {
-      padding: 100px 0;
-      background: var(--bg-soft);
-      border-top: 1px solid var(--border-2);
-    }
-
-    .team-head {
-      text-align: center;
-      max-width: 560px;
-      margin: 0 auto 56px;
-    }
-
-    .team-head h2 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(2rem, 3.4vw, 3.2rem);
-      letter-spacing: -.02em;
-      margin-bottom: 14px;
-    }
-
-    .team-head p {
-      font-size: 1rem;
-      color: var(--t2);
-      line-height: 1.7;
-    }
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .team-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 32px;
-      box-shadow: var(--sh-sm);
-      transition: .2s ease;
-    }
-
-    .team-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--sh-md);
-    }
-
-    .team-card-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-bottom: 20px;
-    }
-
-    .dot-red    { background: var(--red); }
-    .dot-blue   { background: var(--blue); }
-    .dot-yellow { background: var(--yellow); }
-
-    .team-role {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--t3);
-      margin-bottom: 10px;
-    }
-
-    .team-card h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--t1);
-    }
-
-    .team-card p {
-      font-size: .92rem;
-      color: var(--t2);
-      line-height: 1.65;
-    }
-
-    /* ─── Testimonials ────────────────────────────────────────────── */
-    .testimonials {
-      padding: 100px 0;
-      background: #fff;
-    }
-
-    .testimonials-head {
-      text-align: center;
-      max-width: 560px;
-      margin: 0 auto 52px;
-    }
-
-    .testimonials-head h2 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(2rem, 3.2vw, 3rem);
-      letter-spacing: -.02em;
-      margin-bottom: 12px;
-    }
-
-    .testimonials-head p {
-      font-size: 1rem;
-      color: var(--t2);
-      line-height: 1.7;
-    }
-
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .testi-card {
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 30px;
-      transition: .2s;
-    }
-
-    .testi-card:hover {
-      background: #fff;
-      box-shadow: var(--sh-md);
-      transform: translateY(-3px);
-    }
-
-    .testi-quote {
-      font-family: "DM Serif Display", serif;
-      font-size: 1.5rem;
-      color: var(--warm-parchment);
-      margin-bottom: 12px;
-    }
-
-    .testi-card p {
-      font-size: .96rem;
-      color: var(--t2);
-      line-height: 1.65;
-      margin-bottom: 22px;
-    }
-
-    .testi-attr strong {
-      display: block;
-      font-size: .92rem;
-      font-weight: 600;
-      color: var(--t1);
-      margin-bottom: 2px;
-    }
-
-    .testi-attr span {
-      font-size: .82rem;
-      color: var(--t3);
-    }
-
-    /* ─── Resources ───────────────────────────────────────────────── */
-    .resources {
-      padding: 100px 0;
-      background: var(--bg-soft);
-      border-top: 1px solid var(--border-2);
-    }
-
-    .resources-head {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: end;
-      gap: 24px;
-      margin-bottom: 44px;
-    }
-
-    .resources-head h2 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(1.8rem, 2.8vw, 2.8rem);
-      letter-spacing: -.02em;
-    }
-
-    .res-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .res-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 28px;
-      box-shadow: var(--sh-sm);
-      transition: .2s;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .res-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--sh-md);
-    }
-
-    .res-type {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--t3);
-    }
-
-    .res-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--t1);
-      line-height: 1.4;
-      flex: 1;
-    }
-
-    .res-card p {
-      font-size: .88rem;
-      color: var(--t2);
-      line-height: 1.6;
-    }
-
-    .res-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: .84rem;
-      font-weight: 600;
-      color: var(--t1);
-      margin-top: 4px;
-      transition: gap .15s;
-    }
-
-    .res-link:hover { gap: 10px; }
-
-    /* ─── CTA band ────────────────────────────────────────────────── */
-    .cta-band {
-      padding: 100px 0;
-      background: var(--graphite);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-band::before {
-      content: "";
-      position: absolute;
-      top: -120px; right: -120px;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(232,224,204,.12), transparent 68%);
-      pointer-events: none;
-    }
-
-    .cta-band::after {
-      content: "";
-      position: absolute;
-      bottom: -80px; left: -80px;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(214,204,186,.08), transparent 68%);
-      pointer-events: none;
-    }
-
-    .cta-band-inner {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .cta-band-copy .section-eyebrow {
-      color: rgba(255,255,255,.5);
-    }
-
-    .cta-band-copy .section-eyebrow::before {
-      background: rgba(255,255,255,.3);
-    }
-
-    .cta-band-copy h2 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(2.2rem, 4vw, 4rem);
-      color: #fff;
-      line-height: 1.02;
-      letter-spacing: -.02em;
-      margin-bottom: 14px;
-    }
-
-    .cta-band-copy h2 em {
-      font-style: italic;
-      color: var(--warm-parchment);
-    }
-
-    .cta-band-copy p {
-      font-size: 1.04rem;
-      color: rgba(255,255,255,.7);
-      max-width: 56ch;
-      line-height: 1.7;
-    }
-
-    .cta-band-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    /* ─── Footer ──────────────────────────────────────────────────── */
-    .footer {
-      background: var(--graphite);
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding: 40px 0;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .footer-brand img { height: 34px; width: auto; }
-
-    .footer-brand-text {
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.5);
-    }
-
-    .footer-meta {
-      font-size: .84rem;
-      color: rgba(255,255,255,.4);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 22px;
-    }
-
-    .footer-links a {
-      font-size: .84rem;
-      color: rgba(255,255,255,.45);
-      transition: .15s;
-    }
-
-    .footer-links a:hover { color: rgba(255,255,255,.8); }
-
-    /* ─── Responsive ──────────────────────────────────────────────── */
-    @media (max-width: 1100px) {
-      .hero-inner,
-      .solutions-head,
-      .features-layout,
-      .how-step,
-      .cta-band-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .how-step.reverse .how-step-copy,
-      .how-step.reverse .how-step-vis { order: unset; }
-
-      .feat-tabs { position: static; }
-    }
-
-    @media (max-width: 860px) {
-      .sol-grid,
-      .testi-grid,
-      .res-grid,
-      .team-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 640px) {
-      .container { width: min(var(--max), calc(100% - 32px)); }
-
-      .nav-inner { height: auto; padding: 14px 0; flex-direction: column; align-items: flex-start; }
-      .nav-links  { display: none; }
-
-      .hero { padding: 60px 0; }
-
-      .sol-grid,
-      .testi-grid,
-      .res-grid,
-      .team-grid,
-      .hc-metrics,
-      .stats-bar-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-band-actions { flex-direction: row; flex-wrap: wrap; }
-    }
-
-    /* ─── Entrance animations ─────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-copy > * {
-      animation: fadeUp .6s ease both;
-    }
-
+    .container { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+
+    .skip-link { position: absolute; top: -100%; left: 1rem; background: var(--graphite); color: #fff; padding: .5rem 1rem; border-radius: var(--r); font-size: .875rem; font-weight: 600; z-index: 9999; }
+    .skip-link:focus { top: 1rem; }
+
+    /* NAV */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color var(--trans), box-shadow var(--trans); }
+    .nav.scrolled { border-bottom-color: var(--border-2); box-shadow: var(--sh-sm); }
+    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .brand img { height: 44px; width: auto; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1; }
+    .brand-name { font-size: .82rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t1); }
+    .brand-sub  { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin-top: 4px; }
+    .nav-links  { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
+    .nav-links a { padding: 8px 14px; font-size: .9rem; font-weight: 500; color: var(--t2); border-radius: 8px; transition: var(--trans); }
+    .nav-links a:hover { color: var(--t1); background: var(--bg-soft); }
+    .nav-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 22px; border-radius: 999px; border: 1.5px solid transparent; font-family: inherit; font-size: .92rem; font-weight: 600; cursor: pointer; transition: var(--trans); white-space: nowrap; text-decoration: none; }
+    .btn-ghost { background: transparent; border-color: var(--border); color: var(--t1); }
+    .btn-ghost:hover { background: var(--bg-soft); transform: translateY(-1px); }
+    .btn-dark { background: var(--graphite); border-color: var(--graphite); color: #fff; box-shadow: var(--sh-sm); }
+    .btn-dark:hover { background: var(--warm-shadow); border-color: var(--warm-shadow); transform: translateY(-1px); box-shadow: var(--sh-md); }
+    .btn-outline-white { background: transparent; border-color: rgba(255,255,255,.4); color: #fff; }
+    .btn-outline-white:hover { background: rgba(255,255,255,.1); transform: translateY(-1px); }
+    .btn-white { background: #fff; border-color: #fff; color: var(--graphite); }
+    .btn-white:hover { background: var(--ash-white); transform: translateY(-1px); }
+    .btn-lg { height: 54px; padding: 0 28px; font-size: 1rem; }
+
+    /* AFFILIATION STRIP */
+    .affil-strip { background: var(--bg-soft); border-bottom: 1px solid var(--border-2); padding: 10px 0; }
+    .affil-inner { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .affil-label { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--t3); white-space: nowrap; flex-shrink: 0; }
+    .affil-divider { width: 1px; height: 16px; background: var(--border); flex-shrink: 0; }
+    .affil-list { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .affil-item { font-size: .76rem; font-weight: 500; color: var(--t3); white-space: nowrap; }
+
+    /* HERO */
+    .hero { padding: 88px 0 80px; background: #fff; border-bottom: 1px solid var(--border-2); position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(62,59,56,.014) 1px, transparent 1px), linear-gradient(90deg, rgba(62,59,56,.014) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+    .hero::after  { content: ""; position: absolute; top: -160px; right: -160px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(232,224,204,.4) 0%, transparent 68%); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--t3); margin-bottom: 20px; }
+    .hero-eyebrow-dot  { width: 5px; height: 5px; background: var(--dove-grey); border-radius: 50%; }
+    .hero-eyebrow-line { width: 22px; height: 1.5px; background: var(--dove-grey); }
+    .hero h1 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.6rem, 5vw, 4.6rem); line-height: 1.02; letter-spacing: -.02em; color: var(--t1); margin-bottom: 22px; }
+    .hero h1 em { font-style: italic; color: var(--slate-grey); }
+    .hero-lead { font-size: 1.06rem; color: var(--t2); max-width: 54ch; margin-bottom: 32px; line-height: 1.75; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+    .hchip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--r); font-size: .72rem; font-weight: 700; color: var(--t3); letter-spacing: .04em; white-space: nowrap; }
+
+    .hero-divider { width: 100%; height: 1px; background: var(--border-2); margin-bottom: 28px; }
+
+    .hero-stats { display: grid; grid-template-columns: repeat(4, auto); gap: 0; width: fit-content; }
+    .hero-stat { padding-right: 28px; border-right: 1px solid var(--border-2); margin-right: 28px; }
+    .hero-stat:last-child { padding-right: 0; border-right: none; margin-right: 0; }
+    .hero-stat-value { font-family: "DM Serif Display", serif; font-size: 1.9rem; color: var(--t1); line-height: 1; margin-bottom: 4px; letter-spacing: -.02em; }
+    .hero-stat-label { font-size: .72rem; color: var(--t3); letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
+
+    /* Hero dashboard */
+    .hero-visual { position: relative; }
+    .hero-card-main { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: 28px; box-shadow: var(--sh-lg); position: relative; overflow: hidden; }
+    .hero-card-main::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--blue) 50%, var(--yellow) 100%); }
+    .hc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+    .hc-title { font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); }
+    .hc-live { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 700; color: #2a7a4b; background: #edf7f2; border: 1px solid #c3e6d2; border-radius: 999px; padding: 4px 10px; }
+    .hc-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #2a7a4b; }
+    .hc-bars { display: grid; gap: 12px; margin-bottom: 22px; }
+    .hc-bar-row { display: grid; grid-template-columns: 108px 1fr 40px; gap: 12px; align-items: center; }
+    .hc-label { font-size: .86rem; font-weight: 500; color: var(--t2); }
+    .hc-val   { font-size: .86rem; font-weight: 700; color: var(--t1); }
+    .hc-track { height: 8px; background: var(--ash-white); border-radius: 999px; overflow: hidden; }
+    .hc-fill  { height: 100%; border-radius: 999px; }
+    .hc-f1 { width: 82%; background: var(--graphite); }
+    .hc-f2 { width: 68%; background: var(--slate-grey); }
+    .hc-f3 { width: 91%; background: var(--pencil-line); }
+    .hc-f4 { width: 74%; background: var(--faded-stone); }
+    .hc-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .hc-metric { background: var(--bg-soft); border: 1px solid var(--border-2); border-radius: 12px; padding: 14px; text-align: center; }
+    .hc-metric strong { display: block; font-family: "DM Serif Display", serif; font-size: 1.3rem; color: var(--t1); margin-bottom: 2px; }
+    .hc-metric span   { font-size: .7rem; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: .08em; }
+
+    .float-card { position: absolute; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 13px 16px; box-shadow: var(--sh-md); animation: float 4s ease-in-out infinite; }
+    .float-card-1 { top: -22px; right: -18px; animation-delay: 0s; }
+    .float-card-2 { bottom: -16px; left: -18px; animation-delay: 2s; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    .fc-label { font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); margin-bottom: 3px; }
+    .fc-value { font-family: "DM Serif Display", serif; font-size: 1.15rem; color: var(--t1); }
+
+    /* TRUST STRIP */
+    .trust-strip { background: var(--graphite); }
+    .trust-strip-inner { display: flex; align-items: stretch; }
+    .trust-item { display: flex; align-items: center; gap: 10px; padding: 18px 28px 18px 0; margin-right: 28px; border-right: 1px solid rgba(255,255,255,.1); flex-shrink: 0; }
+    .trust-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .trust-icon { font-size: 1rem; opacity: .85; flex-shrink: 0; }
+    .trust-text { font-size: .78rem; font-weight: 600; color: rgba(255,255,255,.88); line-height: 1.4; }
+    .trust-text em { display: block; font-style: normal; font-size: .66rem; font-weight: 400; letter-spacing: .05em; opacity: .6; margin-top: 1px; }
+
+    /* EVIDENCE BAR */
+    .evidence-bar { background: var(--bg-soft); border-bottom: 1px solid var(--border-2); padding: 10px 0; }
+    .evidence-bar-inner { display: flex; align-items: center; }
+    .evidence-label { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--t3); white-space: nowrap; margin-right: 20px; flex-shrink: 0; }
+    .evidence-pills { display: flex; gap: 7px; flex-wrap: wrap; }
+    .evidence-pill  { background: #fff; border: 1px solid var(--border); border-radius: var(--r); padding: 4px 10px; font-size: .7rem; font-weight: 700; color: var(--t3); letter-spacing: .04em; white-space: nowrap; text-transform: uppercase; }
+
+    /* SECTION HELPERS */
+    .section { padding: 96px 0; }
+    .section-soft { background: var(--bg-soft); border-top: 1px solid var(--border-2); border-bottom: 1px solid var(--border-2); }
+    .section-eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--t3); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .section-eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--dove-grey); }
+    .section-head { max-width: 680px; margin-bottom: 56px; }
+    .section-head h2 { font-family: "DM Serif Display", serif; font-size: clamp(2rem, 3.5vw, 3.2rem); line-height: 1.04; letter-spacing: -.02em; margin-bottom: 14px; }
+    .section-head p  { font-size: 1.02rem; color: var(--t2); line-height: 1.75; }
+
+    /* STATS BAR */
+    .stats-bar { background: var(--graphite); }
+    .stats-bar-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.08); }
+    .stat-item  { background: var(--graphite); padding: 32px; text-align: center; }
+    .stat-num   { font-family: "DM Serif Display", serif; font-size: 2.6rem; color: #fff; line-height: 1; margin-bottom: 6px; }
+    .stat-num em { font-style: normal; color: var(--warm-parchment); }
+    .stat-label { font-size: .74rem; font-weight: 600; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .1em; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 60px; align-items: start; }
+    .about-text p { font-size: .98rem; line-height: 1.85; color: var(--t2); margin-bottom: 18px; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text em { font-style: italic; }
+    .acronym-box { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-sm); }
+    .acr-item { display: flex; align-items: flex-start; gap: 16px; padding: 22px 24px; border-bottom: 1px solid var(--border-2); transition: background var(--trans); }
+    .acr-item:last-child { border-bottom: none; }
+    .acr-item:hover { background: rgba(62,59,56,.025); }
+    .acr-letter { width: 48px; height: 48px; flex-shrink: 0; object-fit: contain; }
+    .acr-body h4 { font-size: .96rem; font-weight: 700; color: var(--t1); margin-bottom: 3px; }
+    .acr-body p  { font-size: .84rem; color: var(--t3); line-height: 1.55; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 30px; box-shadow: var(--sh-sm); transition: transform var(--trans), box-shadow var(--trans); }
+    .service-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
+    .service-num { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--t3); margin-bottom: 18px; }
+    .service-card h3 { font-size: 1.08rem; font-weight: 600; color: var(--t1); line-height: 1.3; margin-bottom: 12px; }
+    .service-card p  { font-size: .9rem; color: var(--t2); line-height: 1.7; }
+
+    /* PHARMA */
+    .pharma-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .pharma-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 30px; box-shadow: var(--sh-sm); transition: transform var(--trans), box-shadow var(--trans); }
+    .pharma-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
+    .pharma-tag { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--t3); margin-bottom: 10px; display: block; }
+    .pharma-card h3 { font-size: 1.08rem; font-weight: 600; color: var(--t1); line-height: 1.3; margin-bottom: 10px; }
+    .pharma-card p  { font-size: .9rem; color: var(--t2); line-height: 1.7; }
+
+    /* FEATURE TABS */
+    .features-layout { display: grid; grid-template-columns: 280px 1fr; gap: 52px; align-items: start; }
+    .feat-tabs { display: grid; gap: 4px; position: sticky; top: 88px; }
+    .feat-tab { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-radius: var(--r); border: 1px solid transparent; cursor: pointer; transition: var(--trans); background: none; text-align: left; width: 100%; }
+    .feat-tab:hover { background: var(--bg-soft); }
+    .feat-tab.active { background: var(--bg-soft); border-color: var(--border); box-shadow: var(--sh-sm); }
+    .feat-tab-icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .fti-1 { background: rgba(245,43,46,.1); }
+    .fti-2 { background: rgba(21,122,189,.1); }
+    .fti-3 { background: rgba(242,185,15,.12); }
+    .feat-tab-body h4 { font-size: .94rem; font-weight: 600; color: var(--t1); margin-bottom: 3px; }
+    .feat-tab-body p  { font-size: .82rem; color: var(--t3); line-height: 1.5; }
+    .feat-panel { display: none; }
+    .feat-panel.active { display: block; }
+    .feat-panel-visual { background: linear-gradient(160deg, #fff 0%, var(--bg-soft) 100%); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 36px; box-shadow: var(--sh-md); min-height: 400px; }
+    .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
+    .panel-title  { font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--t3); }
+    .bar-chart { display: grid; gap: 14px; }
+    .bc-row { display: grid; grid-template-columns: 140px 1fr 52px; align-items: center; gap: 14px; font-size: .88rem; color: var(--t2); font-weight: 500; }
+    .bc-track { height: 10px; background: var(--ash-white); border-radius: 999px; overflow: hidden; }
+    .bc-fill  { height: 100%; border-radius: 999px; }
+    .bc-a { background: var(--graphite); }
+    .bc-b { background: var(--slate-grey); }
+    .bc-c { background: var(--pencil-line); }
+    .bc-d { background: var(--faded-stone); }
+    .bc-e { background: var(--warm-parchment); filter: brightness(.85); }
+    .bc-val { font-weight: 700; color: var(--t1); text-align: right; font-size: .86rem; }
+    .panel-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+    .pk { background: #fff; border: 1px solid var(--border-2); border-radius: 12px; padding: 16px; }
+    .pk strong { display: block; font-family: "DM Serif Display", serif; font-size: 1.25rem; margin-bottom: 3px; }
+    .pk span   { font-size: .7rem; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: .08em; }
+
+    /* PATHWAY */
+    .pathway-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; margin-top: 48px; }
+    .pathway-steps::before { content: ""; position: absolute; top: 21px; left: calc(12.5% + 21px); right: calc(12.5% + 21px); height: 1px; background: var(--border); }
+    .pathway-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; }
+    .step-num { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .86rem; font-weight: 700; margin-bottom: 20px; position: relative; z-index: 1; flex-shrink: 0; }
+    .step-filled { background: var(--graphite); color: #fff; }
+    .step-outline { background: #fff; color: var(--t3); border: 1px solid var(--border); }
+    .step-phase { font-size: .7rem; font-weight: 700; color: var(--t3); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+    .step-title { font-size: .96rem; font-weight: 700; color: var(--t1); margin-bottom: 6px; }
+    .step-desc  { font-size: .84rem; color: var(--t2); line-height: 1.6; max-width: 26ch; }
+
+    /* APPROACH BANNER */
+    .approach-banner { background: var(--graphite); color: #fff; padding: 96px 0; }
+    .approach-banner .section-eyebrow { color: rgba(255,255,255,.45); }
+    .approach-banner .section-eyebrow::before { background: rgba(255,255,255,.25); }
+    .approach-banner h2 { font-family: "DM Serif Display", serif; font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: -.02em; color: #fff; margin-bottom: 12px; }
+    .approach-banner .lead { font-size: 1.02rem; color: rgba(255,255,255,.65); max-width: 62ch; line-height: 1.75; margin-bottom: 0; }
+    .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 56px; }
+    .approach-item { padding-right: 36px; border-right: 1px solid rgba(255,255,255,.1); margin-right: 36px; }
+    .approach-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .approach-num { font-size: .7rem; font-weight: 700; color: rgba(255,255,255,.35); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 12px; }
+    .approach-item h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: 10px; }
+    .approach-item p  { font-size: .9rem; line-height: 1.75; color: rgba(255,255,255,.72); }
+
+    /* PUBLICATIONS */
+    .pub-list { max-width: 820px; margin-top: 44px; }
+    .pub-item { padding: 24px 0; border-bottom: 1px solid var(--border-2); border-left: 2px solid transparent; margin-left: -2px; padding-left: 2px; transition: padding-left var(--trans), border-color var(--trans); cursor: default; }
+    .pub-item:first-child { border-top: 1px solid var(--border-2); }
+    .pub-item:hover { padding-left: 14px; border-left-color: var(--graphite); }
+    .pub-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 5px; }
+    .pub-venue { font-size: .74rem; font-weight: 700; color: var(--t3); letter-spacing: .08em; text-transform: uppercase; }
+    .pub-year  { font-size: .74rem; color: var(--t3); font-weight: 600; white-space: nowrap; }
+    .pub-title { font-size: 1.04rem; font-weight: 600; color: var(--t1); line-height: 1.4; margin-bottom: 5px; letter-spacing: -.01em; }
+    .pub-meta  { font-size: .84rem; color: var(--t3); margin-bottom: 10px; }
+    .pub-takeaway { font-size: .86rem; color: var(--t2); font-style: italic; line-height: 1.6; padding: 10px 14px; background: var(--bg-soft); border-left: 2px solid var(--dove-grey); border-radius: 0 var(--r) var(--r) 0; }
+    .pub-takeaway strong { font-style: normal; font-weight: 700; color: var(--t1); }
+    .pub-footer { margin-top: 28px; }
+    .pub-footer a { font-size: .88rem; font-weight: 600; color: var(--t1); display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: var(--trans); }
+    .pub-footer a:hover { border-bottom-color: var(--t1); }
+
+    /* TEAM */
+    .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 52px; }
+    .team-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-sm); transition: transform var(--trans), box-shadow var(--trans); }
+    .team-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
+    .team-card-header { padding: 28px; display: flex; gap: 18px; align-items: flex-start; }
+    .team-photo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border-2); }
+    .team-photo-placeholder { width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0; background: var(--bg-soft); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+    .team-meta { flex: 1; }
+    .team-name { font-size: 1.08rem; font-weight: 700; color: var(--t1); margin-bottom: 3px; line-height: 1.3; }
+    .team-role { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin-bottom: 3px; }
+    .team-role-detail { font-size: .84rem; color: var(--t3); line-height: 1.5; }
+    .team-card-body { padding: 0 28px 28px; border-top: 1px solid var(--border-2); }
+    .team-stats-row { display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--border-2); }
+    .team-stat-item { flex: 1; }
+    .team-stat-val  { font-family: "DM Serif Display", serif; font-size: 1.5rem; color: var(--t1); line-height: 1; margin-bottom: 2px; }
+    .team-stat-lbl  { font-size: .68rem; color: var(--t3); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .team-info-row  { padding: 12px 0; border-bottom: 1px solid var(--border-2); }
+    .team-info-row:last-child { border-bottom: none; }
+    .team-info-label { font-size: .68rem; font-weight: 700; color: var(--t3); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
+    .team-info-value { font-size: .86rem; color: var(--t2); line-height: 1.55; }
+    .team-links-row { padding-top: 14px; display: flex; gap: 18px; }
+    .team-links-row a { font-size: .84rem; font-weight: 600; color: var(--t1); display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: var(--trans); }
+    .team-links-row a:hover { border-bottom-color: var(--t1); }
+
+    /* CTA BAND */
+    .cta-band { padding: 96px 0; background: var(--graphite); position: relative; overflow: hidden; }
+    .cta-band::before { content: ""; position: absolute; top: -120px; right: -120px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(232,224,204,.1), transparent 68%); }
+    .cta-band::after  { content: ""; position: absolute; bottom: -80px; left: -80px; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(214,204,186,.06), transparent 68%); }
+    .cta-band-inner { position: relative; z-index: 1; text-align: center; max-width: 640px; margin: 0 auto; }
+    .cta-band .section-eyebrow { justify-content: center; color: rgba(255,255,255,.45); }
+    .cta-band .section-eyebrow::before { background: rgba(255,255,255,.25); }
+    .cta-band h2 { font-family: "DM Serif Display", serif; font-size: clamp(2.2rem, 4vw, 3.8rem); color: #fff; line-height: 1.02; letter-spacing: -.02em; margin-bottom: 14px; }
+    .cta-band h2 em { font-style: italic; color: var(--warm-parchment); }
+    .cta-band p  { font-size: 1.02rem; color: rgba(255,255,255,.65); line-height: 1.75; margin-bottom: 32px; }
+    .cta-band-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .cta-contact-details { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 18px; }
+    .cta-contact-details span { font-size: .84rem; color: rgba(255,255,255,.45); }
+    .cta-contact-details a { font-size: .84rem; font-weight: 600; color: rgba(255,255,255,.7); transition: var(--trans); }
+    .cta-contact-details a:hover { color: #fff; }
+    .cta-note { font-size: .74rem; color: rgba(255,255,255,.35); margin-top: 12px; }
+
+    /* GOVERNANCE */
+    .governance { background: var(--bg-soft); border-top: 1px solid var(--border-2); padding: 40px 0; }
+    .governance-grid { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start; }
+    .gov-badges { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+    .gov-badge  { display: flex; align-items: center; gap: 8px; font-size: .74rem; font-weight: 700; color: var(--t2); }
+    .gov-badge-icon { width: 22px; height: 22px; border-radius: 4px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .7rem; flex-shrink: 0; }
+    .governance-text { font-size: .86rem; color: var(--t2); line-height: 1.8; }
+
+    /* COMPLIANCE / FOOTER */
+    .compliance { background: var(--bg-soft); border-top: 1px solid var(--border-2); padding: 14px 0; }
+    .compliance-text { font-size: .74rem; color: var(--t3); text-align: center; }
+    .footer { background: var(--graphite); border-top: 1px solid rgba(255,255,255,.06); padding: 28px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+    .footer-brand img  { height: 32px; width: auto; }
+    .footer-brand span { font-size: .76rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: .8rem; color: rgba(255,255,255,.4); transition: var(--trans); }
+    .footer-links a:hover { color: rgba(255,255,255,.75); }
+    .footer-meta { font-size: .78rem; color: rgba(255,255,255,.35); }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); backdrop-filter: blur(8px); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 2rem; opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s ease; }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal { background: #fff; max-width: 480px; width: 100%; padding: 36px; border-radius: var(--r-lg); position: relative; transform: translateY(14px); transition: transform .2s cubic-bezier(.22,1,.36,1); box-shadow: var(--sh-lg); }
+    .modal-overlay.active .modal { transform: translateY(0); }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; background: var(--bg-soft); border: none; border-radius: 50%; font-size: 1rem; color: var(--t2); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--trans); }
+    .modal-close:hover { background: var(--border); color: var(--t1); }
+    .modal h2   { font-family: "DM Serif Display", serif; font-size: 1.5rem; color: var(--t1); margin-bottom: 4px; }
+    .modal-sub  { font-size: .88rem; color: var(--t2); margin-bottom: 24px; }
+    .form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-size: .72rem; font-weight: 700; color: var(--t1); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+    .form-input, .form-textarea { width: 100%; font-family: inherit; font-size: .88rem; color: var(--t1); border: 1px solid var(--border); background: #fff; padding: 10px 12px; border-radius: var(--r); transition: var(--trans); outline: none; min-height: 44px; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--graphite); box-shadow: 0 0 0 3px rgba(62,59,56,.08); }
+    .form-textarea { resize: vertical; min-height: 88px; }
+    .form-submit { width: 100%; font-family: inherit; font-size: .9rem; font-weight: 600; color: #fff; background: var(--graphite); border: 1px solid var(--graphite); padding: 12px; border-radius: 999px; cursor: pointer; transition: var(--trans); min-height: 48px; margin-top: 4px; }
+    .form-submit:hover { background: var(--warm-shadow); border-color: var(--warm-shadow); }
+
+    /* MOBILE STICKY */
+    .mobile-sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; padding: 12px 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); background: rgba(255,255,255,.97); backdrop-filter: blur(12px); border-top: 1px solid var(--border-2); }
+    .mobile-sticky-cta button { width: 100%; font-family: inherit; font-size: .9rem; font-weight: 600; color: #fff; background: var(--graphite); border: none; padding: 14px; border-radius: 999px; cursor: pointer; min-height: 50px; transition: var(--trans); }
+    .mobile-sticky-cta button:hover { background: var(--warm-shadow); }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1); }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-copy > * { animation: fadeUp .65s cubic-bezier(.22,1,.36,1) both; }
     .hero-copy > *:nth-child(1) { animation-delay: .05s; }
-    .hero-copy > *:nth-child(2) { animation-delay: .12s; }
-    .hero-copy > *:nth-child(3) { animation-delay: .2s; }
-    .hero-copy > *:nth-child(4) { animation-delay: .28s; }
-    .hero-copy > *:nth-child(5) { animation-delay: .36s; }
+    .hero-copy > *:nth-child(2) { animation-delay: .14s; }
+    .hero-copy > *:nth-child(3) { animation-delay: .22s; }
+    .hero-copy > *:nth-child(4) { animation-delay: .3s; }
+    .hero-copy > *:nth-child(5) { animation-delay: .38s; }
+    .hero-copy > *:nth-child(6) { animation-delay: .46s; }
+    .hero-copy > *:nth-child(7) { animation-delay: .54s; }
+    .hero-visual { animation: fadeUp .7s .28s cubic-bezier(.22,1,.36,1) both; }
 
-    .hero-visual {
-      animation: fadeUp .7s .25s ease both;
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hero-inner, .about-grid, .features-layout { grid-template-columns: 1fr; }
+      .feat-tabs { position: static; }
+      .approach-grid { grid-template-columns: 1fr; gap: 36px; }
+      .approach-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); padding: 0 0 36px; margin: 0; }
+      .approach-item:last-child { border-bottom: none; padding-bottom: 0; }
+    }
+    @media (max-width: 900px) {
+      .services-grid, .pharma-grid, .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+      .pathway-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .pathway-steps::before { display: none; }
+      .team-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(var(--max), calc(100% - 32px)); }
+      .nav-inner { height: auto; padding: 14px 0; flex-direction: column; align-items: flex-start; }
+      .nav-links { display: none; }
+      .affil-strip, .trust-strip, .evidence-bar { display: none; }
+      .hero { padding: 52px 0; }
+      .hero-stats { grid-template-columns: 1fr 1fr; gap: 0; width: 100%; }
+      .hero-stat { padding: 14px; border-right: 1px solid var(--border-2); margin-right: 0; border-bottom: 1px solid var(--border-2); }
+      .hero-stat:nth-child(2) { border-right: none; }
+      .hero-stat:nth-child(3) { border-bottom: none; }
+      .hero-stat:nth-child(4) { border-right: none; border-bottom: none; }
+      .section { padding: 64px 0; }
+      .services-grid, .pharma-grid, .stats-bar-inner, .hc-metrics { grid-template-columns: 1fr; }
+      .pathway-steps { grid-template-columns: 1fr; }
+      .pathway-step { flex-direction: row; align-items: flex-start; gap: 16px; text-align: left; }
+      .step-num { flex-shrink: 0; margin-bottom: 0; }
+      .step-desc { max-width: 100%; }
+      .cta-band-inner { text-align: left; }
+      .cta-band .section-eyebrow { justify-content: flex-start; }
+      .cta-band-actions, .cta-contact-details { justify-content: flex-start; }
+      .governance-grid { grid-template-columns: 1fr; }
+      .gov-badges { flex-direction: row; flex-wrap: wrap; }
+      .footer-inner { flex-direction: column; gap: 12px; }
+      .footer-links { flex-wrap: wrap; gap: 12px; }
+      .form-row { grid-template-columns: 1fr; }
+      .modal { padding: 24px 20px; }
+      .modal-overlay { align-items: flex-end; padding: 0; }
+      .modal { border-radius: var(--r-lg) var(--r-lg) 0 0; max-width: 100%; }
+      .mobile-sticky-cta { display: block; }
+      body { padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px)); }
+      .pub-top { flex-direction: column; gap: 2px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ─── Nav ─────────────────────────────────────────────────────── -->
-  <header class="nav">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
     <div class="container nav-inner">
-      <a href="/assets/Logo.png" class="brand" aria-label="ACP Data Lab">
-        <img src="/assets/Logo.png" alt="ACP Data Lab logo" />
+      <a href="#" class="brand" aria-label="ACP Data Lab home">
+        <img src="assets/Logo.png" alt="ACP Data Lab" />
         <div class="brand-text">
           <div class="brand-name">ACP Data Lab</div>
           <div class="brand-sub">Analysis · Consulting · Prediction</div>
         </div>
       </a>
-
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="#platform">Platform</a>
-        <a href="#solutions">Solutions</a>
-        <a href="#how">How it works</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#research">Research</a>
         <a href="#team">Team</a>
-        <a href="#resources">Resources</a>
       </nav>
-
       <div class="nav-cta">
-        <a href="#contact" class="btn btn-ghost">Sign in</a>
-        <a href="#contact" class="btn btn-dark">Book a consultation</a>
+        <button class="btn btn-ghost" onclick="openModal()">Sign in</button>
+        <button class="btn btn-dark" onclick="openModal()">Request Consultation</button>
       </div>
     </div>
   </header>
 
-  <main>
+  <!-- AFFILIATION STRIP -->
+  <div class="affil-strip" aria-label="Scientific affiliations">
+    <div class="container affil-inner">
+      <span class="affil-label">Scientific Affiliations</span>
+      <div class="affil-divider" aria-hidden="true"></div>
+      <div class="affil-list">
+        <span class="affil-item">Harvard Medical School</span>
+        <span class="affil-item">Brigham &amp; Women's Hospital</span>
+        <span class="affil-item">University Hospital Zürich</span>
+        <span class="affil-item">Heidelberg University</span>
+        <span class="affil-item">University of Cambridge</span>
+        <span class="affil-item">University College London</span>
+      </div>
+    </div>
+  </div>
 
-    <!-- ─── Hero ──────────────────────────────────────────────────── -->
-    <section class="hero">
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Introduction">
       <div class="container">
         <div class="hero-inner">
-
           <div class="hero-copy">
             <div class="hero-eyebrow">
-              <span></span>Surgical outcomes intelligence
+              <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+              Medical Outcomes Analytics
+              <span class="hero-eyebrow-line" aria-hidden="true"></span>
             </div>
-            <h1>Analytics that move healthcare <em>decisions</em> forward.</h1>
-            <p class="hero-lead">
-              ACP Data Lab helps pharmaceutical, medtech, and healthcare teams transform
-              surgical and registry data into publication-grade evidence, sharper strategy,
-              and decision-ready insight.
-            </p>
+            <h1>Pharmaceutical-Grade Evidence from <em>Surgical Registries.</em></h1>
+            <p class="hero-lead">ACP Data Lab helps pharmaceutical, medtech, and healthcare teams transform surgical and registry data into publication-grade evidence, sharper strategy, and decision-ready insight.</p>
             <div class="hero-actions">
-              <a href="#contact" class="btn btn-dark btn-lg">Request a consultation</a>
-              <a href="#platform" class="btn btn-ghost btn-lg">Explore the platform</a>
+              <button class="btn btn-dark btn-lg" onclick="openModal()">Request a Consultation</button>
+              <a href="#research" class="btn btn-ghost btn-lg">View Research ↓</a>
             </div>
-            <div class="hero-tags">
-              <span class="hero-tag">Registry analytics</span>
-              <span class="hero-tag">Real-world evidence</span>
-              <span class="hero-tag">Commercial insight</span>
-              <span class="hero-tag">Clinical strategy</span>
+            <div class="hero-chips" aria-label="Data governance">
+              <span class="hchip">🔒 De-identified Data</span>
+              <span class="hchip">📋 IRB Compliant</span>
+              <span class="hchip">⚖️ DUA-Governed</span>
+              <span class="hchip">HIPAA Safe Harbor</span>
+            </div>
+            <div class="hero-divider" aria-hidden="true"></div>
+            <div class="hero-stats" role="list" aria-label="Key statistics">
+              <div class="hero-stat" role="listitem">
+                <div class="hero-stat-value"><span data-target="945">0</span>K+</div>
+                <div class="hero-stat-label">Patient Records</div>
+              </div>
+              <div class="hero-stat" role="listitem">
+                <div class="hero-stat-value"><span data-target="11">0</span>+</div>
+                <div class="hero-stat-label">Surgical Specialties</div>
+              </div>
+              <div class="hero-stat" role="listitem">
+                <div class="hero-stat-value"><span data-target="300">0</span>+</div>
+                <div class="hero-stat-label">Peer-Reviewed Publications</div>
+              </div>
+              <div class="hero-stat" role="listitem">
+                <div class="hero-stat-value">11,200+</div>
+                <div class="hero-stat-label">Total Citations</div>
+              </div>
             </div>
           </div>
 
@@ -1479,178 +543,199 @@
               <div class="fc-label">Evidence score</div>
               <div class="fc-value">91 / 100</div>
             </div>
-
             <div class="hero-card-main">
               <div class="hc-header">
                 <div class="hc-title">Portfolio performance</div>
-                <div class="hc-badge">Live</div>
+                <div class="hc-live">Live</div>
               </div>
-
               <div class="hc-bars">
-                <div class="hc-bar-row">
-                  <span class="hc-row-label">Adoption</span>
-                  <div class="hc-track"><div class="hc-fill hc-fill-1"></div></div>
-                  <span class="hc-row-val">82%</span>
-                </div>
-                <div class="hc-bar-row">
-                  <span class="hc-row-label">Market access</span>
-                  <div class="hc-track"><div class="hc-fill hc-fill-2"></div></div>
-                  <span class="hc-row-val">68%</span>
-                </div>
-                <div class="hc-bar-row">
-                  <span class="hc-row-label">Evidence base</span>
-                  <div class="hc-track"><div class="hc-fill hc-fill-3"></div></div>
-                  <span class="hc-row-val">91%</span>
-                </div>
-                <div class="hc-bar-row">
-                  <span class="hc-row-label">Differentiation</span>
-                  <div class="hc-track"><div class="hc-fill hc-fill-4"></div></div>
-                  <span class="hc-row-val">74%</span>
-                </div>
+                <div class="hc-bar-row"><span class="hc-label">Adoption</span><div class="hc-track"><div class="hc-fill hc-f1"></div></div><span class="hc-val">82%</span></div>
+                <div class="hc-bar-row"><span class="hc-label">Market access</span><div class="hc-track"><div class="hc-fill hc-f2"></div></div><span class="hc-val">68%</span></div>
+                <div class="hc-bar-row"><span class="hc-label">Evidence base</span><div class="hc-track"><div class="hc-fill hc-f3"></div></div><span class="hc-val">91%</span></div>
+                <div class="hc-bar-row"><span class="hc-label">Differentiation</span><div class="hc-track"><div class="hc-fill hc-f4"></div></div><span class="hc-val">74%</span></div>
               </div>
-
               <div class="hc-metrics">
-                <div class="hc-metric">
-                  <strong>945K+</strong>
-                  <span>Patient records</span>
-                </div>
-                <div class="hc-metric">
-                  <strong>11+</strong>
-                  <span>Specialties</span>
-                </div>
-                <div class="hc-metric">
-                  <strong>300+</strong>
-                  <span>Publications</span>
-                </div>
+                <div class="hc-metric"><strong>945K+</strong><span>Patient records</span></div>
+                <div class="hc-metric"><strong>11+</strong><span>Specialties</span></div>
+                <div class="hc-metric"><strong>300+</strong><span>Publications</span></div>
               </div>
             </div>
-
             <div class="float-card float-card-2">
               <div class="fc-label">h-index</div>
               <div class="fc-value">43</div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ─── Stats bar ─────────────────────────────────────────────── -->
-    <section class="stats-bar">
+    <!-- TRUST STRIP -->
+    <div class="trust-strip" aria-label="Data governance credentials">
+      <div class="container trust-strip-inner">
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">🔒</span><div class="trust-text">De-identified Data Only<em>HIPAA Safe Harbor Compliant</em></div></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">📋</span><div class="trust-text">IRB-Reviewed Protocols<em>Institutional Ethics Standards</em></div></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">⚖️</span><div class="trust-text">DUA-Governed Access<em>National Surgical Registries</em></div></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">🔬</span><div class="trust-text">Publication-Grade Methodology<em>Lancet · JAMA · Annals of Surgery</em></div></div>
+      </div>
+    </div>
+
+    <!-- EVIDENCE BAR -->
+    <div class="evidence-bar">
+      <div class="container evidence-bar-inner">
+        <span class="evidence-label">Registry Databases</span>
+        <div class="evidence-pills">
+          <span class="evidence-pill">National Registries</span>
+          <span class="evidence-pill">NIS / HCUP</span>
+          <span class="evidence-pill">SEER</span>
+          <span class="evidence-pill">945K+ Patient Records</span>
+          <span class="evidence-pill">11 Surgical Specialties</span>
+          <span class="evidence-pill">Multi-Registry Validation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS BAR -->
+    <section class="stats-bar" aria-label="Key metrics">
       <div class="container">
         <div class="stats-bar-inner">
-          <div class="stat-item">
-            <div class="stat-num">945<em>K+</em></div>
-            <div class="stat-label">Patient records analysed</div>
+          <div class="stat-item"><div class="stat-num">945<em>K+</em></div><div class="stat-label">Patient records analysed</div></div>
+          <div class="stat-item"><div class="stat-num">300<em>+</em></div><div class="stat-label">Peer-reviewed publications</div></div>
+          <div class="stat-item"><div class="stat-num">11<em>,</em>200<em>+</em></div><div class="stat-label">Total citations</div></div>
+          <div class="stat-item"><div class="stat-num">11<em>+</em></div><div class="stat-label">Surgical specialties</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section section-soft" id="about" aria-label="About ACP Data Lab">
+      <div class="container">
+        <div class="section-head fade-in">
+          <div class="section-eyebrow">Who We Are</div>
+          <h2>Analysis. Consulting. Prediction.</h2>
+          <p>ACP Data Lab is a surgical outcomes research firm that bridges academic medicine and pharmaceutical strategy.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-text fade-in">
+            <p>ACP Data Lab specializes in large-scale registry analytics, turning population-level surgical data into actionable intelligence for product positioning, market access, and clinical adoption.</p>
+            <p>Founded by surgeon-scientists with deep expertise in outcomes research, we combine peer-reviewed methodological rigour with a commercial mindset. Our analyses meet the publication standards of journals including <em>The Lancet</em>, <em>Annals of Surgery</em>, and <em>JAMA Surgery</em> — the same credibility now applied to your commercial challenge.</p>
+            <p>All research uses de-identified registry data accessed under approved Data Use Agreements from the American College of Surgeons, AHRQ, and NCI. No patient-identifiable data is collected or retained. Methodology is documented to regulatory submission standards and available for independent peer review.</p>
           </div>
-          <div class="stat-item">
-            <div class="stat-num">300<em>+</em></div>
-            <div class="stat-label">Peer-reviewed publications</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">7<em>,</em>709</div>
-            <div class="stat-label">Total citations</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">11<em>+</em></div>
-            <div class="stat-label">Surgical specialties</div>
+          <div class="acronym-box fade-in">
+            <div class="acr-item">
+              <img src="assets/a.png" alt="A" class="acr-letter" />
+              <div class="acr-body">
+                <h4>Analysis</h4>
+                <p>Large-scale registry analytics across 945K+ patient records from national surgical databases — de-identified, IRB-compliant, and DUA-governed.</p>
+              </div>
+            </div>
+            <div class="acr-item">
+              <img src="assets/c.png" alt="C" class="acr-letter" />
+              <div class="acr-body">
+                <h4>Consulting</h4>
+                <p>Evidence-based strategy for pharmaceutical go-to-market, formulary access, and product differentiation at the medical affairs level.</p>
+              </div>
+            </div>
+            <div class="acr-item">
+              <img src="assets/p.png" alt="P" class="acr-letter" />
+              <div class="acr-body">
+                <h4>Prediction</h4>
+                <p>Data-driven forecasting for clinical adoption, complication risk stratification, and market access modelling using validated ML approaches.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── Clients ───────────────────────────────────────────────── -->
-    <section class="clients">
+    <!-- SERVICES -->
+    <section class="section" id="services" aria-label="Services">
       <div class="container">
-        <div class="clients-label">Built for teams across healthcare</div>
-        <div class="clients-logos">
-          <div class="client-pill">Pharmaceutical</div>
-          <div class="client-pill">MedTech</div>
-          <div class="client-pill">Hospitals</div>
-          <div class="client-pill">Academic centres</div>
-          <div class="client-pill">Biotech</div>
-          <div class="client-pill">Clinical strategy</div>
-          <div class="client-pill">Medical affairs</div>
-          <div class="client-pill">Market access</div>
+        <div class="section-head fade-in">
+          <div class="section-eyebrow">What We Do</div>
+          <h2>Research-Driven Intelligence.</h2>
+          <p>Every deliverable is grounded in peer-reviewed methodology and designed for commercial impact.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card fade-in">
+            <div class="service-num">01</div>
+            <h3>Real-World Evidence Development</h3>
+            <p>Large-scale analyses of national surgical registries to generate product-relevant clinical evidence — publishable or white-paper format, designed for regulatory submissions, medical affairs, and payer dossiers.</p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-num">02</div>
+            <h3>Market Landscape &amp; Opportunity Sizing</h3>
+            <p>Procedure-level quantification of addressable patient populations, prescribing patterns, and treatment pathway analysis. We identify where your product fits in clinical practice and quantify the commercial opportunity.</p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-num">03</div>
+            <h3>Clinical Adoption Strategy</h3>
+            <p>Hospital-level implementation intelligence: decision-maker mapping, protocol framework development, and P&amp;T Committee evidence packages. From registry data to formulary approval.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── Platform / Feature tabs ───────────────────────────────── -->
-    <section class="features" id="platform">
+    <!-- FOR PHARMA -->
+    <section class="section section-soft" id="for-pharma" aria-label="For pharmaceutical leaders">
       <div class="container">
+        <div class="section-head fade-in">
+          <div class="section-eyebrow">For Pharma Leaders</div>
+          <h2>What Pharmaceutical Teams Get From Us.</h2>
+          <p>We answer the specific questions that move products forward — from market access through KOL engagement to formulary approval.</p>
+        </div>
+        <div class="pharma-grid">
+          <div class="pharma-card fade-in">
+            <span class="pharma-tag">Medical Affairs</span>
+            <h3>Publication-Ready Evidence</h3>
+            <p>Registry analyses that meet top-tier journal standards — credible to payers, KOLs, and regulators because they were built to survive peer review, not just internal review.</p>
+          </div>
+          <div class="pharma-card fade-in">
+            <span class="pharma-tag">Market Access</span>
+            <h3>Payer Dossier Support</h3>
+            <p>Population-level evidence on treatment patterns, complication rates, and outcome differentials — structured for formulary submissions and health technology assessments.</p>
+          </div>
+          <div class="pharma-card fade-in">
+            <span class="pharma-tag">Commercial Strategy</span>
+            <h3>Opportunity Quantification</h3>
+            <p>Procedure-level patient volume, prescribing pattern analysis, and hospital-level segmentation — enabling precise resource allocation and field force targeting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <div class="features-head">
+    <!-- FEATURE TABS -->
+    <section class="section" id="platform" aria-label="Platform capabilities">
+      <div class="container">
+        <div class="section-head fade-in">
           <div class="section-eyebrow">Platform</div>
           <h2>Bridge the gap between data and action.</h2>
-          <p>
-            ACP Data Lab is designed around a single challenge: valuable surgical data
-            exists, but is rarely shaped into evidence that can be used quickly, credibly,
-            and strategically.
-          </p>
+          <p>Valuable surgical data exists everywhere — but is rarely shaped into evidence that can be used quickly, credibly, and strategically.</p>
         </div>
-
         <div class="features-layout">
-
-          <!-- Tab navigation -->
           <div class="feat-tabs" id="featTabs">
-            <div class="feat-tab active" data-panel="p1">
-              <div class="feat-tab-icon feat-tab-icon-1">🔬</div>
-              <div class="feat-tab-body">
-                <h4>Evidence development</h4>
-                <p>Registry analyses structured for manuscripts and medical affairs.</p>
-              </div>
-            </div>
-            <div class="feat-tab" data-panel="p2">
-              <div class="feat-tab-icon feat-tab-icon-2">📊</div>
-              <div class="feat-tab-body">
-                <h4>Commercial insight</h4>
-                <p>Market landscapes, patient populations, and opportunity sizing.</p>
-              </div>
-            </div>
-            <div class="feat-tab" data-panel="p3">
-              <div class="feat-tab-icon feat-tab-icon-3">🎯</div>
-              <div class="feat-tab-body">
-                <h4>Strategic decisions</h4>
-                <p>Sharper adoption, segmentation, and positioning frameworks.</p>
-              </div>
-            </div>
+            <button class="feat-tab active" data-panel="p1">
+              <div class="feat-tab-icon fti-1">🔬</div>
+              <div class="feat-tab-body"><h4>Evidence development</h4><p>Registry analyses structured for manuscripts and medical affairs.</p></div>
+            </button>
+            <button class="feat-tab" data-panel="p2">
+              <div class="feat-tab-icon fti-2">📊</div>
+              <div class="feat-tab-body"><h4>Commercial insight</h4><p>Market landscapes, patient populations, and opportunity sizing.</p></div>
+            </button>
+            <button class="feat-tab" data-panel="p3">
+              <div class="feat-tab-icon fti-3">🎯</div>
+              <div class="feat-tab-body"><h4>Strategic decisions</h4><p>Sharper adoption, segmentation, and positioning frameworks.</p></div>
+            </button>
           </div>
-
-          <!-- Panels -->
           <div id="featPanels">
-
             <div class="feat-panel active" id="p1">
               <div class="feat-panel-visual">
-                <div class="panel-header">
-                  <div class="panel-title">Outcomes analysis — programme overview</div>
-                </div>
+                <div class="panel-header"><div class="panel-title">Outcomes analysis — programme overview</div></div>
                 <div class="bar-chart">
-                  <div class="bc-row">
-                    <span>Complications</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-a" style="width:78%"></div></div>
-                    <span class="bc-val">78%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>Readmission</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-b" style="width:54%"></div></div>
-                    <span class="bc-val">54%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>Length of stay</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-c" style="width:88%"></div></div>
-                    <span class="bc-val">88%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>Variation</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-d" style="width:66%"></div></div>
-                    <span class="bc-val">66%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>Mortality</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-e" style="width:42%"></div></div>
-                    <span class="bc-val">42%</span>
-                  </div>
+                  <div class="bc-row"><span>Complications</span><div class="bc-track"><div class="bc-fill bc-a" style="width:78%"></div></div><span class="bc-val">78%</span></div>
+                  <div class="bc-row"><span>Readmission rate</span><div class="bc-track"><div class="bc-fill bc-b" style="width:54%"></div></div><span class="bc-val">54%</span></div>
+                  <div class="bc-row"><span>Length of stay</span><div class="bc-track"><div class="bc-fill bc-c" style="width:88%"></div></div><span class="bc-val">88%</span></div>
+                  <div class="bc-row"><span>Prescribing variation</span><div class="bc-track"><div class="bc-fill bc-d" style="width:66%"></div></div><span class="bc-val">66%</span></div>
+                  <div class="bc-row"><span>Mortality</span><div class="bc-track"><div class="bc-fill bc-e" style="width:42%"></div></div><span class="bc-val">42%</span></div>
                 </div>
                 <div class="panel-kpis">
                   <div class="pk"><strong>7,709</strong><span>Citations</span></div>
@@ -1659,33 +744,14 @@
                 </div>
               </div>
             </div>
-
             <div class="feat-panel" id="p2">
               <div class="feat-panel-visual">
-                <div class="panel-header">
-                  <div class="panel-title">Market landscape — opportunity sizing</div>
-                </div>
+                <div class="panel-header"><div class="panel-title">Market landscape — opportunity sizing</div></div>
                 <div class="bar-chart">
-                  <div class="bc-row">
-                    <span>Cardiothoracic</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-a" style="width:85%"></div></div>
-                    <span class="bc-val">85%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>Orthopaedics</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-b" style="width:71%"></div></div>
-                    <span class="bc-val">71%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>General surgery</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-c" style="width:93%"></div></div>
-                    <span class="bc-val">93%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>Burns &amp; plastics</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-d" style="width:62%"></div></div>
-                    <span class="bc-val">62%</span>
-                  </div>
+                  <div class="bc-row"><span>Cardiothoracic</span><div class="bc-track"><div class="bc-fill bc-a" style="width:85%"></div></div><span class="bc-val">85%</span></div>
+                  <div class="bc-row"><span>Orthopaedics</span><div class="bc-track"><div class="bc-fill bc-b" style="width:71%"></div></div><span class="bc-val">71%</span></div>
+                  <div class="bc-row"><span>General surgery</span><div class="bc-track"><div class="bc-fill bc-c" style="width:93%"></div></div><span class="bc-val">93%</span></div>
+                  <div class="bc-row"><span>Burns &amp; plastics</span><div class="bc-track"><div class="bc-fill bc-d" style="width:62%"></div></div><span class="bc-val">62%</span></div>
                 </div>
                 <div class="panel-kpis">
                   <div class="pk"><strong>945K+</strong><span>Records</span></div>
@@ -1694,33 +760,14 @@
                 </div>
               </div>
             </div>
-
             <div class="feat-panel" id="p3">
               <div class="feat-panel-visual">
-                <div class="panel-header">
-                  <div class="panel-title">Decision themes — strategic outputs</div>
-                </div>
+                <div class="panel-header"><div class="panel-title">Decision themes — strategic outputs</div></div>
                 <div class="bar-chart">
-                  <div class="bc-row">
-                    <span>Positioning</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-c" style="width:90%"></div></div>
-                    <span class="bc-val">90%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>Adoption mapping</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-a" style="width:76%"></div></div>
-                    <span class="bc-val">76%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>HCP targeting</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-b" style="width:68%"></div></div>
-                    <span class="bc-val">68%</span>
-                  </div>
-                  <div class="bc-row">
-                    <span>Forecasting</span>
-                    <div class="bc-track"><div class="bc-fill bc-fill-d" style="width:58%"></div></div>
-                    <span class="bc-val">58%</span>
-                  </div>
+                  <div class="bc-row"><span>Positioning</span><div class="bc-track"><div class="bc-fill bc-c" style="width:90%"></div></div><span class="bc-val">90%</span></div>
+                  <div class="bc-row"><span>Adoption mapping</span><div class="bc-track"><div class="bc-fill bc-a" style="width:76%"></div></div><span class="bc-val">76%</span></div>
+                  <div class="bc-row"><span>HCP targeting</span><div class="bc-track"><div class="bc-fill bc-b" style="width:68%"></div></div><span class="bc-val">68%</span></div>
+                  <div class="bc-row"><span>Forecasting</span><div class="bc-track"><div class="bc-fill bc-d" style="width:58%"></div></div><span class="bc-val">58%</span></div>
                 </div>
                 <div class="panel-kpis">
                   <div class="pk"><strong>Reports</strong><span>Exec-ready</span></div>
@@ -1729,390 +776,371 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── Solutions ─────────────────────────────────────────────── -->
-    <section class="solutions" id="solutions">
+    <!-- ENGAGEMENT PATHWAY -->
+    <section class="section section-soft" id="how" aria-label="Engagement process">
       <div class="container">
-
-        <div class="solutions-head">
-          <div>
-            <div class="section-eyebrow">Solutions</div>
-            <h2>Choose the questions you need answered.</h2>
-          </div>
-          <div>
-            <p>
-              ACP Data Lab supports focused engagements or broader analytical programmes,
-              depending on whether you need one answer quickly or a deeper body of evidence
-              over time.
-            </p>
-            <a href="#contact">See all solutions →</a>
-          </div>
+        <div class="section-head fade-in">
+          <div class="section-eyebrow">How We Work</div>
+          <h2>A Formal Engagement Process.</h2>
+          <p>Each engagement follows a structured protocol — from confidential briefing through delivery of a publication-grade analytical package. Fixed-scope pricing, defined milestones, no open-ended retainers.</p>
         </div>
-
-        <div class="sol-grid">
-          <div class="sol-card">
-            <div class="sol-icon sol-icon-1">🔬</div>
-            <div class="sol-label">Evidence development</div>
-            <h3>Real-world evidence programmes</h3>
-            <p>Registry-based analyses structured for manuscripts, medical affairs, and external credibility.</p>
-            <a href="#contact" class="sol-link">Learn more →</a>
+        <div class="pathway-steps">
+          <div class="pathway-step fade-in">
+            <div class="step-num step-filled">1</div>
+            <div><div class="step-phase">Week 1</div><div class="step-title">Discovery Call</div><div class="step-desc">Confidential briefing. We define your commercial challenge and the research question that drives the engagement.</div></div>
           </div>
-
-          <div class="sol-card">
-            <div class="sol-icon sol-icon-2">🗺️</div>
-            <div class="sol-label">Analytics</div>
-            <h3>Market landscape and opportunity sizing</h3>
-            <p>Patient populations, procedural pathways, and variation across institutions or specialties.</p>
-            <a href="#contact" class="sol-link">Explore →</a>
+          <div class="pathway-step fade-in">
+            <div class="step-num step-filled">2</div>
+            <div><div class="step-phase">Weeks 2–4</div><div class="step-title">Scoping Proposal</div><div class="step-desc">Written proposal with registry selection, statistical methodology, deliverable formats, timeline, and fixed-scope pricing.</div></div>
           </div>
-
-          <div class="sol-card">
-            <div class="sol-icon sol-icon-3">🎯</div>
-            <div class="sol-label">Strategy</div>
-            <h3>Clinical adoption and access support</h3>
-            <p>Data-backed frameworks that support hospital adoption, payer conversations, and differentiation.</p>
-            <a href="#contact" class="sol-link">See approach →</a>
+          <div class="pathway-step fade-in">
+            <div class="step-num step-filled">3</div>
+            <div><div class="step-phase">8–16 Weeks</div><div class="step-title">Registry Analysis</div><div class="step-desc">Structured analysis with interim read-outs and milestone reporting. Publication-grade statistical methodology throughout.</div></div>
           </div>
-
-          <div class="sol-card">
-            <div class="sol-icon sol-icon-4">📄</div>
-            <div class="sol-label">Publications</div>
-            <h3>Manuscript and publication support</h3>
-            <p>From raw registry outputs to submission-ready manuscripts in top-tier surgical journals.</p>
-            <a href="#contact" class="sol-link">Learn more →</a>
+          <div class="pathway-step fade-in">
+            <div class="step-num step-outline">4</div>
+            <div><div class="step-phase">Delivery</div><div class="step-title">Final Package</div><div class="step-desc">Final report, slide deck, and supporting data package. Manuscript preparation for peer-reviewed submission available.</div></div>
           </div>
-
-          <div class="sol-card">
-            <div class="sol-icon sol-icon-5">📋</div>
-            <div class="sol-label">Reporting</div>
-            <h3>Executive and stakeholder reporting</h3>
-            <p>Clear, structured reports and presentation decks that leadership and access teams can actually use.</p>
-            <a href="#contact" class="sol-link">See examples →</a>
-          </div>
-
-          <div class="sol-card">
-            <div class="sol-icon sol-icon-6">🤝</div>
-            <div class="sol-label">Collaboration</div>
-            <h3>Ongoing analytical partnerships</h3>
-            <p>A long-term analytical partner embedded within your evidence and strategy function.</p>
-            <a href="#contact" class="sol-link">Talk to us →</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ─── How it works ──────────────────────────────────────────── -->
-    <section class="how" id="how">
-      <div class="container">
-
-        <div class="how-head">
-          <div class="section-eyebrow">How it works</div>
-          <h2>From data to decisions in three steps.</h2>
-          <p>
-            We combine academic-grade methodology with commercially useful output design —
-            clear, structured, and ready for strategic use.
-          </p>
-        </div>
-
-        <div class="how-steps">
-
-          <div class="how-step">
-            <div class="how-step-copy">
-              <div class="how-step-num">01</div>
-              <h3>Build sharper evidence in less time.</h3>
-              <p>
-                Whether the goal is publication support, market access positioning, or
-                portfolio analysis, we structure large datasets into clean analytical
-                workflows that reduce noise and surface what matters.
-              </p>
-              <a href="#contact" class="how-step-link">Discuss an engagement →</a>
-            </div>
-            <div class="how-step-vis">
-              <div class="panel-header">
-                <div class="panel-title">Analysis pipeline</div>
-              </div>
-              <div class="bar-chart">
-                <div class="bc-row">
-                  <span>Data ingestion</span>
-                  <div class="bc-track"><div class="bc-fill bc-fill-a" style="width:100%"></div></div>
-                  <span class="bc-val">✓</span>
-                </div>
-                <div class="bc-row">
-                  <span>Cleaning</span>
-                  <div class="bc-track"><div class="bc-fill bc-fill-b" style="width:100%"></div></div>
-                  <span class="bc-val">✓</span>
-                </div>
-                <div class="bc-row">
-                  <span>Analysis</span>
-                  <div class="bc-track"><div class="bc-fill bc-fill-c" style="width:82%"></div></div>
-                  <span class="bc-val">82%</span>
-                </div>
-                <div class="bc-row">
-                  <span>Review</span>
-                  <div class="bc-track"><div class="bc-fill bc-fill-d" style="width:20%"></div></div>
-                  <span class="bc-val">20%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="how-step reverse">
-            <div class="how-step-copy">
-              <div class="how-step-num">02</div>
-              <h3>Make complex data usable for non-technical teams.</h3>
-              <p>
-                We translate complicated registry outputs into clear summaries, comparative
-                analyses, and structured narratives that can be used by leadership, medical
-                affairs, access teams, and external stakeholders.
-              </p>
-              <a href="#solutions" class="how-step-link">See solution areas →</a>
-            </div>
-            <div class="how-step-vis">
-              <div class="panel-header">
-                <div class="panel-title">Output formats</div>
-              </div>
-              <div class="panel-kpis" style="grid-template-columns:1fr 1fr; margin-top:0;">
-                <div class="pk"><strong>Reports</strong><span>Executive-ready</span></div>
-                <div class="pk"><strong>Slides</strong><span>Board &amp; stakeholder</span></div>
-                <div class="pk"><strong>Manuscripts</strong><span>Publication support</span></div>
-                <div class="pk"><strong>Briefs</strong><span>Access &amp; payer</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="how-step">
-            <div class="how-step-copy">
-              <div class="how-step-num">03</div>
-              <h3>Embed insight into strategic decisions.</h3>
-              <p>
-                The point is not simply to analyse data. The point is to create evidence
-                that shapes how teams think about adoption, segmentation, positioning, and
-                where an intervention has the strongest value proposition.
-              </p>
-              <a href="#resources" class="how-step-link">View examples →</a>
-            </div>
-            <div class="how-step-vis">
-              <div class="panel-header">
-                <div class="panel-title">Decision themes</div>
-              </div>
-              <div class="bar-chart">
-                <div class="bc-row">
-                  <span>Positioning</span>
-                  <div class="bc-track"><div class="bc-fill bc-fill-c" style="width:90%"></div></div>
-                  <span class="bc-val">High</span>
-                </div>
-                <div class="bc-row">
-                  <span>Adoption</span>
-                  <div class="bc-track"><div class="bc-fill bc-fill-a" style="width:76%"></div></div>
-                  <span class="bc-val">High</span>
-                </div>
-                <div class="bc-row">
-                  <span>Segmentation</span>
-                  <div class="bc-track"><div class="bc-fill bc-fill-b" style="width:68%"></div></div>
-                  <span class="bc-val">Med</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ─── Team ──────────────────────────────────────────────────── -->
-    <section class="team" id="team">
+    <!-- APPROACH BANNER -->
+    <section class="approach-banner" id="approach" aria-label="Our approach">
       <div class="container">
-
-        <div class="team-head">
-          <div class="section-eyebrow">Team</div>
-          <h2>Scientific leadership with clinical depth.</h2>
-          <p>
-            ACP Data Lab is built around surgeon-scientists and research leaders who
-            understand the methodological standards required for serious healthcare evidence.
-          </p>
+        <div class="section-eyebrow fade-in">Our Approach</div>
+        <h2 class="fade-in">We publish the evidence, then translate it.</h2>
+        <p class="lead fade-in">The methodology behind 300+ peer-reviewed publications and 11,200+ citations — applied to pharmaceutical product strategy, market access, and clinical adoption.</p>
+        <div class="approach-grid">
+          <div class="approach-item fade-in">
+            <div class="approach-num">01</div>
+            <h3>Registry Expertise</h3>
+            <p>Deep, firsthand experience with the largest US surgical databases. We know the data architecture, the limitations, and how to extract commercially relevant signals others miss.</p>
+          </div>
+          <div class="approach-item fade-in">
+            <div class="approach-num">02</div>
+            <h3>Publication-Grade Rigour</h3>
+            <p>Our analyses meet the standards of top-tier medical journals. Evidence that withstands scrutiny from Medical Affairs, KOLs, payers, and regulators — because it was built for exactly that scrutiny.</p>
+          </div>
+          <div class="approach-item fade-in">
+            <div class="approach-num">03</div>
+            <h3>Commercial Translation</h3>
+            <p>We translate findings into adoption roadmaps, protocol templates, and field-ready materials. Evidence that moves from registry to formulary to prescription.</p>
+          </div>
         </div>
+      </div>
+    </section>
 
+    <!-- PUBLICATIONS -->
+    <section class="section" id="research" aria-label="Selected publications">
+      <div class="container">
+        <div class="section-head fade-in">
+          <div class="section-eyebrow">Selected Research</div>
+          <h2>Selected Publications.</h2>
+          <p>Representative analyses from our surgical outcomes research portfolio — each with direct relevance to pharmaceutical strategy and market access.</p>
+        </div>
+        <div class="pub-list">
+          <div class="pub-item fade-in">
+            <div class="pub-top">
+              <div class="pub-venue">The Lancet Regional Health — Americas</div>
+              <div class="pub-year">2026</div>
+            </div>
+            <div class="pub-title">Post-Surgical Opioid Prescribing in the United States: A National Analysis</div>
+            <div class="pub-meta">N = 945,505 patients · 11 surgical specialties · national registry data</div>
+            <div class="pub-takeaway"><strong>Pharma relevance:</strong> Procedure-level opioid exposure data across specialties — directly applicable to pain management product positioning, prescribing pattern segmentation, and market opportunity sizing for analgesics and opioid alternatives.</div>
+          </div>
+          <div class="pub-item fade-in">
+            <div class="pub-top">
+              <div class="pub-venue">Annals of Surgery</div>
+              <div class="pub-year">2025</div>
+            </div>
+            <div class="pub-title">Variation in Surgical Outcomes Across US Hospital Systems: A Registry-Based Study</div>
+            <div class="pub-meta">Multi-centre analysis of outcome variation and quality benchmarking · NIS database</div>
+            <div class="pub-takeaway"><strong>Pharma relevance:</strong> Hospital-level performance stratification enables targeted market access strategies — identifying high-adoption institutions, KOL mapping, and evidence for formulary differentiation arguments.</div>
+          </div>
+          <div class="pub-item fade-in">
+            <div class="pub-top">
+              <div class="pub-venue">JAMA Surgery</div>
+              <div class="pub-year">2024</div>
+            </div>
+            <div class="pub-title">Predictive Models for Post-Operative Complication Risk: Machine Learning Approaches</div>
+            <div class="pub-meta">Development and validation of ML-based risk stratification tools · Multi-registry validation</div>
+            <div class="pub-takeaway"><strong>Pharma relevance:</strong> ML risk models identify high-risk patient subgroups where targeted pharmacologic intervention has the greatest impact — enabling precision market access and outcomes-based contracting arguments.</div>
+          </div>
+        </div>
+        <div class="pub-footer fade-in">
+          <a href="https://scholar.google.com/citations?user=IusAkF0AAAAJ" target="_blank" rel="noopener">Full publication list on Google Scholar →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="section section-soft" id="team" aria-label="Scientific leadership">
+      <div class="container">
+        <div class="section-head fade-in">
+          <div class="section-eyebrow">Leadership</div>
+          <h2>Scientific Leadership.</h2>
+          <p>Surgeon-scientists and research leaders who understand the methodological standards required for serious healthcare evidence.</p>
+        </div>
         <div class="team-grid">
-          <div class="team-card">
-            <div class="team-card-dot dot-red"></div>
-            <div class="team-role">Founder</div>
-            <h3>Dr Adriana C Panayi</h3>
-            <p>
-              Surgeon-scientist focused on outcomes research, evidence generation, and
-              high-value analytical collaboration across academic and clinical settings.
-            </p>
-          </div>
-
-          <div class="team-card">
-            <div class="team-card-dot dot-blue"></div>
-            <div class="team-role">Research leadership</div>
-            <h3>Prof Gabriel Hundeshagen</h3>
-            <p>
-              Senior clinical academic with extensive experience in surgical outcomes
-              research, registry analytics, and multidisciplinary project execution.
-            </p>
-          </div>
-
-          <div class="team-card">
-            <div class="team-card-dot dot-yellow"></div>
-            <div class="team-role">Capability</div>
-            <h3>Built for collaboration</h3>
-            <p>
-              ACP Data Lab is designed to work alongside industry, hospital, and academic
-              teams that need a rigorous but highly usable analytical partner.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ─── Testimonials ──────────────────────────────────────────── -->
-    <section class="testimonials">
-      <div class="container">
-
-        <div class="testimonials-head">
-          <div class="section-eyebrow">Selected perspectives</div>
-          <h2>Built for clarity, not clutter.</h2>
-          <p>
-            What teams say about working with ACP Data Lab.
-          </p>
-        </div>
-
-        <div class="testi-grid">
-          <div class="testi-card">
-            <div class="testi-quote">"</div>
-            <p>ACP Data Lab helped transform a broad research question into a decision-grade analytical package we could actually use internally.</p>
-            <div class="testi-attr">
-              <strong>Medical Affairs Lead</strong>
-              <span>Pharmaceutical partner</span>
+          <div class="team-card fade-in">
+            <div class="team-card-header">
+              <img src="assets/ACPbw.jpg" alt="Dr. Adriana C. Panayi" class="team-photo"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="team-photo-placeholder" style="display:none;">👩‍⚕️</div>
+              <div class="team-meta">
+                <div class="team-name">Dr. Adriana C. Panayi, M.D., Ph.D.</div>
+                <div class="team-role">Founding Director &amp; Chair of Scientific Leadership</div>
+                <div class="team-role-detail">Scientific strategy, study design &amp; pharmaceutical partnership development</div>
+              </div>
+            </div>
+            <div class="team-card-body">
+              <div class="team-stats-row">
+                <div class="team-stat-item"><div class="team-stat-val">7,709</div><div class="team-stat-lbl">Citations</div></div>
+                <div class="team-stat-item"><div class="team-stat-val">43</div><div class="team-stat-lbl">h-index</div></div>
+                <div class="team-stat-item"><div class="team-stat-val">300+</div><div class="team-stat-lbl">Publications</div></div>
+              </div>
+              <div class="team-info-row">
+                <div class="team-info-label">Affiliations</div>
+                <div class="team-info-value">Harvard Medical School · Brigham &amp; Women's Hospital · University Hospital Zürich · University College London · University of Cambridge</div>
+              </div>
+              <div class="team-info-row">
+                <div class="team-links-row">
+                  <a href="https://scholar.google.com/citations?user=IusAkF0AAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a>
+                  <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="testi-card">
-            <div class="testi-quote">"</div>
-            <p>The work felt rigorous in the academic sense, but also clear enough for strategy and leadership discussions.</p>
-            <div class="testi-attr">
-              <strong>Commercial Strategy Director</strong>
-              <span>Healthcare organisation</span>
+          <div class="team-card fade-in">
+            <div class="team-card-header">
+              <img src="assets/gabriel-profile.jpg" alt="Prof. Dr. Gabriel Hundeshagen" class="team-photo"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="team-photo-placeholder" style="display:none;">👨‍⚕️</div>
+              <div class="team-meta">
+                <div class="team-name">Prof. Dr. Gabriel Hundeshagen, MMS.</div>
+                <div class="team-role">Research Associate &amp; Senior Project Manager</div>
+                <div class="team-role-detail">Project execution, clinical data analysis &amp; research operations</div>
+              </div>
             </div>
-          </div>
-
-          <div class="testi-card">
-            <div class="testi-quote">"</div>
-            <p>What stood out was not just the analysis, but the way the findings were translated into something genuinely useful.</p>
-            <div class="testi-attr">
-              <strong>Clinical Innovation Advisor</strong>
-              <span>Industry collaborator</span>
+            <div class="team-card-body">
+              <div class="team-stats-row">
+                <div class="team-stat-item"><div class="team-stat-val">3,500</div><div class="team-stat-lbl">Citations</div></div>
+                <div class="team-stat-item"><div class="team-stat-val">27</div><div class="team-stat-lbl">h-index</div></div>
+                <div class="team-stat-item"><div class="team-stat-val">150+</div><div class="team-stat-lbl">Publications</div></div>
+              </div>
+              <div class="team-info-row">
+                <div class="team-info-label">Affiliations</div>
+                <div class="team-info-value">UTMB Galveston · BG Klinik Ludwigshafen · Heidelberg University</div>
+              </div>
+              <div class="team-info-row">
+                <div class="team-info-label">Clinical Role</div>
+                <div class="team-info-value">Managing Senior Consultant, Plastic, Reconstructive &amp; Hand Surgery · Director of Research</div>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ─── Resources ─────────────────────────────────────────────── -->
-    <section class="resources" id="resources">
-      <div class="container">
-
-        <div class="resources-head">
-          <div>
-            <div class="section-eyebrow">Resources</div>
-            <h2>Research, reports, and working examples.</h2>
-          </div>
-          <a href="#" class="btn btn-ghost">View all resources</a>
-        </div>
-
-        <div class="res-grid">
-          <div class="res-card">
-            <div class="res-type">Report</div>
-            <h3>Where surgical registry data can create competitive advantage</h3>
-            <p>A practical framing of how real-world surgical data can support strategy, adoption, and evidence planning.</p>
-            <a href="#" class="res-link">Read summary →</a>
-          </div>
-
-          <div class="res-card">
-            <div class="res-type">Case study</div>
-            <h3>National prescribing variation after surgery</h3>
-            <p>How broad outcomes analysis can inform positioning and identify high-value segments.</p>
-            <a href="#" class="res-link">View case study →</a>
-          </div>
-
-          <div class="res-card">
-            <div class="res-type">Guide</div>
-            <h3>From publication-grade methods to stakeholder-ready outputs</h3>
-            <p>How ACP Data Lab turns rigorous analysis into materials that leadership teams can actually use.</p>
-            <a href="#" class="res-link">Open guide →</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ─── CTA band ───────────────────────────────────────────────── -->
-    <section class="cta-band" id="contact">
+    <!-- CTA / CONTACT -->
+    <section class="cta-band" id="contact" aria-label="Get in touch">
       <div class="container">
         <div class="cta-band-inner">
-          <div class="cta-band-copy">
-            <div class="section-eyebrow">Get started</div>
-            <h2>Start with a <em>focused question.</em></h2>
-            <p>
-              Whether you need a single study, a strategic evidence package, or a broader
-              analytical collaboration, ACP Data Lab can help define the right scope and
-              output.
-            </p>
-          </div>
+          <div class="section-eyebrow">Get in Touch</div>
+          <h2>Begin a <em>Confidential</em> Engagement.</h2>
+          <p>We work with pharmaceutical and medical device companies on a project basis. Every engagement begins with a confidential discovery call — no obligation, no commitment until written scope is agreed.</p>
           <div class="cta-band-actions">
-            <a href="mailto:contact@acpdatalab.com" class="btn btn-white btn-lg">Book a consultation</a>
-            <a href="#solutions" class="btn btn-outline-white btn-lg">View solutions</a>
+            <button class="btn btn-white btn-lg" onclick="openModal()">Request a Consultation</button>
+            <a href="#services" class="btn btn-outline-white btn-lg">View Services</a>
+          </div>
+          <div class="cta-contact-details">
+            <span>Email: <a href="/cdn-cgi/l/email-protection#65060a0b1104061125040615010411040904074b060a08"><span class="__cf_email__" data-cfemail="a9cac6c7ddc8cadde9c8cad9cdc8ddc8c5c8cb87cac6c4">[email&#160;protected]</span></a></span>
+            <span>Response within 48 hours</span>
+          </div>
+          <p class="cta-note">References and prior engagement scope available upon request under NDA.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GOVERNANCE -->
+    <section class="governance" aria-label="Data governance">
+      <div class="container">
+        <div class="governance-grid">
+          <div class="gov-badges">
+            <div class="gov-badge"><div class="gov-badge-icon">🔒</div>De-identified Data</div>
+            <div class="gov-badge"><div class="gov-badge-icon">📋</div>IRB Compliant</div>
+            <div class="gov-badge"><div class="gov-badge-icon">⚖️</div>DUA Governed</div>
+            <div class="gov-badge"><div class="gov-badge-icon">🇪🇺</div>GDPR Aligned</div>
+            <div class="gov-badge"><div class="gov-badge-icon">🏥</div>HIPAA Safe Harbor</div>
+          </div>
+          <div class="governance-text">
+            <strong>Data Governance &amp; Compliance.</strong> All analyses are conducted using de-identified, publicly available research datasets accessed under approved Data Use Agreements (DUAs) from national surgical registries and federal health databases. No patient-identifiable information is collected, used, or stored at any point. Methodology adheres to IRB standards and applicable data governance frameworks including HIPAA Safe Harbor de-identification requirements and GDPR Article 9 derogations for scientific research. Full methodological documentation is available for regulatory and compliance review upon request.
           </div>
         </div>
       </div>
     </section>
+
+    <!-- COMPLIANCE -->
+    <div class="compliance">
+      <div class="container">
+        <p class="compliance-text">ACP Data Lab Ltd. · Registered in Cyprus · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6d61607a6f6d7a4e6f6d7e6a6f7a6f626f6c206d6163">[email&#160;protected]</a> · All analyses conducted in compliance with applicable data use agreements and research ethics standards.</p>
+      </div>
+    </div>
 
   </main>
 
-  <!-- ─── Footer ───────────────────────────────────────────────────── -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <img src="/assets/Logo.png" alt="ACP Data Lab" />
-        <span class="footer-brand-text">ACP Data Lab</span>
+        <img src="assets/Logo.png" alt="ACP Data Lab" />
+        <span>ACP Data Lab</span>
       </div>
       <div class="footer-links">
-        <a href="#platform">Platform</a>
-        <a href="#solutions">Solutions</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#research">Research</a>
         <a href="#team">Team</a>
-        <a href="#resources">Resources</a>
         <a href="#contact">Contact</a>
+        <a href="#">Privacy Policy</a>
       </div>
-      <div class="footer-meta">© 2026 ACP Data Lab · Analysis · Consulting · Prediction</div>
+      <div class="footer-meta">© 2026 ACP Data Lab Ltd. · Nicosia, Cyprus · Founded by Dr. Adriana C. Panayi</div>
     </div>
   </footer>
 
-  <script>
-    // Feature tab switching
-    const tabs   = document.querySelectorAll('.feat-tab');
-    const panels = document.querySelectorAll('.feat-panel');
+  <!-- MOBILE STICKY CTA -->
+  <div class="mobile-sticky-cta" aria-hidden="true">
+    <button onclick="openModal()">Request a Consultation</button>
+  </div>
 
-    tabs.forEach(tab => {
+  <!-- MODAL -->
+  <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+      <h2 id="modalTitle">Request a Consultation</h2>
+      <p class="modal-sub">We'll be in touch within 48 hours. All enquiries are treated confidentially.</p>
+      <form id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">Name</label>
+            <input type="text" class="form-input" id="fname" name="name" required autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ftitle">Title</label>
+            <input type="text" class="form-input" id="ftitle" name="title" required autocomplete="organization-title" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fcompany">Company</label>
+          <input type="text" class="form-input" id="fcompany" name="company" required autocomplete="organization" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="femail">Work Email</label>
+          <input type="email" class="form-input" id="femail" name="email" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fmessage">Research Area / Commercial Challenge</label>
+          <textarea class="form-textarea" id="fmessage" name="message" placeholder="Briefly describe your research or commercial challenge..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit Consultation Request</button>
+      </form>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.pageYOffset > 40);
+    }, { passive: true });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href.length > 1) {
+          e.preventDefault();
+          const t = document.querySelector(href);
+          if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Fade-in on scroll
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 55);
+          fadeObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+    // Counter animation
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const duration = 1200;
+          const startTime = performance.now();
+          const easeOut = t => 1 - Math.pow(1 - t, 3);
+          const animate = (now) => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            el.textContent = Math.round(easeOut(progress) * target).toLocaleString();
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+          counterObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+    // Feature tabs
+    document.querySelectorAll('.feat-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         const target = tab.dataset.panel;
-
-        tabs.forEach(t => t.classList.remove('active'));
-        panels.forEach(p => p.classList.remove('active'));
-
+        document.querySelectorAll('.feat-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.feat-panel').forEach(p => p.classList.remove('active'));
         tab.classList.add('active');
         document.getElementById(target).classList.add('active');
       });
     });
-  </script>
 
-</body>
-</html>
+    // Modal
+    function openModal() {
+      const m = document.getElementById('contactModal');
+      m.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => { const f = m.querySelector('input,button,textarea'); if (f) f.focus(); }, 100);
+    }
+
+    function closeModal() {
+      document.getElementById('contactModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('contactModal').addEventListener('click', e => {
+      if (e.target.id === 'contactModal') closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function submitContact(e) {
+      e.preventDefault();
+      const n  = document.getElementById('fname').value;
+      const c  = document.getElementById('fcompany').value;
+      const t  = document.getElementById('ftitle').value;
+      const em = document.getElementById('femail').value;
+      const m  = document.getElementById('fmessa
